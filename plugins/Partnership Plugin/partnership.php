@@ -578,7 +578,7 @@ This following statements selects each category individually that contains an in
             }
     
             // Send email to admin
-            $admin_email = 'info@gowithfund.com';
+            $admin_email = $email;
             $admin_subject = 'New Partnership Request Submission';
             $admin_message = "<html><body>";
             $admin_message .= "<h2>User Information</h2>";

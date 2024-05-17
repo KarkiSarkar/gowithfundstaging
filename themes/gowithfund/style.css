@@ -179,6 +179,6 @@ strong{
     display: flex;
     justify-content: center;
 }
-h2.title > span{
+.title > span{
     color: red!important;
 }

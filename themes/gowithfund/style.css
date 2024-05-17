@@ -179,6 +179,6 @@ strong{
     display: flex;
     justify-content: center;
 }
-h1{
+h2.title > span{
     color: red!important;
 }

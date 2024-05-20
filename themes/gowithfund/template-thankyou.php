@@ -8,19 +8,19 @@ get_header();
     .buttonhovercss > a{
             padding: 10px 30px 10px 30px;
             border-radius: 20px;
-            background: red;
+            background: #00A9A5!important;
     }
 </style>
 <div id="primary" class="content-area">
     <main id="main" class="site-main">
         <section class="thank-you">
             <header class="page-header">
-                <h1 class="page-title" style="text-align: center; font-size: 60px; color: #00A9A5;"><?php esc_html_e('Thank You', 'krowd'); ?></h1>
+                <h1 class="page-title" style="text-align: center; font-size: 60px; color: #00A9A5; padding-top: 3rem;"><?php esc_html_e('Thank You', 'krowd'); ?></h1>
             </header>
             <div class="page-content">
-                <p style="text-align: center;"><?php esc_html_e('Thank you for your request on becoming a partner. We will get back to you soon.', 'krowd'); ?></p>
-                <div class="buttonhovercss" style="text-align: center; margin: 30px 10px 30px 10px;">
-                    <a href="<?php echo home_url('/become-a-partner'); ?>"><i class="far fa-arrow-alt-circle-left"></i>Back Homepage</a>
+                <p style="text-align: center;"><?php esc_html_e('Your request on becoming a partner has been submitted. We will get back to you soon.', 'krowd'); ?></p>
+                <div class="buttonhovercss" style="text-align: center; margin: 30px 10px 30px 10px; ">
+                    <a href="<?php echo home_url('/become-a-partner'); ?>" style="color: white;"><i class="far fa-arrow-alt-circle-left"></i>Back Homepage</a>
                 </div>
             </div>
 

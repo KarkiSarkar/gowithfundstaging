@@ -7,7 +7,7 @@ get_header();
 <style>
     .not-found-wrapper {
     padding: 300px 0 250px;
-    background: url('https://unsplash.com/photos/a-lone-tree-sitting-on-top-of-a-hill-i1lGryhL0w4') repeat-x center center transparent;
+    background: url('https://images.unsplash.com/photo-1502082553048-9b3a9d6a2f61') repeat-x center center transparent;
     background-size: cover;
 }
 </style>

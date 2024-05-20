@@ -9,7 +9,7 @@ get_header();
     <main id="main" class="site-main">
         <section class="thank-you">
             
-            <div class=" text-center">
+            <div class="not-found-wrapper text-center">
 			<div class="not-found-title"><h1><span><?php esc_html_e('Thank You', 'krowd'); ?></span></h1></div>
 			<!-- <div class="not-found-subtitle">Page Not Found</div> -->
 			<div class="not-found-desc"><?php esc_html_e('Thank you for your request on becoming a partner. We will get back to you soon.', 'krowd'); ?></div> 

@@ -19,7 +19,7 @@ get_header();
             </header>
             <div class="page-content">
                 <p style="text-align: center;"><?php esc_html_e('Thank you for your request on becoming a partner. We will get back to you soon.', 'krowd'); ?></p>
-                <div class="buttonhovercss" style="text-align: center;">
+                <div class="buttonhovercss" style="text-align: center; margin: 30px 10px 30px 10px;">
                     <a href="<?php echo home_url('/become-a-partner'); ?>"><i class="far fa-arrow-alt-circle-left"></i>Back Homepage</a>
                 </div>
             </div>

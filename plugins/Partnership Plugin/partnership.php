@@ -635,7 +635,7 @@ add_filter('template_include', 'load_custom_template');
 function create_thank_you_page_template() {
     $template_file = plugin_dir_path(__FILE__) . 'page-thank-you.php';
     if (!file_exists($template_file)) {
-        $template_content = 
+        $template_content = <<<EOD
         <?php
         /*
         Template Name: Thank You Page
@@ -659,7 +659,7 @@ function create_thank_you_page_template() {
         <?php
         get_footer();
         ?>
-       
+        EOD;
         file_put_contents($template_file, $template_content);
     }
 }

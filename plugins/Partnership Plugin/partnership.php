@@ -611,7 +611,7 @@ This following statements selects each category individually that contains an in
             wp_mail($email, $client_subject, $client_message, $client_headers);
     
             if (!is_admin() && !wp_doing_ajax() && isset($_POST['custom_contact_form_submit'])) {
-                wp_redirect(get_permalink($thank_you_page->ID));
+                wp_redirect(home_url('/become-a-partner'));
                 exit();
             }
 
@@ -619,48 +619,3 @@ This following statements selects each category individually that contains an in
     }
     add_action('init', 'process_custom_contact_form');
     
-// Template redirection
-function load_custom_template($template) {
-    if (is_page('thank-you')) {
-        $custom_template = plugin_dir_path(__FILE__) . 'page-thank-you.php';
-        if (file_exists($custom_template)) {
-            return $custom_template;
-        }
-    }
-    return $template;
-}
-add_filter('template_include', 'load_custom_template');
-
-// Create the Thank You page template within the plugin
-function create_thank_you_page_template() {
-    $template_file = plugin_dir_path(__FILE__) . 'page-thank-you.php';
-    if (!file_exists($template_file)) {
-        $template_content = <<<EOD
-        <?php
-        /*
-        Template Name: Thank You Page
-        */
-        get_header();
-        ?>
-
-        <div id="primary" class="content-area">
-            <main id="main" class="site-main">
-                <section class="thank-you">
-                    <header class="page-header">
-                        <h1 class="page-title"><?php esc_html_e('Thank You', 'your-text-domain'); ?></h1>
-                    </header>
-                    <div class="page-content">
-                        <p><?php esc_html_e('Thank you for your submission. We will get back to you soon.', 'your-text-domain'); ?></p>
-                    </div>
-                </section>
-            </main>
-        </div>
-
-        <?php
-        get_footer();
-        ?>
-        EOD;
-        file_put_contents($template_file, $template_content);
-    }
-}
-register_activation_hook(__FILE__, 'create_thank_you_page_template');

@@ -17,7 +17,7 @@ get_header();
                     <a href="https://dev.gowithfund.com/"><i class="far fa-arrow-alt-circle-left"></i>Back Homepage</a>
                 </div>
             </div>
-            <div class="not-found-wrapper text-center">
+            <div class=" text-center">
 			<div class="not-found-title"><h1><span>404</span></h1></div>
 			<div class="not-found-subtitle">Page Not Found</div>
 			<div class="not-found-desc">The page requested couldn't be found. This could be a spelling error in the URL or a removed page.</div> 

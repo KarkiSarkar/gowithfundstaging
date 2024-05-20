@@ -15,7 +15,7 @@ get_header();
     <main id="main" class="site-main">
         <section class="thank-you">
             <header class="page-header">
-                <h1 class="page-title" style="text-align: center;"><?php esc_html_e('Thank You', 'krowd'); ?></h1>
+                <h1 class="page-title" style="text-align: center; font-size: 60px; color: #00A9A5;"><?php esc_html_e('Thank You', 'krowd'); ?></h1>
             </header>
             <div class="page-content">
                 <p style="text-align: center;"><?php esc_html_e('Thank you for your request on becoming a partner. We will get back to you soon.', 'krowd'); ?></p>

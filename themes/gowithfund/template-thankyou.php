@@ -19,19 +19,6 @@ get_header();
 </div>
 
 <?php
-function register_partnership_requests_page() {
-    add_menu_page(
-        'Partnership Requests',
-        'Partnership Requests',
-        'manage_options',
-        'partnership-requests',
-        'display_partnership_requests_page',
-        'dashicons-list-view',
-        6
-    );
-}
-
-add_action('admin_menu', 'register_partnership_requests_page');
 
 
 function display_partnership_requests_page() {

@@ -4,7 +4,13 @@ Template Name: Thank You Page
 */
 get_header();
 ?>
-
+<style>
+    .buttonhovercss > a{
+            padding: 10px 30px 10px 30px;
+            border-radius: 20px;
+            background: red;
+    }
+</style>
 <div id="primary" class="content-area">
     <main id="main" class="site-main">
         <section class="thank-you">
@@ -13,7 +19,7 @@ get_header();
             </header>
             <div class="page-content">
                 <p style="text-align: center;"><?php esc_html_e('Thank you for your request on becoming a partner. We will get back to you soon.', 'krowd'); ?></p>
-                <div class="not-found-home text-center">
+                <div class="buttonhovercss">
                     <a href="<?php echo home_url('/become-a-partner'); ?>"><i class="far fa-arrow-alt-circle-left"></i>Back Homepage</a>
                 </div>
             </div>

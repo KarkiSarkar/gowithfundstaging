@@ -9,10 +9,10 @@
             <main id="main" class="site-main">
                 <section class="thank-you">
                     <header class="page-header">
-                        <h1 class="page-title"><?php esc_html_e('Thank You', 'your-text-domain'); ?></h1>
+                        <h1 class="page-title" style="text-align: center;"><?php esc_html_e('Thank You', 'your-text-domain'); ?></h1>
                     </header>
                     <div class="page-content">
-                        <p><?php esc_html_e('Thank you for your submission. We will get back to you soon.', 'your-text-domain'); ?></p>
+                        <p style="text-align: center;"><?php esc_html_e('Thank you for your submission. We will get back to you soon.', 'your-text-domain'); ?></p>
                     </div>
                 </section>
             </main>

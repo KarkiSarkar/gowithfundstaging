@@ -619,3 +619,29 @@ This following statements selects each category individually that contains an in
     }
     add_action('init', 'process_custom_contact_form');
     
+// Function to create Thank You page
+function create_thank_you_page() {
+    $page_title = 'Thank You';
+    $page_content = '';
+    $page_template = 'page-thank-you.php';
+
+    // Check if the page already exists
+    $page_check = get_page_by_title($page_title);
+
+    if (!isset($page_check->ID)) {
+        // Create post object
+        $new_page_id = wp_insert_post(array(
+            'post_title'   => $page_title,
+            'post_content' => $page_content,
+            'post_status'  => 'publish',
+            'post_type'    => 'page',
+            'post_author'  => 1,
+        ));
+
+        // Update the post meta to use the custom template
+        if (!empty($page_template)) {
+            update_post_meta($new_page_id, '_wp_page_template', $page_template);
+        }
+    }
+}
+register_activation_hook(__FILE__, 'create_thank_you_page');

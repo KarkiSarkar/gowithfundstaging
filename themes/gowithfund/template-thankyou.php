@@ -14,8 +14,8 @@ get_header();
             <div class="page-content">
                 <p style="text-align: center;"><?php esc_html_e('Thank you for your request on becoming a partner. We will get back to you soon.', 'krowd'); ?></p>
                 <div class="not-found-home text-center">
-				<a href="https://dev.gowithfund.com/"><i class="far fa-arrow-alt-circle-left"></i>Back Homepage</a>
-			</div>
+                    <a href="<?php echo home_url('/become-a-partner'); ?>"><i class="far fa-arrow-alt-circle-left"></i>Back Homepage</a>
+                </div>
             </div>
 
         </section>

@@ -451,9 +451,10 @@ This following statements selects each category individually that contains an in
     var email = document.getElementById('email').value;
 
             // Perform the lead tracking
-            fbq('track', 'Lead');
-            name: name,
-      email: email
+            fbq('track', 'Lead', {
+                name: name,
+                email: email
+            });
             // Submit the form after tracking
             this.submit();
         });

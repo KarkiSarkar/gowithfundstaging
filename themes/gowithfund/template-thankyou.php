@@ -18,6 +18,7 @@ else{
     $_SESSION['submitted_email'] = '';
     unset($_SESSION['submitted_email']);
     session_unset();
+    echo 'session stop';
     
 }
 // die($email);

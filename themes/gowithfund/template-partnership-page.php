@@ -15,7 +15,7 @@ get_header();
             </div>
             <?php
                 if ( has_post_thumbnail() ) {
-                    the_post_thumbnail('full'); // 'full' can be changed to 'thumbnail', 'medium', 'large', etc. based on your needs
+                    the_post_thumbnail('medium'); // 'full' can be changed to 'thumbnail', 'medium', 'large', etc. based on your needs
                 }
                 ?>
 

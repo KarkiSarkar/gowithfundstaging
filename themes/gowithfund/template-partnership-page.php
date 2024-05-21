@@ -11,7 +11,7 @@ get_header();
                 <h1 class="page-title"><?php the_title(); ?></h1>
             </header>
             <div class="page-content">
-                <p><?php //the_field('description');?></p>
+                <p><?php the_field('description');?></p>
                 <h4>Key Feature</h4>
                 <ul>
                     <li>Key 1</li>

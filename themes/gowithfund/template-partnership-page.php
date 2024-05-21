@@ -20,7 +20,7 @@ get_header();
                     <li>Key 1</li>
                 </ul>
             </div>
-            <div>
+            <div style="background: #00A9A5;">
                 <?php echo do_shortcode('[custom_contact_form]'); ?>
             </div>
 

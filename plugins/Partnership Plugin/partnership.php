@@ -633,7 +633,20 @@ This following statements selects each category individually that contains an in
             wp_mail($email, $client_subject, $client_message, $client_headers);
     
             if (!is_admin() && !wp_doing_ajax() && isset($_POST['custom_contact_form_submit'])) {
-                wp_redirect(home_url('/become-a-partner/thank-you/'));
+                $thank_you_url = add_query_arg(
+                    array(
+                        'name' => $name,
+                        'email' => $email,
+                        'country' => $country,
+                        'phone_number' => $phoneNumber,
+                        'investment_type' => $investmentType,
+                        'message' => $message,
+                        'checkboxes' => $checkboxes,
+                        'other_text' => $otherText
+                    ),
+                    home_url('/become-a-partner/thank-you/')
+                );
+                wp_redirect($thank_you_url);
                 exit();
             }
 

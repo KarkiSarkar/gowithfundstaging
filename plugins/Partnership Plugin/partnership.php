@@ -421,7 +421,18 @@ This following statements selects each category individually that contains an in
             }
         }
         </script>
+<script>
+        document.getElementById('custom-contact-form').addEventListener('submit', function(event) {
+            // Prevent the default form submission
+            event.preventDefault();
 
+            // Perform the lead tracking
+            fbq('track', 'Lead');
+
+            // Submit the form after tracking
+            this.submit();
+        });
+    </script>
 
 
     <?php

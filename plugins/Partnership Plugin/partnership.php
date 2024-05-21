@@ -648,12 +648,17 @@ This following statements selects each category individually that contains an in
             if ($post_id) {
                 // Save post meta
                 update_post_meta($post_id, 'email', $email);
-                update_post_meta($post_id, 'country', $country);
               
             }
 
             if (!is_admin() && !wp_doing_ajax() && isset($_POST['custom_contact_form_submit'])) {
-                wp_redirect(home_url('/become-a-partner/thank-you/'));
+                $thank_you_url = add_query_arg(
+                    array(
+                        'transient_key' => $transient_key,
+                    ),
+                    home_url('/become-a-partner/thank-you/')
+                );
+                wp_redirect($thank_you_url);
                 exit();
             }
 

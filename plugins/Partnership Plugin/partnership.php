@@ -447,11 +447,13 @@ This following statements selects each category individually that contains an in
 <script>
         document.getElementById('custom-contact-form').addEventListener('submit', function(event) {
             // Prevent the default form submission
-           
+            var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
 
             // Perform the lead tracking
             fbq('track', 'Lead');
-
+            name: name,
+      email: email
             // Submit the form after tracking
             this.submit();
         });

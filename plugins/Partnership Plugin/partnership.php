@@ -631,7 +631,26 @@ This following statements selects each category individually that contains an in
             $client_subject = 'Thank you for contacting us';
              $client_message = "<div style='text-align: center; background-color: #00A9A5;'><img width='200' src='https://gowithfund.com/wp-content/uploads/2015/12/Final-Logo-white.png'/></div></br><div><h2>Dear $name,</h2></div><p>Thank you for expressing your interest in becoming a partner with GoWithFund. We appreciate your support and enthusiasm for our crowdfunding platform. Our team will review your submission and get back to you soon with further details.</p><div><p>Best regards,</p><p>The GoWithFund Team</p><p>943, 447 Broadway, 2nd Floor</p><p>New York, US</p></div><div><img width='150' src='https://gowithfund.com/wp-content/uploads/2024/05/Gowithfund-Final-Logo-Transparancy-BG.png'/></div>";
             wp_mail($email, $client_subject, $client_message, $client_headers);
-                
+                 // Store the email address in a session variable
+        session_start();
+        $_SESSION['submitted_email'] = $email;
+        session_write_close();
+
+        // Create a new post
+        $post_data = array(
+            'post_title'    => wp_strip_all_tags($name),
+            'post_content'  => $message,
+            'post_status'   => 'publish',
+            'post_type'     => 'partnership_request',
+        );
+        $post_id = wp_insert_post($post_data);
+    
+        if ($post_id) {
+            // Save post meta
+            update_post_meta($post_id, 'email', $email);
+           
+        }
+
             if (!is_admin() && !wp_doing_ajax() && isset($_POST['custom_contact_form_submit'])) {
                 wp_redirect(home_url('/become-a-partner/thank-you/'));
                 exit();

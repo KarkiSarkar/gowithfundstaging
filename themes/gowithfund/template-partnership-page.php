@@ -4,7 +4,7 @@ Template Name: Partner Single Page
 */
 get_header();
 ?>
-<div id="primary" class="content-area">
+
     <main id="main" class="site-main">
         <section>
             <header class="page-header">
@@ -23,7 +23,6 @@ get_header();
 
         </section>
     </main>
-</div>
 
 <?php
 get_footer();

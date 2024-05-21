@@ -25,7 +25,7 @@ function add_facebook_tracking_code() {
      <?php
    }
    add_action('wp_head', 'add_facebook_tracking_code');
-   add_action('wp_footer', 'add_facebook_tracking_code');
+  
 // Enqueue scripts and styles
 function custom_contact_form_scripts() {
     // Enqueue scripts and styles here if needed

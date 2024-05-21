@@ -8,7 +8,7 @@ get_header();
     <main id="main" class="container-layout-content container">
         <section>
             <header class="page-header">
-                <h1 class="page-title"><?php esc_html_e('Title', 'krowd'); ?></h1>
+                <h1 class="page-title"><?php the_title(); ?></h1>
             </header>
             <div class="page-content">
                 <p><?php esc_html_e('Description ', 'krowd'); ?></p>

@@ -3,7 +3,7 @@
 Template Name: Partner Single Page
 */
 get_header();
-get_field('form_shortcode')
+get_field('form_shortcode')=$form;
 ?>
 <style>
     .page-title{

@@ -561,6 +561,7 @@ This following statements selects each category individually that contains an in
                 }
             // Additional fields for checkboxes
             $checkboxes = "";
+            
             if(isset($_POST['legal'])) $checkboxes .= "Legal, ";
             if(isset($_POST['accountant'])) $checkboxes .= "Accountant, ";
             if(isset($_POST['content'])) $checkboxes .= "Content, ";
@@ -652,13 +653,7 @@ This following statements selects each category individually that contains an in
             }
 
             if (!is_admin() && !wp_doing_ajax() && isset($_POST['custom_contact_form_submit'])) {
-                $thank_you_url = add_query_arg(
-                    array(
-                        'transient_key' => $transient_key,
-                    ),
-                    home_url('/become-a-partner/thank-you/')
-                );
-                wp_redirect($thank_you_url);
+                wp_redirect(home_url('/become-a-partner/thank-you/'));
                 exit();
             }
 

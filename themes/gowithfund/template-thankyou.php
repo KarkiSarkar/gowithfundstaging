@@ -5,19 +5,19 @@ Template Name: Thank You Page
 get_header();
 ?>
 <?php
-// Start the session (not strictly necessary for transient-based approach)
-if (isset($_GET['transient_key'])) {
-    $transient_key = sanitize_text_field($_GET['transient_key']);
-    $email = get_transient($transient_key);
-    if ($email !== false) {
-        // Delete the transient immediately after retrieving the email
-        delete_transient($transient_key);
-    } else {
-        $email = '';
-    }
-} else {
-    $email = '';
+// Start the session
+session_start();
+
+// Retrieve the email address from the session variable
+$email = isset($_SESSION['submitted_email']) ? $_SESSION['submitted_email'] : '';
+if(empty($email)){
+    unset($_SESSION['submitted_email']);
+    wp_redirect(home_url('/become-a-partner'));
 }
+
+// Unset the session variable to clear it after use
+// unset($_SESSION['submitted_email']);
+session_write_close();
 ?>
 <script>
         fbq('track', 'Lead');

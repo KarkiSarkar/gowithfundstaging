@@ -20,6 +20,9 @@ get_header();
                     <li>Key 1</li>
                 </ul>
             </div>
+            <div>
+                <?php echo do_shortcode('[custom_contact_form]'); ?>
+            </div>
 
         </section>
     </main>

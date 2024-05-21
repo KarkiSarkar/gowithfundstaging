@@ -23,7 +23,7 @@ get_header();
                 }
                 ?>
 
-            <div style="background: #00A9A5;">
+            <div style="background: #00A9A5; width: 70%;">
                 <?php echo do_shortcode('[custom_contact_form]'); ?>
             </div>
 

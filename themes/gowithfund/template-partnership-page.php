@@ -12,8 +12,13 @@ get_header();
             </header>
             <div class="page-content">
                 <p><?php the_field('description');?></p>
-                
             </div>
+            <?php
+                if ( has_post_thumbnail() ) {
+                    the_post_thumbnail('full'); // 'full' can be changed to 'thumbnail', 'medium', 'large', etc. based on your needs
+                }
+                ?>
+
             <div style="background: #00A9A5;">
                 <?php echo do_shortcode('[custom_contact_form]'); ?>
             </div>

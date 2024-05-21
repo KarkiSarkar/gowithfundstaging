@@ -9,9 +9,9 @@ get_header();
 session_start();
 
 // Retrieve the email address from the session variable
-echo $email = isset($_SESSION['submitted_email']) ? $_SESSION['submitted_email'] : '';
+$email = isset($_SESSION['submitted_email']) ? $_SESSION['submitted_email'] : '';
 if(empty($email)){
-    // wp_redirect(home_url('/become-a-partner'));
+    wp_redirect(home_url('/become-a-partner'));
     
 }
 else{
@@ -39,11 +39,7 @@ session_write_close();
 </style>
 <div id="primary" class="content-area">
     <main id="main" class="site-main">
-    <p>Name: <?php
-// Retrieve the email address from the URL parameter
-echo $email;
-?>
-</p>
+
         <section class="thank-you">
             <header class="page-header">
                 <h1 class="page-title" style="text-align: center; font-size: 60px; color: #00A9A5; padding-top: 3rem;"><?php esc_html_e('Thank You', 'krowd'); ?></h1>

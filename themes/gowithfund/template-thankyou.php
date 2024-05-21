@@ -16,6 +16,7 @@ get_header();
 </style>
 <div id="primary" class="content-area">
     <main id="main" class="site-main">
+    <p>Name: <?php echo htmlspecialchars($_GET['name']); ?></p>
         <section class="thank-you">
             <header class="page-header">
                 <h1 class="page-title" style="text-align: center; font-size: 60px; color: #00A9A5; padding-top: 3rem;"><?php esc_html_e('Thank You', 'krowd'); ?></h1>

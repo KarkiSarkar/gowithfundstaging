@@ -16,7 +16,7 @@ $form = get_field('form_shortcode');
                 <h1 class="page-title"><?php the_title(); ?></h1>
             </header>
             <div style="display: flex;">
-                <div class="page-content" style="width: 48%;">
+                <div class="page-content" style="width: 48%; padding-right: 10px;">
                     <p><?php the_field('description');?></p>
                 </div>
                 <div style="width: 48%;">

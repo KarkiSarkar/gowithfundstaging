@@ -32,7 +32,7 @@ $form = get_field('form_shortcode');
             <h4>Key Feature</h4>
                 <p><?php the_field('key_feature');?></p>
             </div>
-            <div style="background: #00A9A5; width: 60%; padding-top: 3rem;">
+            <div style="background: #00A9A5; width: 60%; padding-top: 3rem; text-align: center;">
                 <?php echo do_shortcode($form); ?>
             </div>
             

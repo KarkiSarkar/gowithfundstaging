@@ -3,6 +3,7 @@
 Template Name: Partner Single Page
 */
 get_header();
+get_field('form_shortcode')
 ?>
 <style>
     .page-title{
@@ -28,7 +29,7 @@ get_header();
                 </div>
             </div>
             <div style="background: #00A9A5; width: 70%; padding-top: 3rem;">
-                <?php echo do_shortcode('[custom_contact_form]'); ?>
+                <?php echo $form; ?>
             </div>
 
         </section>

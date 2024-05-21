@@ -28,9 +28,9 @@ session_write_close();
 <div id="primary" class="content-area">
     <main id="main" class="site-main">
     <p>Name: <?php
-// Retrieve the email address from the URL parameter
-echo $email ;
-?>
+    // Retrieve the email address from the URL parameter
+    echo $email ;
+    ?>
 </p>
         <section class="thank-you">
             <header class="page-header">
@@ -54,8 +54,8 @@ get_footer();
 <script>
 // JavaScript to redirect to home page when the Thank You page is refreshed
 window.onload = function() {
-    if(performance.navigation.type == 1) {
+   
         window.location.href = '<?php echo esc_url( home_url( '/become-a-partner' ) ); ?>';
-    }
+   
 }
 </script>

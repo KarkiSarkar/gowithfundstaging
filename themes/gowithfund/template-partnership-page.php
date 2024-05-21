@@ -4,7 +4,11 @@ Template Name: Partner Single Page
 */
 get_header();
 ?>
-
+<style>
+    .page-title{
+        padding-top: 3rem;
+    }
+</style>
     <main id="main" class="container-layout-content container">
         <section>
             <header class="page-header">

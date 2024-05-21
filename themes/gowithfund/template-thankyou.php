@@ -12,10 +12,11 @@ session_start();
 $email = isset($_SESSION['submitted_email']) ? $_SESSION['submitted_email'] : '';
 if(empty($email)){
     wp_redirect(home_url('/become-a-partner'));
+
 }
 else{
     
-    unset($_SESSION['submitted_email']);
+    session_unset($_SESSION['submitted_email']);
 }
 
 // Unset the session variable to clear it after use

@@ -29,6 +29,7 @@ $form = get_field('form_shortcode');
                 </div>
             </div>
             <div class="page-content" style="width: 48%; padding-right: 10px;">
+            <h4>Key Feature</h4>
                 <p><?php the_field('key_feature');?></p>
             </div>
             <div style="background: #00A9A5; width: 70%; padding-top: 3rem;">

@@ -15,11 +15,17 @@ get_header();
     <main id="main" class="site-main">
         <section class="thank-you">
             <header class="page-header">
-                <h1 class="page-title" style="text-align: center; font-size: 60px; color: #00A9A5; padding-top: 3rem;"><?php esc_html_e('Partnership Page', 'krowd'); ?></h1>
+                <h1 class="page-title" style="text-align: center; font-size: 60px; color: #00A9A5; padding-top: 3rem;"><?php esc_html_e('Title', 'krowd'); ?></h1>
             </header>
             <div class="page-content">
-                <p style="text-align: center;"><?php esc_html_e('Happy ', 'krowd'); ?></p>
-                
+                <p style="text-align: center;"><?php esc_html_e('Description ', 'krowd'); ?></p>
+                <h4>Key Feature</h4>
+                <ul>
+                    <li>Key 1</li>
+                    <li>Key 1</li>
+                    <li>Key 1</li>
+                    <li>Key 1</li>
+                </ul>
             </div>
 
         </section>

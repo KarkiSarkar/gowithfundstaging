@@ -39,7 +39,4 @@ window.onload = function() {
         window.location.href = '<?php echo esc_url( home_url( '/become-a-partner' ) ); ?>';
     }
 }
-            // Perform the lead tracking with form data
-            fbq('track', 'Lead', data);
-            
-    </script>
+</script>

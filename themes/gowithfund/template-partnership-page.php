@@ -29,7 +29,7 @@ $form = get_field('form_shortcode');
                 </div>
             </div>
             <div style="background: #00A9A5; width: 70%; padding-top: 3rem;">
-                <?php echo $form; ?>
+                <?php echo do_shortcode($form); ?>
             </div>
 
         </section>

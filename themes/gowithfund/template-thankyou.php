@@ -19,7 +19,7 @@ else{
     unset($_SESSION['submitted_email']);
     
 }
-die($email);
+// die($email);
 // var_dump($_SESSION['submitted_email']);
 // Unset the session variable to clear it after use
 // unset($_SESSION['submitted_email']);

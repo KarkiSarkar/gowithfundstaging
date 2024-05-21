@@ -263,7 +263,7 @@ function custom_contact_form_shortcode() {
         </div>
        
             <div class="col-sm-12 col-xs-12">
-            <label class="label-color" for="number">Phone Number:</label>
+            <label class="label-color" for="nuber">Phone Number:</label>
             <input type="number" id="nuber" name="number" required>
             </div>
         

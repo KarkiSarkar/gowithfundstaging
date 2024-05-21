@@ -4,6 +4,9 @@ Template Name: Thank You Page
 */
 get_header();
 ?>
+<script>
+        fbq('track', 'Lead');
+    </script>
 <style>
     .buttonhovercss > a{
             padding: 10px 30px 10px 30px;

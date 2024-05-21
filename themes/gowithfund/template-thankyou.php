@@ -15,9 +15,9 @@ if(empty($email)){
     
 }
 else{
-    
-    unset($_SESSION['submitted_email']);
     $_SESSION['submitted_email'] = '';
+    unset($_SESSION['submitted_email']);
+    
 }
 // var_dump($_SESSION['submitted_email']);
 // Unset the session variable to clear it after use

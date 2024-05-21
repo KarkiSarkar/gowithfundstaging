@@ -4,6 +4,17 @@ Template Name: Thank You Page
 */
 get_header();
 ?>
+<?php
+// Start the session
+session_start();
+
+// Retrieve the email address from the session variable
+$email = isset($_SESSION['submitted_email']) ? sanitize_email($_SESSION['submitted_email']) : '';
+
+// Unset the session variable to clear it after use
+unset($_SESSION['submitted_email']);
+session_write_close();
+?>
 <script>
         fbq('track', 'Lead');
     </script>
@@ -18,7 +29,7 @@ get_header();
     <main id="main" class="site-main">
     <p>Name: <?php
 // Retrieve the email address from the URL parameter
-echo $email = isset($_GET['email']) ? sanitize_email($_GET['email']) : '';
+echo $email ;
 ?>
 </p>
         <section class="thank-you">

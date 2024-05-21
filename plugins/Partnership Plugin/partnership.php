@@ -634,6 +634,7 @@ This following statements selects each category individually that contains an in
                  // Store the email address in a session variable
         session_start();
         $_SESSION['submitted_email'] = $email;
+        die();
         session_write_close();
 
         // Create a new post

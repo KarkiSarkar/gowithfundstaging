@@ -446,15 +446,14 @@ This following statements selects each category individually that contains an in
         </script>
 <script>
         document.getElementById('custom-contact-form').addEventListener('submit', function(event) {
-            // Prevent the default form submission
-            var name = document.getElementById('name').value;
-    var email = document.getElementById('email').value;
-
-            // Perform the lead tracking
-            fbq('track', 'Lead', {
-                name: name,
-                email: email
+            var formData = new FormData(this);
+            var data = {};
+            formData.forEach((value, key) => {
+            data[key] = value;
             });
+
+            // Perform the lead tracking with form data
+            fbq('track', 'Lead', data);
             // Submit the form after tracking
             this.submit();
         });

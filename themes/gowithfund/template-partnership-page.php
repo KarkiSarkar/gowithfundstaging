@@ -5,7 +5,7 @@ Template Name: Partner Single Page
 get_header();
 ?>
 
-    <main id="main" class="site-main">
+    <main id="main" class="container-layout-content container">
         <section>
             <header class="page-header">
                 <h1 class="page-title"><?php esc_html_e('Title', 'krowd'); ?></h1>

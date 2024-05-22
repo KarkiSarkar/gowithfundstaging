@@ -10,7 +10,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $product;
-$posts_per_page = 1;
+$posts_per_page = 6;
 $related = wc_get_related_products( $product->get_id(), $posts_per_page );
 
 if ( sizeof( $related ) == 0 ) return;
@@ -21,8 +21,7 @@ $args = apply_filters( 'woocommerce_related_products_args', array(
 	'no_found_rows' 		=> 1,
 	'posts_per_page' 		=> $posts_per_page,
 	'post__in' 				=> $related,
-	'post__not_in'			=> array( $product->get_id() ),
-	'orderby'               => 'rand'
+	'post__not_in'			=> array( $product->get_id() )
 ) );
 $show = 3;
 $products = new WP_Query( $args );

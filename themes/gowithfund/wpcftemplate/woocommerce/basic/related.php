@@ -37,6 +37,7 @@ if ( $products->have_posts() ) : ?>
 	         <div class="row">
 	            <div class="col-12">
 						<div class="related project">
+							random
 							<div class="widget-heading margin-bottom-10">
 								<div class="widget-subtitle"><?php echo esc_html(krowd_get_option('related_subheading_text', 'Businesses You Can Back' )) ?></div>
 								<h2 class="widget-title"><?php echo esc_html(krowd_get_option('related_heading_text', 'Similar Projects' )) ?></h2>

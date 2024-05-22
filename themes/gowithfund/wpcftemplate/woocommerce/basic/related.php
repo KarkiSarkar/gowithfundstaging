@@ -27,7 +27,7 @@ $args = apply_filters( 'woocommerce_related_products_args', array(
             'taxonomy' => 'product_type',
             'field'    => 'slug',
             'terms'    => 'crowdfunding',
-            'operator' => 'NOT IN',  // Use 'IN' if you want only crowdfunding products
+            //'operator' => 'NOT IN',  // Use 'IN' if you want only crowdfunding products
         ),
     ),
 ) );

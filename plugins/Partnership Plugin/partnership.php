@@ -444,6 +444,45 @@ This following statements selects each category individually that contains an in
             this.submit();
         });
     </script>
+<script>
+document.getElementById('custom-contact-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    var formData = new FormData(this);
+    var data = {};
+
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
+
+    // Perform the lead tracking with form data
+    fbq('track', 'Lead', data);
+
+    // Send the form data to the server using AJAX
+    fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
+        method: 'POST',
+        body: new URLSearchParams({
+            action: 'submit_contact_form',
+            form_data: JSON.stringify(data)
+        }),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+    .then(response => response.json())
+    .then(responseData => {
+        if (responseData.success) {
+            console.log('Form successfully submitted:', responseData);
+            // Optionally, redirect or display a success message
+        } else {
+            console.error('Error submitting form:', responseData);
+        }
+    })
+    .catch(error => {
+        console.error('There was a problem with the form submission:', error);
+    });
+});
+</script>
 
 
     <?php
@@ -465,6 +504,29 @@ This following statements selects each category individually that contains an in
     
     add_action('admin_menu', 'register_partnership_requests_page');
     
+
+    add_action('wp_ajax_submit_contact_form', 'handle_form_submission');
+add_action('wp_ajax_nopriv_submit_contact_form', 'handle_form_submission');
+
+function handle_form_submission() {
+    // Check if the form data is set and properly formatted
+    if (isset($_POST['form_data'])) {
+        $form_data = json_decode(stripslashes($_POST['form_data']), true);
+
+        if ($form_data) {
+            // Perform server-side logic, such as storing data in the database
+            // For example, you could use $form_data['name'] and $form_data['email']
+
+            // Send a response back to the client
+            wp_send_json_success(array('message' => 'Form received!', 'data' => $form_data));
+        } else {
+            wp_send_json_error(array('message' => 'Invalid form data'));
+        }
+    } else {
+        wp_send_json_error(array('message' => 'No form data received'));
+    }
+}
+
 
     function display_partnership_requests_page() {
         // Query all partnership request posts

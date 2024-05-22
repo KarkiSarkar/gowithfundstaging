@@ -35,7 +35,10 @@ $form = get_field('form_shortcode');
             <div style="background: #00A9A5; width: 60%; padding-top: 3rem; margin: auto;">
                 <?php echo do_shortcode($form); ?>
             </div>
+            <div>
             <?php echo do_shortcode('[rotate_named_adsense_ads]'); ?>
+            </div>
+            
         </section>
     </main>
 

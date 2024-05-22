@@ -5,20 +5,20 @@ Template Name: Thank You Page
 get_header();
 ?>
 <?php
-// Start the session
-session_start();
+// // Start the session
+// session_start();
 
-// Retrieve the email address from the session variable
-$email = isset($_SESSION['submitted_email']) ? $_SESSION['submitted_email'] : '';
-if(empty($email)){
-    wp_redirect(home_url('/become-a-partner'));
+// // Retrieve the email address from the session variable
+// $email = isset($_SESSION['submitted_email']) ? $_SESSION['submitted_email'] : '';
+// if(empty($email)){
+//     wp_redirect(home_url('/become-a-partner'));
     
-}
-else{
-    $_SESSION['submitted_email'] = '';
-    unset($_SESSION['submitted_email']);
-}
-session_write_close();
+// }
+// else{
+//     $_SESSION['submitted_email'] = '';
+//     unset($_SESSION['submitted_email']);
+// }
+// session_write_close();
 ?>
 <script>
         fbq('track', 'Lead');

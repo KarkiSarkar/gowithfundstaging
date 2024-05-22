@@ -429,7 +429,8 @@ This following statements selects each category individually that contains an in
                 textFieldDiv.style.display = "none";
             }
         }
-       
+        </script>
+<script>
         document.getElementById('custom-contact-form').addEventListener('submit', function(event) {
             var formData = new FormData(this);
             var data = {};
@@ -442,9 +443,6 @@ This following statements selects each category individually that contains an in
             // Submit the form after tracking
             this.submit();
         });
-
-
-
     </script>
 
 

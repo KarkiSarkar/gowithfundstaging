@@ -82,10 +82,10 @@ function insert_ads_after_paragraph($content) {
 add_filter('the_content', 'insert_ads_after_paragraph');
 
 // Function to insert the AdSense ad shortcode into the header
-// function insert_ads_in_header() {
-//     echo do_shortcode('[rotate_named_adsense_ads]');
-// }
-// add_action('wp_head', 'insert_ads_in_header');
+function insert_ads_in_header() {
+    echo do_shortcode('[rotate_named_adsense_ads]');
+}
+add_action('wp_head', 'insert_ads_in_header');
 
 // Shortcode to insert AdSense ad unit
 function rotate_named_adsense_ads_shortcode() {

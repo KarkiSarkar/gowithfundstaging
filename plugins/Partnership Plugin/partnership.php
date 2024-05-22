@@ -440,9 +440,9 @@ This following statements selects each category individually that contains an in
             // Perform the lead tracking with form data
             fbq('track', 'Lead', data);
             // Submit the form after tracking
+            
             this.submit();
         });
-
         document.getElementById('custom-contact-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission
 
@@ -457,26 +457,23 @@ This following statements selects each category individually that contains an in
     fbq('track', 'Lead', data);
 
     // Send the form data to the server using AJAX
-    fetch(this.action, {
-        method: this.method,
-        body: formData,
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error('Network response was not ok');
+    jQuery.ajax({
+        url: ajax_object.ajax_url,
+        type: 'POST',
+        data: {
+            action: 'submit_contact_form',
+            form_data: data
+        },
+        success: function(response) {
+            console.log('Form successfully submitted:', response);
+            // Optionally, redirect or display a success message
+        },
+        error: function(error) {
+            console.error('There was a problem with the form submission:', error);
         }
-    })
-    .then(responseData => {
-        // Handle the server response
-        console.log('Form successfully submitted:', responseData);
-        // Optionally, redirect or display a success message
-    })
-    .catch(error => {
-        console.error('There was a problem with the form submission:', error);
     });
 });
+
 
 
     </script>
@@ -500,6 +497,23 @@ This following statements selects each category individually that contains an in
     }
     
     add_action('admin_menu', 'register_partnership_requests_page');
+    
+    function handle_form_submission() {
+        // Check if the request is an AJAX request
+        if (isset($_POST['form_data'])) {
+            $form_data = $_POST['form_data'];
+    
+            // Perform server-side logic, such as storing data in the database
+            // For example, you could use $form_data['name'] and $form_data['email']
+    
+            // Send a response back to the client
+            wp_send_json_success(array('message' => 'Form received!', 'data' => $form_data));
+        } else {
+            wp_send_json_error(array('message' => 'Invalid form submission'));
+        }
+    }
+    add_action('wp_ajax_submit_contact_form', 'handle_form_submission');
+    add_action('wp_ajax_nopriv_submit_contact_form', 'handle_form_submission');
     
 
     function display_partnership_requests_page() {

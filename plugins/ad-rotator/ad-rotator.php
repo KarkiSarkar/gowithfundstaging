@@ -21,6 +21,7 @@ function rotate_named_adsense_ads() {
 
     // Get the selected ad unit
     $selected_ad = get_rotated_ad_units()[$_SESSION['selected_ad_unit']];
+    
 
     // Output the ad unit
     ?>

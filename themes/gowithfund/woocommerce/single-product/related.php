@@ -21,7 +21,8 @@ $args = apply_filters( 'woocommerce_related_products_args', array(
 	'no_found_rows' 		=> 1,
 	'posts_per_page' 		=> $posts_per_page,
 	'post__in' 				=> $related,
-	'post__not_in'			=> array( $product->get_id() )
+	'post__not_in'			=> array( $product->get_id() ),
+	'orderby'               => 'rand'
 ) );
 $show = 3;
 $products = new WP_Query( $args );

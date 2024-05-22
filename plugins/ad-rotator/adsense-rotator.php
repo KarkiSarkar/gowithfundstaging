@@ -2,7 +2,7 @@
 /*
 Plugin Name: AdSense Rotator
 Description: Rotates Google AdSense ad codes and generates shortcode.
-Version: 1.0
+Version: 3.0
 Author: Nydoz Team
 */
 

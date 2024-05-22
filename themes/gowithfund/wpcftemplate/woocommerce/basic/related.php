@@ -10,7 +10,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $product;
-$posts_per_page = 1;
+$posts_per_page = 5;
 $related = wc_get_related_products( $product->get_id(), $posts_per_page );
 
 if ( sizeof( $related ) == 0 ) return;
@@ -21,6 +21,7 @@ $args = apply_filters( 'woocommerce_related_products_args', array(
 	'posts_per_page' 		=> $posts_per_page,
 	'post__in' 				=> $related,
 	'post__not_in'			=> array( $product->get_id() ),
+	'orderby'               => 'rand',
 	'tax_query'				=> array(
       'taxonomy' => 'product_type',
       'field' => 'slug',
@@ -37,7 +38,6 @@ if ( $products->have_posts() ) : ?>
 	         <div class="row">
 	            <div class="col-12">
 						<div class="related project">
-							random
 							<div class="widget-heading margin-bottom-10">
 								<div class="widget-subtitle"><?php echo esc_html(krowd_get_option('related_subheading_text', 'Businesses You Can Back' )) ?></div>
 								<h2 class="widget-title"><?php echo esc_html(krowd_get_option('related_heading_text', 'Similar Projects' )) ?></h2>

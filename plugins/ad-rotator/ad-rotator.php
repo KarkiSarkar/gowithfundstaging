@@ -99,39 +99,22 @@ function get_rotated_ad_units() {
     // Array of named AdSense ad units
     $ad_units = array(
         'ad_unit_1' => array(
-            'client_id' => 'ca-pub-1174316040160838',
-            'slot_id' => '4797970803',
+            'client_id' => 'ca-pub-xxxxxxxxxx',
+            'slot_id' => 'xxxxxxxxx',
             'name' => 'Sponsered1',
         ),
         'ad_unit_2' => array(
-            'client_id' => 'ca-pub-3624662931905437',
-            'slot_id' => '2604968027',
+            'client_id' => 'ca-pub-yyyyyyyyy',
+            'slot_id' => 'yyyyyyyyy',
             'name' => 'Sponsered2',
             
         ),
         'ad_unit_3' => array(
-            'client_id' => 'ca-pub-7980503800144997',
-            'slot_id' => '4622130462',
+            'client_id' => 'ca-pub-uuuuuuuuuuu',
+            'slot_id' => 'uuuuuuuuu',
             'name' => 'Sponsered3',),
             
-        'ad_unit_4' => array(
-            'client_id' => 'ca-pub-3009520522837845',
-            'slot_id' => '8226914076',
-            'name' => 'Sponsered4',
-            
-        ),
-        'ad_unit_5' => array(
-            'client_id' => 'ca-pub-7166048638772841',
-            'slot_id' => '3553607674',
-            'name' => 'Sponsered5',
-            
-        ),
-         'ad_unit_6' => array(
-            'client_id' => 'ca-pub-3912613535459320',
-            'slot_id' => '5208070319',
-            'name' => 'Sponsered6',
-            
-        ),
+        
         
     );
 

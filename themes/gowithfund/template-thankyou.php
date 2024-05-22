@@ -5,9 +5,6 @@ Template Name: Thank You Page
 get_header();
 ?>
 
-<script>
-        fbq('track', 'Lead');
-    </script>
 <style>
     .buttonhovercss > a{
             padding: 10px 30px 10px 30px;
@@ -38,10 +35,10 @@ get_footer();
 ?>
         
 <script>
-// JavaScript to redirect to home page when the Thank You page is refreshed
-// window.onload = function() {
-//     if(performance.navigation.type == 1) {
-//         window.location.href = '<?php //echo esc_url( home_url( '/become-a-partner' ) ); ?>';
-//     }
-// }
+JavaScript to redirect to home page when the Thank You page is refreshed
+window.onload = function() {
+    if(performance.navigation.type == 1) {
+        window.location.href = '<?php echo esc_url( home_url( '/become-a-partner' ) ); ?>';
+    }
+}
 </script>

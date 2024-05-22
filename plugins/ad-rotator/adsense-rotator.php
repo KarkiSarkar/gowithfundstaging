@@ -26,6 +26,7 @@ function rotate_named_adsense_ads() {
     // Output the ad unit
     ?>
      <?php if (!is_user_logged_in()) {?> 
+        <div style="display: none;">
     <p style="text-align: center;"><?php echo $selected_ad['name']; ?></p>
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=<?php echo $selected_ad['client_id']; ?>&amp;cachebuster=<?php echo time(); ?>"
@@ -39,6 +40,7 @@ function rotate_named_adsense_ads() {
     <script>
          (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
+    </div>
     <?php
 }
 }

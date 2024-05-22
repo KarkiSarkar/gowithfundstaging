@@ -35,7 +35,7 @@ get_footer();
 ?>
         
 <script>
-JavaScript to redirect to home page when the Thank You page is refreshed
+//JavaScript to redirect to home page when the Thank You page is refreshed
 window.onload = function() {
     if(performance.navigation.type == 1) {
         window.location.href = '<?php echo esc_url( home_url( '/become-a-partner' ) ); ?>';

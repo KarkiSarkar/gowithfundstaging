@@ -48,10 +48,13 @@ function sfs_handle_form_submission() {
         $email = sanitize_email($_POST['sfs_email']);
         $message = sanitize_textarea_field($_POST['sfs_message']);
         
+        // Personal email address for receiving form submissions
+        $recipient_email = 'yourpersonalemail@example.com'; // Replace with your personal email
+        
         // Process the form data here (e.g., send an email or save to the database)
         
         // Example: Send an email
-        wp_mail(get_option('admin_email'), 'New Contact Form Submission', $message, array('Content-Type: text/html; charset=UTF-8', 'From: ' . $name . ' <' . $email . '>'));
+        wp_mail($recipient_email, 'New Contact Form Submission', $message, array('Content-Type: text/html; charset=UTF-8', 'From: ' . $name . ' <' . $email . '>'));
         
         // Display a thank you message
         add_action('the_content', function($content) {

@@ -429,8 +429,7 @@ This following statements selects each category individually that contains an in
                 textFieldDiv.style.display = "none";
             }
         }
-        </script>
-<script>
+       
         document.getElementById('custom-contact-form').addEventListener('submit', function(event) {
             var formData = new FormData(this);
             var data = {};
@@ -443,6 +442,43 @@ This following statements selects each category individually that contains an in
             // Submit the form after tracking
             this.submit();
         });
+
+        document.getElementById('custom-contact-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    var formData = new FormData(this);
+    var data = {};
+
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
+
+    // Perform the lead tracking with form data
+    fbq('track', 'Lead', data);
+
+    // Send the form data to the server using AJAX
+    fetch(this.action, {
+        method: this.method,
+        body: formData,
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Network response was not ok');
+        }
+    })
+    .then(responseData => {
+        // Handle the server response
+        console.log('Form successfully submitted:', responseData);
+        // Optionally, redirect or display a success message
+    })
+    .catch(error => {
+        console.error('There was a problem with the form submission:', error);
+    });
+});
+
+
     </script>
 
 

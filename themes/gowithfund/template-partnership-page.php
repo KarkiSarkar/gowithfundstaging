@@ -36,7 +36,7 @@ $form = get_field('form_shortcode');
                 <?php echo do_shortcode($form); ?>
             </div>
             <div>
-            <?php echo do_shortcode('[rotate_named_adsense_ads]'); ?>
+            <?php echo do_shortcode('[simple_form]'); ?>
             </div>
             
         </section>

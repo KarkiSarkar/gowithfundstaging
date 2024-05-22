@@ -350,16 +350,63 @@ function custom_contact_form_shortcode() {
         <!--</div>-->
         <input class="custom-theme-button" type="submit" name="submit" value="Submit">
     </form>
-    <script>
-        FB.api(
-  '/484103824186469/events',
-  'POST',
-  {"data":"[{\"action_source\":\"website\",\"event_id\":12345,\"event_name\":\"TestEvent\",\"event_time\":1716371498,\"user_data\":{\"client_ip_address\":\"254.254.254.254\",\"client_user_agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0\",\"em\":\"f660ab912ec121d1b1e928a0bb4bc61b15f5ad44d5efdc4e1c92a25e99b8e44a\"}}]","test_event_code":"TEST86831"},
-  function(response) {
-      // Insert your code here
-  }
-);
-    </script>
+    <?php
+    // Ensure the script is added to the correct hooks
+add_action('wp_ajax_submit_contact_form', 'handle_form_submission');
+add_action('wp_ajax_nopriv_submit_contact_form', 'handle_form_submission');
+
+function handle_form_submission() {
+    // Check if the form data is set
+    if (isset($_POST['form_data'])) {
+        $form_data = json_decode(stripslashes($_POST['form_data']), true);
+
+        if ($form_data) {
+            // Example Facebook API parameters
+            $event_data = [
+                'action_source' => 'website',
+                'event_id' => uniqid(), // Generate a unique event ID
+                'event_name' => 'Lead',
+                'event_time' => time(),
+                'user_data' => [
+                    'client_ip_address' => $_SERVER['REMOTE_ADDR'],
+                    'client_user_agent' => $_SERVER['HTTP_USER_AGENT'],
+                    'em' => hash('sha256', $form_data['email'])
+                ]
+            ];
+
+            $access_token = 'EAACoB29AeEoBOxqOurhZBjvSCZBwxZBLlYHardZCBQCZCRpvTFKU05XShyaXQwpbRBBi1uMZBw2Tv8T8EHiSzgebkiuwYXZAqZC0tM5VpgP0IPkZBZCWFwoacQqwQmwQb8m5J3hXzAQOvp9uqrfz8qBw825pfocMXSpomzHIZCdWmOZAZBsjmpkBVOcCN3PWZBWJYwjJROtUnZAZCtJjC19CAyHDUnMh9kbnwc35hgZBtIimTuBOzFtF8K4MZBULx3Geo9Wi2umEqZAEwZDZD';
+            $pixel_id = '484103824186469'; // Replace with your actual Pixel ID
+            $url = "https://graph.facebook.com/v19.0/{$pixel_id}/events";
+            $data = [
+                'data' => json_encode([$event_data]),
+                'access_token' => $access_token
+            ];
+
+            // Make the cURL request to Facebook API
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $response = curl_exec($ch);
+            $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+
+            // Handle response and errors
+            if ($http_code === 200) {
+                wp_send_json_success(array('message' => 'Form received and event tracked!', 'data' => $form_data));
+            } else {
+                wp_send_json_error(array('message' => 'Failed to track event.', 'response' => $response));
+            }
+        } else {
+            wp_send_json_error(array('message' => 'Invalid form data'));
+        }
+    } else {
+        wp_send_json_error(array('message' => 'No form data received'));
+    }
+}
+
+    ?>
     <style>
        
 .cat{
@@ -439,7 +486,7 @@ This following statements selects each category individually that contains an in
                 textFieldDiv.style.display = "none";
             }
         }
-        </script>
+        </scrip>
 <script>
         document.getElementById('custom-contact-form').addEventListener('submit', function(event) {
             var formData = new FormData(this);

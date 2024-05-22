@@ -10,7 +10,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $product;
-$posts_per_page = 5;
+$posts_per_page = 1;
 $related = wc_get_related_products( $product->get_id(), $posts_per_page );
 
 if ( sizeof( $related ) == 0 ) return;

@@ -703,7 +703,7 @@ This following statements selects each category individually that contains an in
         // }
 
             if (!is_admin() && !wp_doing_ajax() && isset($_POST['custom_contact_form_submit'])) {
-                wp_redirect(home_url('/become-a-partner/thank-you/'));
+                wp_redirect(home_url('/become-a-partner'));
                 exit();
             }
 

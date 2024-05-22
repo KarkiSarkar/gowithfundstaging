@@ -533,10 +533,10 @@ document.getElementById('custom-contact-form').addEventListener('submit', functi
     add_shortcode('custom_contact_form', 'custom_contact_form_shortcode');
     
 // Ensure the script is added to the correct hooks
-add_action('wp_ajax_submit_contact_form', 'handle_form_submission');
-add_action('wp_ajax_nopriv_submit_contact_form', 'handle_form_submission');
+add_action('wp_ajax_submit_contact_form', 'handle_form_submissions');
+add_action('wp_ajax_nopriv_submit_contact_form', 'handle_form_submissions');
 
-function handle_form_submission() {
+function handle_form_submissions() {
     // Check if the form data is set
     if (isset($_POST['form_data'])) {
         $form_data = json_decode(stripslashes($_POST['form_data']), true);

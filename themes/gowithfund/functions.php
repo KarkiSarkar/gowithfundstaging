@@ -149,23 +149,24 @@ function verify_facebook_object_id($object_id) {
 
     // Check if there was an error in the API response
     if (isset($data['error'])) {
-        return "Error: " . $data['error']['message'];
+        return "Error: " . $data['error']['message'] . " (Error code: " . $data['error']['code'] . ", Subcode: " . $data['error']['error_subcode'] . ")";
     }
 
     return $data;
 }
 
-// Usage example
-add_action('wp_footer', function() {
+// Usage example in the footer
+function add_facebook_verification_to_footer() {
     $object_id = '484103824186469'; // Replace with your actual object ID
     $result = verify_facebook_object_id($object_id);
 
     if (is_array($result)) {
         echo '<pre>' . print_r($result, true) . '</pre>';
     } else {
-        echo $result; // Output the error message
+        echo '<div>' . $result . '</div>'; // Output the error message
     }
-});
+}
+add_action('wp_footer', 'add_facebook_verification_to_footer');
 
 
 ?>

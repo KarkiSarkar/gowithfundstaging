@@ -5,13 +5,7 @@ Description: Plugin to generate a custom contact form and send emails upon submi
 Version: 1.0
 Author: Nydoz Team
 */
-function add_facebook_tracking_code() {
-    ?>
-     
-     <?php
-   }
-   add_action('wp_head', 'add_facebook_tracking_code');
-  
+
 // Enqueue scripts and styles
 function custom_contact_form_scripts() {
     // Enqueue scripts and styles here if needed
@@ -35,10 +29,7 @@ function custom_contact_form_shortcode() {
             margin-left: 15px;
         }
     </style>
-    <!-- Meta Pixel Code -->
-
-<!-- End Meta Pixel Code -->
-
+    
     <form id="custom-contact-form" method="post" action="" enctype="multipart/form-data">
        <input type="hidden" name="custom_contact_form_submit" value="1">
             <div class="col-sm-12 col-xs-12">
@@ -255,7 +246,7 @@ function custom_contact_form_shortcode() {
         </div>
        
             <div class="col-sm-12 col-xs-12">
-            <label class="label-color" for="nuber">Phone Number:</label>
+            <label class="label-color" for="phonenumber">Phone Number:</label>
             <input type="number" id="nuber" name="number" required>
             </div>
         
@@ -398,27 +389,6 @@ This following statements selects each category individually that contains an in
     </style>
   
    <script>
-
-// Example: Send AddToCart event when user clicks "Add to Cart" button
-jQuery(document).ready(function($) {
-  $('.custom-theme-button').click(function(e) {
-    // e.preventDefault();
-
-    //... (rest of the code remains the same)
-
-    // Send AddToCart event to Meta Pixel test event
-    $event_data = array(
-      'content_ids' => [$download_id],
-      'content_type' => 'product',
-      'currency' => $currency,
-      'value' => $value
-    );
-    send_meta_pixel_test_event('Lead', $event_data);
-  });
-});
-
-
-
         function toggleCheckboxes() {
             var investmentTypeSelect = document.getElementById("investmentType");
             var investmentType = investmentTypeSelect.options[investmentTypeSelect.selectedIndex].value;
@@ -450,8 +420,7 @@ jQuery(document).ready(function($) {
                 textFieldDiv.style.display = "none";
             }
         }
-        </script>
-<script>
+        
         document.getElementById('custom-contact-form').addEventListener('submit', function(event) {
             var formData = new FormData(this);
             var data = {};
@@ -464,7 +433,9 @@ jQuery(document).ready(function($) {
             // Submit the form after tracking
             this.submit();
         });
+        
     </script>
+
 
 
     <?php
@@ -639,26 +610,25 @@ jQuery(document).ready(function($) {
 
             
             $admin_headers = array(
-                'From: GoWithFund <info@gowithfund.com>',
+                'From: Test GoWithFund ',
                 'Content-Type: text/html; charset=UTF-8'
             );
              wp_mail($admin_email, $admin_subject, $admin_message, $admin_headers, $attachments);
-    
+             
+
             // Send email to client
             $client_headers = array(
-                'From: GoWithFund <info@gowithfund.com>',
+                'From: Test GoWithFund ',
                 'Content-Type: text/html; charset=UTF-8'
             );
             $client_subject = 'Thank you for contacting us';
              $client_message = "<div style='text-align: center; background-color: #00A9A5;'><img width='200' src='https://gowithfund.com/wp-content/uploads/2015/12/Final-Logo-white.png'/></div></br><div><h2>Dear $name,</h2></div><p>Thank you for expressing your interest in becoming a partner with GoWithFund. We appreciate your support and enthusiasm for our crowdfunding platform. Our team will review your submission and get back to you soon with further details.</p><div><p>Best regards,</p><p>The GoWithFund Team</p><p>943, 447 Broadway, 2nd Floor</p><p>New York, US</p></div><div><img width='150' src='https://gowithfund.com/wp-content/uploads/2024/05/Gowithfund-Final-Logo-Transparancy-BG.png'/></div>";
             wp_mail($email, $client_subject, $client_message, $client_headers);
-                 // Store the email address in a session variable
-        // session_start();
-        // $_SESSION['submitted_email'] = $email;
-        // // die();
-        // session_write_close();
-
-        // Create a new post
+            // session_start();
+            // $_SESSION['submitted_email'] = $email;
+            // // die();
+            // session_write_close();
+            // // Create a new post
         $post_data = array(
             'post_title'    => wp_strip_all_tags($name),
             'post_content'  => $message,
@@ -666,13 +636,7 @@ jQuery(document).ready(function($) {
             'post_type'     => 'partnership_request',
         );
         $post_id = wp_insert_post($post_data);
-    
-        // if ($post_id) {
-        //     // Save post meta
-        //     update_post_meta($post_id, 'email', $email);
-           
-        // }
-
+        
             if (!is_admin() && !wp_doing_ajax() && isset($_POST['custom_contact_form_submit'])) {
                 wp_redirect(home_url('/become-a-partner/thank-you/'));
                 exit();
@@ -681,6 +645,4 @@ jQuery(document).ready(function($) {
         }
     }
     add_action('init', 'process_custom_contact_form');
-
-
     

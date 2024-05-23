@@ -26,7 +26,7 @@ function sfs_display_form() {
         </p>
         <p>
             <label for="sfs_phonenumber">Phonenumber:</label>
-            <input type="number" id="sfs_phonenumber" name="sfs_phonenumber" required>
+            <input type="tel" id="sfs_phonenumber" name="sfs_phonenumber" required>
         </p>
         <p>
             <label for="country">Country </label><br/>

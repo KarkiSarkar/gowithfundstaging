@@ -124,13 +124,14 @@ function create_success_story_post_type() {
 }
 add_action( 'init', 'create_success_story_post_type' );
 
-// Add the Facebook Graph API request function
+// Function to fetch Facebook object
 function fetch_facebook_object($object_id, $access_token) {
     $url = "https://graph.facebook.com/{$object_id}?access_token={$access_token}";
 
     $response = wp_remote_get($url);
 
     if (is_wp_error($response)) {
+        error_log('Request failed: ' . $response->get_error_message());
         return 'Request failed: ' . $response->get_error_message();
     }
 
@@ -138,7 +139,8 @@ function fetch_facebook_object($object_id, $access_token) {
     $data = json_decode($body, true);
 
     if (isset($data['error'])) {
-        return 'Error: ' . $data['error']['message'];
+        error_log('Error: ' . print_r($data['error'], true));
+        return 'Error: ' . $data['error']['message'] . ' (Code: ' . $data['error']['code'] . ')';
     }
 
     return $data;

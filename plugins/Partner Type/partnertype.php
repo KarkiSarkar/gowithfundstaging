@@ -53,10 +53,22 @@ function sfs_handle_form_submission() {
         // Personal email address for receiving form submissions
         $recipient_email = 'prabin@nydoz.com'; // Replace with your personal email
         
-        // Process the form data here (e.g., send an email or save to the database)
+        // Construct email subject with page name (if available)
+        $email_subject = 'New Contact Form Submission';
+        if (!empty($page_name)) {
+            $email_subject .= ' from ' . $page_name;
+        }
+        
+        // Construct email message
+        $email_message = "Name: $name\n";
+        $email_message .= "Email: $email\n";
+        if (!empty($page_name)) {
+            $email_message .= "Page Name: $page_name\n\n";
+        }
+        $email_message .= "Message:\n$message";
         
         // Example: Send an email
-        wp_mail($recipient_email, 'New Contact Form Submission', $message, $page_name, array('Content-Type: text/html; charset=UTF-8', 'From: ' . $name . ' <' . $email . '>'));
+        wp_mail($recipient_email, $email_subject, $email_message, array('Content-Type: text/html; charset=UTF-8', 'From: ' . $name . ' <' . $email . '>'));
         
         // Display a thank you message
         add_action('the_content', function($content) {

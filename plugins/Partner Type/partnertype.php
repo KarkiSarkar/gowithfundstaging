@@ -253,59 +253,147 @@ function sfs_register_shortcodes() {
 add_action('init', 'sfs_register_shortcodes');
 
 // Handle form submission
+// function sfs_handle_form_submission() {
+//     if (isset($_POST['sfs_submit'])) {
+//         $name = sanitize_text_field($_POST['sfs_name']);
+//         $email = sanitize_email($_POST['sfs_email']);
+//         $phonenumber = sanitize_text_field($_POST['sfs_phonenumber']);
+//         $country = sanitize_text_field($_POST['country']);
+//         $page_name = isset($_POST['sfs_page_name'])? sanitize_text_field($_POST['sfs_page_name']) : '';
+//         $message = sanitize_textarea_field($_POST['sfs_message']);
+//         $file = isset($_FILES['sfs_file'])? $_FILES['sfs_file'] : null;
+        
+//         // Personal email address for receiving form submissions
+//         $recipient_email = $email; // Replace with your personal email
+        
+//         // Construct email subject with page name (if available)
+//         $email_subject = 'New Contact Form Submission';
+//         if (!empty($page_name)) {
+//             $email_subject.= ' from '. $page_name;
+//         }
+        
+//         // Construct email message
+//         $email_message = "<html><body>";
+//         $email_message.= "<p>Name: $name</p>";
+//         $email_message.= "<h2>User Request for $page_name</h2>";
+//         $email_message.= "<p>Email: $email\n</p>";
+//         $email_message.= "<p>Phonenumber: $phonenumber\n</p>";
+//         $email_message.= "<p>Country: $country\n</p>";
+//         $email_message.= "<p>Message:\n$message</p>";
+       
+//         // Handle file upload
+//         if ($file) {
+//             $upload_dir = wp_upload_dir();
+//             $file_name = basename($file['name']);
+//             $file_path = $upload_dir['path']. '/'. $file_name;
+//             if (move_uploaded_file($file['tmp_name'], $file_path)) {
+//                 $email_message.= "\n\nFile: $file_name\n";
+//                 $email_message.= "File URL: ". $upload_dir['url']. '/'. $file_name;
+//             }
+//         }
+//         $attachments = array();
+//         if ($file) {
+//             $attachments[] = $file_path;
+//         }
+//          $email_message.= "</body></html>";
+       
+//         // Example: Send an email
+//         wp_mail($recipient_email, $email_subject, $email_message, array('Content-Type: text/html; charset=UTF-8', 'From: '. $name. ' <'. $email. '>'), $attachments);
+        
+//         // Display a thank you message
+//         add_action('the_content', function($content) {
+//             return '<p>Thank you for your message!</p>'. $content;
+//         });
+//     }
+// }
+// add_action('wp', 'sfs_handle_form_submission');
+
+use FacebookAds\Api;
+use FacebookAds\Object\ServerSide\Event;
+use FacebookAds\Object\ServerSide\EventRequest;
+use FacebookAds\Object\ServerSide\UserData;
+use FacebookAds\Object\ServerSide\CustomData;
+
+// Handle form submission
 function sfs_handle_form_submission() {
     if (isset($_POST['sfs_submit'])) {
-        $name = sanitize_text_field($_POST['sfs_name']);
-        $email = sanitize_email($_POST['sfs_email']);
-        $phonenumber = sanitize_text_field($_POST['sfs_phonenumber']);
-        $country = sanitize_text_field($_POST['country']);
-        $page_name = isset($_POST['sfs_page_name'])? sanitize_text_field($_POST['sfs_page_name']) : '';
-        $message = sanitize_textarea_field($_POST['sfs_message']);
-        $file = isset($_FILES['sfs_file'])? $_FILES['sfs_file'] : null;
-        
+        // Check if 'sfs_page_name' key is set in $_POST array
+        $page_name = isset($_POST['sfs_page_name']) ? sanitize_text_field($_POST['sfs_page_name']) : '';
+
+        // Sanitize other form inputs
+        $name = isset($_POST['sfs_name']) ? sanitize_text_field($_POST['sfs_name']) : '';
+        $email = isset($_POST['sfs_email']) ? sanitize_email($_POST['sfs_email']) : '';
+        $message = isset($_POST['sfs_message']) ? sanitize_textarea_field($_POST['sfs_message']) : '';
+
         // Personal email address for receiving form submissions
-        $recipient_email = $email; // Replace with your personal email
-        
+        $recipient_email = 'prabin@nydoz.com'; // Replace with your personal email
+
         // Construct email subject with page name (if available)
         $email_subject = 'New Contact Form Submission';
         if (!empty($page_name)) {
-            $email_subject.= ' from '. $page_name;
+            $email_subject .= ' from ' . $page_name;
         }
-        
+
         // Construct email message
-        $email_message = "<html><body>";
-        $email_message.= "<p>Name: $name</p>";
-        $email_message.= "<h2>User Request for $page_name</h2>";
-        $email_message.= "<p>Email: $email\n</p>";
-        $email_message.= "<p>Phonenumber: $phonenumber\n</p>";
-        $email_message.= "<p>Country: $country\n</p>";
-        $email_message.= "<p>Message:\n$message</p>";
-       
-        // Handle file upload
-        if ($file) {
-            $upload_dir = wp_upload_dir();
-            $file_name = basename($file['name']);
-            $file_path = $upload_dir['path']. '/'. $file_name;
-            if (move_uploaded_file($file['tmp_name'], $file_path)) {
-                $email_message.= "\n\nFile: $file_name\n";
-                $email_message.= "File URL: ". $upload_dir['url']. '/'. $file_name;
-            }
+        $email_message = "Name: $name\n";
+        $email_message .= "Email: $email\n";
+        if (!empty($page_name)) {
+            $email_message .= "Page Name: $page_name\n\n";
         }
-        $attachments = array();
-        if ($file) {
-            $attachments[] = $file_path;
-        }
-         $email_message.= "</body></html>";
-       
-        // Example: Send an email
-        wp_mail($recipient_email, $email_subject, $email_message, array('Content-Type: text/html; charset=UTF-8', 'From: '. $name. ' <'. $email. '>'), $attachments);
-        
+        $email_message .= "Message:\n$message";
+
+        // Send an email
+        wp_mail($recipient_email, $email_subject, $email_message, array('Content-Type: text/html; charset=UTF-8', 'From: ' . $name . ' <' . $email . '>'));
+
         // Display a thank you message
         add_action('the_content', function($content) {
-            return '<p>Thank you for your message!</p>'. $content;
+            return '<p>Thank you for your message!</p>' . $content;
         });
+
+        // Send data to Facebook Conversion API
+        send_event_to_facebook($name, $email, $page_name, $message);
     }
 }
 add_action('wp', 'sfs_handle_form_submission');
+
+function send_event_to_facebook($name, $email, $page_name, $message) {
+    // Initialize the Facebook SDK
+    $access_token = 'your_access_token'; // Replace with your actual access token
+    $pixel_id = 'your_pixel_id'; // Replace with your actual Pixel ID
+
+    Api::init(null, null, $access_token);
+
+    // Create UserData object
+    $user_data = (new UserData())
+        ->setEmails([hash('sha256', $email)]);
+
+    // Create CustomData object
+    $custom_data = (new CustomData())
+        ->setContentName($page_name)
+        ->setContentCategory('Form Submission')
+        ->setContentIds([$message]);
+
+    // Create Event object
+    $event = (new Event())
+        ->setEventName('Lead')
+        ->setEventTime(time())
+        ->setUserData($user_data)
+        ->setCustomData($custom_data)
+        ->setActionSource('website');
+
+    // Create EventRequest object
+    $request = (new EventRequest($pixel_id))
+        ->setEvents([$event]);
+
+    // Execute the request
+    try {
+        $response = $request->execute();
+        // Log the response or handle it as needed
+    } catch (Exception $e) {
+        // Handle exceptions
+        error_log('Facebook Conversion API error: ' . $e->getMessage());
+    }
+}
+
 
 ?>

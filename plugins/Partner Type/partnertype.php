@@ -47,7 +47,7 @@ function sfs_handle_form_submission() {
     if (isset($_POST['sfs_submit'])) {
         $name = sanitize_text_field($_POST['sfs_name']);
         $email = sanitize_email($_POST['sfs_email']);
-        $page_name = sanitize_page_name($_POST['sfs_page_name']);
+        $page_name = sanitize_text_field($_POST['sfs_page_name']);
         $message = sanitize_textarea_field($_POST['sfs_message']);
         
         // Personal email address for receiving form submissions

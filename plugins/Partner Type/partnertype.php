@@ -242,6 +242,20 @@ function sfs_display_form() {
             <input type="submit" name="sfs_submit" value="Send">
         </p>
     </form>
+    <script>
+        document.getElementById('custom-contact-form').addEventListener('submit', function(event) {
+            var formData = new FormData(this);
+            var data = {};
+            formData.forEach((value, key) => {
+            data[key] = value;
+            });
+
+            // Perform the lead tracking with form data
+            fbq('track', 'Lead', data);
+            // Submit the form after tracking
+            this.submit();
+        });
+    </script>
     <?php
     return ob_get_clean();
 }

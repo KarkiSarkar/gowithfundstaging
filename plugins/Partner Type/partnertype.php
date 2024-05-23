@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: PartnerType Form
-Description: Plugin to generate a custom contact form with file upload, phone number, and country fields, and send emails upon submission.
+Description: Plugin to generate a custom contact form with file upload and send emails upon submission.
 Version: 1.0
 Author: Nydoz Team
 */
@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 // Shortcode function to display the form
 function sfs_display_form() {
     ob_start();
-  ?>
+   ?>
     <form method="post" action="" enctype="multipart/form-data">
     <input type="hidden" name="sfs_page_name" value="<?php echo get_the_title();?>">
         <p>
@@ -23,14 +23,6 @@ function sfs_display_form() {
         <p>
             <label for="sfs_email">Email:</label>
             <input type="email" id="sfs_email" name="sfs_email" required>
-        </p>
-        <p>
-            <label for="sfs_phone">Phone:</label>
-            <input type="tel" id="sfs_phone" name="sfs_phone" required>
-        </p>
-        <p>
-            <label for="sfs_country">Country:</label>
-            <input type="text" id="sfs_country" name="sfs_country" readonly>
         </p>
         <p>
             <label for="sfs_message">Message:</label>
@@ -59,8 +51,6 @@ function sfs_handle_form_submission() {
     if (isset($_POST['sfs_submit'])) {
         $name = sanitize_text_field($_POST['sfs_name']);
         $email = sanitize_email($_POST['sfs_email']);
-        $phone = sanitize_text_field($_POST['sfs_phone']);
-        $country = sanitize_text_field($_POST['sfs_country']);
         $page_name = isset($_POST['sfs_page_name'])? sanitize_text_field($_POST['sfs_page_name']) : '';
         $message = sanitize_textarea_field($_POST['sfs_message']);
         $file = isset($_FILES['sfs_file'])? $_FILES['sfs_file'] : null;
@@ -77,8 +67,6 @@ function sfs_handle_form_submission() {
         // Construct email message
         $email_message = "Name: $name\n";
         $email_message.= "Email: $email\n";
-        $email_message.= "Phone: $phone\n";
-        $email_message.= "Country: $country\n";
         if (!empty($page_name)) {
             $email_message.= "Page Name: $page_name\n\n";
         }
@@ -103,15 +91,7 @@ function sfs_handle_form_submission() {
             return '<p>Thank you for your message!</p>'. $content;
         });
     }
-    // Get user location based on IP address
-    $ip = $_SERVER['REMOTE_ADDR'];
-    $location_data = wp_remote_get("https://ipapi.co/$ip/json/");
-    $location = json_decode(wp_remote_retrieve_body($location_data), true);
-    $country = $location['country_name'];
-?>
-<script>
-document.getElementById('sfs_country').value = '<?php echo $country; ?>';
-</script>
-<?php
 }
 add_action('wp', 'sfs_handle_form_submission');
+
+?>

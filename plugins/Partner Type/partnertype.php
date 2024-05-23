@@ -26,10 +26,10 @@ function sfs_display_form() {
         </p>
         <p>
             <label for="sfs_phonenumber">Phonenumber:</label>
-            <input type="phonenumber" id="sfs_phonenumber" name="sfs_phonenumber" required>
+            <input type="number" id="sfs_phonenumber" name="sfs_phonenumber" required>
         </p>
         <p>
-            <label class="label-color" for="country">Country </label><br/>
+            <label for="country">Country </label><br/>
             <select id="country" name="country" required>
                 <option value="">Select a country</option>
                 <option value="Afghanistan">Afghanistan</option>

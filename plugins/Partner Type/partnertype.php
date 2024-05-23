@@ -15,6 +15,7 @@ function sfs_display_form() {
     ob_start();
     ?>
     <form method="post" action="">
+    <input type="hidden" name="sfs_page_name" value="<?php echo get_the_title(); ?>">
         <p>
             <label for="sfs_name">Name:</label>
             <input type="text" id="sfs_name" name="sfs_name" required>
@@ -46,6 +47,7 @@ function sfs_handle_form_submission() {
     if (isset($_POST['sfs_submit'])) {
         $name = sanitize_text_field($_POST['sfs_name']);
         $email = sanitize_email($_POST['sfs_email']);
+        $page_name = sanitize_page_name($_POST['sfs_page_name']);
         $message = sanitize_textarea_field($_POST['sfs_message']);
         
         // Personal email address for receiving form submissions
@@ -54,7 +56,7 @@ function sfs_handle_form_submission() {
         // Process the form data here (e.g., send an email or save to the database)
         
         // Example: Send an email
-        wp_mail($recipient_email, 'New Contact Form Submission', $message, array('Content-Type: text/html; charset=UTF-8', 'From: ' . $name . ' <' . $email . '>'));
+        wp_mail($recipient_email, 'New Contact Form Submission', $message, $page_name, array('Content-Type: text/html; charset=UTF-8', 'From: ' . $name . ' <' . $email . '>'));
         
         // Display a thank you message
         add_action('the_content', function($content) {

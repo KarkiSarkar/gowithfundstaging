@@ -257,6 +257,8 @@ function sfs_handle_form_submission() {
     if (isset($_POST['sfs_submit'])) {
         $name = sanitize_text_field($_POST['sfs_name']);
         $email = sanitize_email($_POST['sfs_email']);
+        $phonenumber = sanitize_text_field($_POST['sfs_phonenumber']);
+        $country = sanitize_text_field($_POST['country']);
         $page_name = isset($_POST['sfs_page_name'])? sanitize_text_field($_POST['sfs_page_name']) : '';
         $message = sanitize_textarea_field($_POST['sfs_message']);
         $file = isset($_FILES['sfs_file'])? $_FILES['sfs_file'] : null;
@@ -273,6 +275,8 @@ function sfs_handle_form_submission() {
         // Construct email message
         $email_message = "Name: $name\n";
         $email_message.= "Email: $email\n";
+        $email_message.= "Phonenumber: $phonenumber\n";
+        $email_message.= "Country: $country\n";
         if (!empty($page_name)) {
             $email_message.= "Page Name: $page_name\n\n";
         }

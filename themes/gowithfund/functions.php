@@ -155,18 +155,17 @@ function verify_facebook_object_id($object_id) {
     return $data;
 }
 
-// Usage example in the footer
-function add_facebook_verification_to_footer() {
+// Usage example
+add_action('wp_footer', function() {
     $object_id = '484103824186469'; // Replace with your actual object ID
     $result = verify_facebook_object_id($object_id);
 
     if (is_array($result)) {
         echo '<pre>' . print_r($result, true) . '</pre>';
     } else {
-        echo '<div>' . $result . '</div>'; // Output the error message
+        echo $result; // Output the error message
     }
-}
-add_action('wp_footer', 'add_facebook_verification_to_footer');
+});
 
 
 ?>

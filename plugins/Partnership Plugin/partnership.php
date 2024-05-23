@@ -684,14 +684,3 @@ jQuery(document).ready(function($) {
 
 
     
-    function send_meta_pixel_test_event($event_name, $event_data) {
-        // Initialize the Meta Pixel API
-        $pixel_id = 'YOUR_META_PIXEL_ID';
-        $access_token = 'YOUR_META_PIXEL_ACCESS_TOKEN';
-      
-        // Create a new instance of the Meta Pixel API client
-        $fbq = new FacebookPixelAPI($pixel_id, $access_token);
-      
-        // Track the event
-        $fbq->track($event_name, $event_data);
-      }

@@ -124,5 +124,48 @@ function create_success_story_post_type() {
 }
 add_action( 'init', 'create_success_story_post_type' );
 
+// Add the Facebook Graph API request function
+function fetch_facebook_object($object_id, $access_token) {
+    $url = "https://graph.facebook.com/{$object_id}?access_token={$access_token}";
+
+    $response = wp_remote_get($url);
+
+    if (is_wp_error($response)) {
+        return 'Request failed: ' . $response->get_error_message();
+    }
+
+    $body = wp_remote_retrieve_body($response);
+    $data = json_decode($body, true);
+
+    if (isset($data['error'])) {
+        return 'Error: ' . $data['error']['message'];
+    }
+
+    return $data;
+}
+
+// Shortcode to display Facebook object data
+function display_facebook_object($atts) {
+    $atts = shortcode_atts(array(
+        'id' => '484103824186469', // Facebook object ID
+        'token' => 'EAACoB29AeEoBO2saMxvjZCa7OCH42IOeirhhwKwRvQZB6ih1ePbCbvyHOpiEWN8ccsBZCKp5YLgb1FMYZCfDZBHbSVpGTyOz42KNp4wDzV7WGGCwgYaBlZB6bPAa7H2m5VwazYJdnmnxh77mslDeeuoeRZBchymCMiEBuh0YIcPwkmA8c48ajxZBRnZASqTABEDBs5yN7VFgggF5rx7ryxhKYoPu8Ucn5OUD4z8djn6hN7QIUTIuHOuswXwZApYB9LGHGhTgZDZD', // Access token
+    ), $atts, 'facebook_object');
+
+    if (empty($atts['id']) || empty($atts['token'])) {
+        return 'Object ID and access token are required.';
+    }
+
+    $data = fetch_facebook_object($atts['id'], $atts['token']);
+
+    if (is_string($data)) {
+        return $data;
+    }
+
+    // Customize this part to display the data as needed
+    return '<pre>' . print_r($data, true) . '</pre>';
+}
+
+// Register the shortcode
+add_shortcode('facebook_object', 'display_facebook_object');
 
 ?>

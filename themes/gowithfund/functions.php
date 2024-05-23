@@ -168,4 +168,34 @@ add_action('wp_footer', function() {
 });
 
 
+// Enqueue JavaScript for Facebook verification
+function enqueue_facebook_verification_script() {
+    // Replace '484103824186469' with your actual Facebook object ID
+    $object_id = '484103824186469';
+    
+    // Define the JavaScript code
+    $script = "
+    <script>
+        // Function to verify Facebook object ID
+        function verifyFacebookObject(objectId) {
+            // Make an API request to verify the object ID
+            fetch(`https://graph.facebook.com/v19.0/${objectId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Log the response for debugging
+                    console.log(data);
+                    // You can handle the response here, e.g., display it on the page
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Call the function with your Facebook object ID
+        verifyFacebookObject('$object_id');
+    </script>";
+
+    // Output the JavaScript code
+    echo $script;
+}
+add_action('wp_footer', 'enqueue_facebook_verification_script');
+
 ?>

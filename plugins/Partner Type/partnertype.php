@@ -292,9 +292,12 @@ function sfs_handle_form_submission() {
                 $email_message.= "File URL: ". $upload_dir['url']. '/'. $file_name;
             }
         }
-        
+        $attachments = array();
+        if ($file) {
+            $attachments[] = $file_path;
+        }
         // Example: Send an email
-        wp_mail($recipient_email, $email_subject, $email_message, array('Content-Type: text/html; charset=UTF-8', 'From: '. $name. ' <'. $email. '>'));
+        wp_mail($recipient_email, $email_subject, $email_message, array('Content-Type: text/html; charset=UTF-8', 'From: '. $name. ' <'. $email. '>'), $attachments);
         
         // Display a thank you message
         add_action('the_content', function($content) {

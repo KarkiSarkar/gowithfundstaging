@@ -17,6 +17,7 @@ $form = get_field('form_shortcode');
     padding: 5px 10px;
     max-width: 100%;
     border-radius: 0;
+    width: 100%;
 }
 </style>
     <main id="main" class="container-layout-content container">

@@ -275,7 +275,7 @@ function sfs_handle_form_submission() {
         // Construct email message
         $email_message = "Name: $name\n";
         $email_message.= "<html><body>";
-        $email_message.= "<h2>User Request for $page_name</h2>";
+        $admin_message .= "<h2>User Request for $page_name</h2>";
         $email_message.= "<p>Email: $email\n</p>";
         $email_message.= "<p>Phonenumber: $phonenumber\n</p>";
         $email_message.= "<p>Country: $country\n</p>";
@@ -295,13 +295,10 @@ function sfs_handle_form_submission() {
         if ($file) {
             $attachments[] = $file_path;
         }
-        $email_message.= "</body></html>";
-        $email_headers = array(
-            'From: Test GoWithFund ',
-            'Content-Type: text/html; charset=UTF-8'
-        );
+         $email_message.= "</body></html>";
+       
         // Example: Send an email
-        wp_mail($recipient_email, $email_subject, $email_message, $email_headers, array('Content-Type: text/html; charset=UTF-8', 'From: '. $name. ' <'. $email. '>'), $attachments);
+        wp_mail($recipient_email, $email_subject, $email_message, array('Content-Type: text/html; charset=UTF-8', 'From: '. $name. ' <'. $email. '>'), $attachments);
         
         // Display a thank you message
         add_action('the_content', function($content) {

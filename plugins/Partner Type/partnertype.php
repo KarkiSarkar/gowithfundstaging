@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 function sfs_display_form() {
     ob_start();
    ?>
-    <form method="post" action="" enctype="multipart/form-data">
+    <form id="partnertype_form" method="post" action="" enctype="multipart/form-data">
     <input type="hidden" name="sfs_page_name" value="<?php echo get_the_title();?>">
         <p>
             <label for="sfs_name">Name:</label>
@@ -243,7 +243,7 @@ function sfs_display_form() {
         </p>
     </form>
     <script>
-        document.getElementById('custom-contact-form').addEventListener('submit', function(event) {
+        document.getElementById('partnertype_form').addEventListener('submit', function(event) {
             var formData = new FormData(this);
             var data = {};
             formData.forEach((value, key) => {

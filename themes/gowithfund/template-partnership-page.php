@@ -9,6 +9,15 @@ $form = get_field('form_shortcode');
     .page-title{
         padding-top: 3rem;
     }
+    input[type="text"], input[type="tel"], input[type="password"], input[type="email"], textarea, select {
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.02) inset;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.02) inset;
+    border: 1px solid #E9E9EE;
+    padding: 5px 10px;
+    max-width: 100%;
+    border-radius: 0;
+}
 </style>
     <main id="main" class="container-layout-content container">
         <section>

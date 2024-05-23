@@ -275,7 +275,7 @@ function sfs_handle_form_submission() {
         // Construct email message
         $email_message = "Name: $name\n";
         $email_message.= "<html><body>";
-        $admin_message .= "<h2>User Request for $page_name</h2>";
+        $email_message .= "<h2>User Request for $page_name</h2>";
         $email_message.= "<p>Email: $email\n</p>";
         $email_message.= "<p>Phonenumber: $phonenumber\n</p>";
         $email_message.= "<p>Country: $country\n</p>";

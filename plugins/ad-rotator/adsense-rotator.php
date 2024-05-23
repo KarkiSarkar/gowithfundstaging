@@ -26,20 +26,10 @@ function rotate_named_adsense_ads() {
     // Output the ad unit
     ?>
      <?php if (!is_user_logged_in()) {?> 
-    <p style="text-align: center;"><?php echo $selected_ad['name']; ?><?php echo $selected_ad['client_id']; ?></p>
-    
+        <p><?php echo $selected_ad['client_id']; ?></p>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=<?php echo $selected_ad['client_id']; ?>&amp;cachebuster=<?php echo time(); ?>"
      crossorigin="anonymous"></script>
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="<?php echo $selected_ad['client_id']; ?>"
-         data-ad-slot="<?php echo $selected_ad['slot_id']; ?>"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-   
+    
     <?php
 }
 }
@@ -101,39 +91,21 @@ function get_rotated_ad_units() {
     // Array of named AdSense ad units
     $ad_units = array(
         'ad_unit_1' => array(
-            'client_id' => 'ca-pub-1174316040160838',
-            'slot_id' => '4797970803',
+            'client_id' => 'ca-pub-xxxxxxx',
+           
             'name' => 'Sponsered1',
         ),
         'ad_unit_2' => array(
-            'client_id' => 'ca-pub-3624662931905437',
-            'slot_id' => '2604968027',
+            'client_id' => 'ca-pub-yyyyyyyy',
+           
             'name' => 'Sponsered2',
             
         ),
         'ad_unit_3' => array(
-            'client_id' => 'ca-pub-7980503800144997',
-            'slot_id' => '4622130462',
+            'client_id' => 'ca-pub-zzzzzzzz',
+           
             'name' => 'Sponsered3',),
             
-        'ad_unit_4' => array(
-            'client_id' => 'ca-pub-3009520522837845',
-            'slot_id' => '8226914076',
-            'name' => 'Sponsered4',
-            
-        ),
-        'ad_unit_5' => array(
-            'client_id' => 'ca-pub-7166048638772841',
-            'slot_id' => '3553607674',
-            'name' => 'Sponsered5',
-            
-        ),
-         'ad_unit_6' => array(
-            'client_id' => 'ca-pub-3912613535459320',
-            'slot_id' => '5208070319',
-            'name' => 'Sponsered6',
-            
-        ),
         
     );
 

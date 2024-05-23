@@ -398,6 +398,27 @@ This following statements selects each category individually that contains an in
     </style>
   
    <script>
+
+// Example: Send AddToCart event when user clicks "Add to Cart" button
+jQuery(document).ready(function($) {
+  $('.custom-theme-button').click(function(e) {
+    // e.preventDefault();
+
+    //... (rest of the code remains the same)
+
+    // Send AddToCart event to Meta Pixel test event
+    $event_data = array(
+      'content_ids' => [$download_id],
+      'content_type' => 'product',
+      'currency' => $currency,
+      'value' => $value
+    );
+    send_meta_pixel_test_event('Lead', $event_data);
+  });
+});
+
+
+
         function toggleCheckboxes() {
             var investmentTypeSelect = document.getElementById("investmentType");
             var investmentType = investmentTypeSelect.options[investmentTypeSelect.selectedIndex].value;
@@ -663,4 +684,14 @@ This following statements selects each category individually that contains an in
 
 
     
-    
+    function send_meta_pixel_test_event($event_name, $event_data) {
+        // Initialize the Meta Pixel API
+        $pixel_id = 'YOUR_META_PIXEL_ID';
+        $access_token = 'YOUR_META_PIXEL_ACCESS_TOKEN';
+      
+        // Create a new instance of the Meta Pixel API client
+        $fbq = new FacebookPixelAPI($pixel_id, $access_token);
+      
+        // Track the event
+        $fbq->track($event_name, $event_data);
+      }

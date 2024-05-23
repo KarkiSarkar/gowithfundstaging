@@ -125,4 +125,47 @@ function create_success_story_post_type() {
 add_action( 'init', 'create_success_story_post_type' );
 
 
+function verify_facebook_object_id($object_id) {
+    $access_token = 'EAACoB29AeEoBO9xtVld0GZCFWmkR4RhBn3UBOX17fuSyMzFgWFmhE02krHhGDI6EdtBzDMUPk2kMcMfxhGnJilCLWeyoGLmqKT0DBldHEgDxbZBtL1AJvvoYROdxVEad1GkNzeXIMSnh4GyH5urTs1eD0YIRZAF4cirJYCn0t8rl6J5YkvaZBatU0SZAURF8sGHovBiqi5ysi260SGJ1ptOUsk2GUHs0XcXojvvCYxJgFeeQ3mYccw2BE8HrOjMewnHkZD';
+    $url = "https://graph.facebook.com/v19.0/$object_id?access_token=" . urlencode($access_token);
+
+    // Make the request
+    $response = wp_remote_get($url);
+
+    // Check if there was an error with the request
+    if (is_wp_error($response)) {
+        $error_message = $response->get_error_message();
+        return "Something went wrong: $error_message";
+    }
+
+    // Retrieve the response body
+    $body = wp_remote_retrieve_body($response);
+
+    // Log the raw response body for debugging purposes
+    error_log('Facebook API response: ' . $body);
+
+    // Decode the JSON response
+    $data = json_decode($body, true);
+
+    // Check if there was an error in the API response
+    if (isset($data['error'])) {
+        return "Error: " . $data['error']['message'];
+    }
+
+    return $data;
+}
+
+// Usage example
+add_action('wp_footer', function() {
+    $object_id = '484103824186469'; // Replace with your actual object ID
+    $result = verify_facebook_object_id($object_id);
+
+    if (is_array($result)) {
+        echo '<pre>' . print_r($result, true) . '</pre>';
+    } else {
+        echo $result; // Output the error message
+    }
+});
+
+
 ?>

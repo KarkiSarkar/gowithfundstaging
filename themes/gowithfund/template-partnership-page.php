@@ -41,16 +41,7 @@ $form = get_field('form_shortcode');
             
         </section>
     </main>
-<script>
-    FB.api(
-  '/484103824186469/events',
-  'POST',
-  {"data":"[{\"action_source\":\"website\",\"event_id\":12345,\"event_name\":\"TestEvent\",\"event_time\":1716434206,\"user_data\":{\"client_ip_address\":\"254.254.254.254\",\"client_user_agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0\",\"em\":\"f660ab912ec121d1b1e928a0bb4bc61b15f5ad44d5efdc4e1c92a25e99b8e44a\"}}]","test_event_code":"TEST86831"},
-  function(response) {
-      // Insert your code here
-  }
-);
-</script>
+
 <?php
 get_footer();
 ?>

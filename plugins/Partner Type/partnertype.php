@@ -49,7 +49,7 @@ function sfs_handle_form_submission() {
         $message = sanitize_textarea_field($_POST['sfs_message']);
         
         // Personal email address for receiving form submissions
-        $recipient_email = 'yourpersonalemail@example.com'; // Replace with your personal email
+        $recipient_email = 'prabin@nydoz.com'; // Replace with your personal email
         
         // Process the form data here (e.g., send an email or save to the database)
         

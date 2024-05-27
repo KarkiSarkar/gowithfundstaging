@@ -412,7 +412,7 @@ function send_event_to_facebook($name, $email, $page_name, $message) {
     // Execute the request
     try {
         $response = $request->execute();
-        // Log the response or handle it as needed
+        error_log('Facebook Conversion API response: ' . print_r($response, true));
     } catch (Exception $e) {
         // Handle exceptions
         error_log('Facebook Conversion API error: ' . $e->getMessage());

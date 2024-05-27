@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 function sfs_display_form() {
     ob_start();
    ?>
-    <form method="post" action="" enctype="multipart/form-data">
+    <form id="simple-form-ui" method="post" action="" enctype="multipart/form-data">
     <input type="hidden" name="sfs_page_name" value="<?php echo get_the_title();?>">
         <p>
             <label for="sfs_name">Name:</label>
@@ -242,6 +242,20 @@ function sfs_display_form() {
             <input type="submit" name="sfs_submit" value="Send">
         </p>
     </form>
+    <script>
+         document.getElementById('simple-form-ui').addEventListener('submit', function(event) {
+            var formData = new FormData(this);
+            var data = {};
+            formData.forEach((value, key) => {
+            data[key] = value;
+            });
+
+            // Perform the lead tracking with form data
+            fbq('track', 'Lead', data);
+            // Submit the form after tracking
+            this.submit();
+        });
+    </script>
     <?php
     return ob_get_clean();
 }
@@ -307,5 +321,93 @@ function sfs_handle_form_submission() {
     }
 }
 add_action('wp', 'sfs_handle_form_submission');
+
+use FacebookAds\Api;
+use FacebookAds\Object\ServerSide\Event;
+use FacebookAds\Object\ServerSide\EventRequest;
+use FacebookAds\Object\ServerSide\UserData;
+use FacebookAds\Object\ServerSide\CustomData;
+
+// Handle form submission
+function sfs_handle_form_submission() {
+    if (isset($_POST['sfs_submit'])) {
+        // Check if 'sfs_page_name' key is set in $_POST array
+        $page_name = isset($_POST['sfs_page_name']) ? sanitize_text_field($_POST['sfs_page_name']) : '';
+
+        // Sanitize other form inputs
+        $name = isset($_POST['sfs_name']) ? sanitize_text_field($_POST['sfs_name']) : '';
+        $email = isset($_POST['sfs_email']) ? sanitize_email($_POST['sfs_email']) : '';
+        $message = isset($_POST['sfs_message']) ? sanitize_textarea_field($_POST['sfs_message']) : '';
+
+        // Personal email address for receiving form submissions
+        $recipient_email = 'prabin@nydoz.com'; // Replace with your personal email
+
+        // Construct email subject with page name (if available)
+        $email_subject = 'New Contact Form Submission';
+        if (!empty($page_name)) {
+            $email_subject .= ' from ' . $page_name;
+        }
+
+        // Construct email message
+        $email_message = "Name: $name\n";
+        $email_message .= "Email: $email\n";
+        if (!empty($page_name)) {
+            $email_message .= "Page Name: $page_name\n\n";
+        }
+        $email_message .= "Message:\n$message";
+
+        // Send an email
+        wp_mail($recipient_email, $email_subject, $email_message, array('Content-Type: text/html; charset=UTF-8', 'From: ' . $name . ' <' . $email . '>'));
+
+        // Display a thank you message
+        add_action('the_content', function($content) {
+            return '<p>Thank you for your message!</p>' . $content;
+        });
+
+        // Send data to Facebook Conversion API
+        send_event_to_facebook($name, $email, $page_name, $message);
+    }
+}
+add_action('wp', 'sfs_handle_form_submission');
+
+function send_event_to_facebook($name, $email, $page_name, $message) {
+    // Initialize the Facebook SDK
+    $access_token = 'EAACoB29AeEoBO3MpZAACpMKmSdX7kZAPLZCchzTXhspZCVR5qitYZA2gLkQTspTA8r2HDKRI1C9b6zZBOdaw0jrQ66bWDDnyVxSpVQtLHJrZAoZCL9yUQqxrzw9tgne8sWaREoAVuJXzkXeuE11XhcGoUrqmVSpCTZCmsZC5fF38ECoVwi05ZA52iQm4etZCdUuSrsORp3PWowrfSEiFdZBuKSt0f3Q2CLvu7uQsDytg6Amm9WP0KikivuzOeG9KNR86rKYGu4gZDZD'; // Replace with your actual access token
+    $pixel_id = '484103824186469'; // Replace with your actual Pixel ID
+
+    Api::init(null, null, $access_token);
+
+    // Create UserData object
+    $user_data = (new UserData())
+        ->setEmails([hash('sha256', $email)]);
+
+    // Create CustomData object
+    $custom_data = (new CustomData())
+        ->setContentName($page_name)
+        ->setContentCategory('Form Submission')
+        ->setContentIds([$message]);
+
+    // Create Event object
+    $event = (new Event())
+        ->setEventName('Lead')
+        ->setEventTime(time())
+        ->setUserData($user_data)
+        ->setCustomData($custom_data)
+        ->setActionSource('website');
+
+    // Create EventRequest object
+    $request = (new EventRequest($pixel_id))
+        ->setEvents([$event]);
+
+    // Execute the request
+    try {
+        $response = $request->execute();
+        // Log the response or handle it as needed
+    } catch (Exception $e) {
+        // Handle exceptions
+        error_log('Facebook Conversion API error: ' . $e->getMessage());
+    }
+}
+
 
 ?>

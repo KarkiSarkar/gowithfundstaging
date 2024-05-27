@@ -367,7 +367,7 @@ function sfs_handle_form_submissions() {
         $email_message .= "Message:\n$message";
 
         // Send an email
-        wp_mail($recipient_email, $email_subject, $email_message, array('Content-Type: text/html; charset=UTF-8', 'From: ' . $name . ' <' . $email . '>'));
+        // wp_mail($recipient_email, $email_subject, $email_message, array('Content-Type: text/html; charset=UTF-8', 'From: ' . $name . ' <' . $email . '>'));
 
         // Display a thank you message
         add_action('the_content', function($content) {

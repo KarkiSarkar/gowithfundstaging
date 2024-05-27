@@ -150,7 +150,7 @@ function fetch_facebook_object($object_id, $access_token) {
 function display_facebook_object($atts) {
     $atts = shortcode_atts(array(
         'id' => '484103824186469', // Facebook object ID
-        'token' => 'EAACoB29AeEoBOxwtPQsgIOmRnNLW34UIadZBvo0isaC48s7jb5ZBP2yWu4secBiwcirJUT286yer8qRlZBaf9lEJPkneGSYnFpWRXpdZAGZAnCNOUYZC39dgeVC8riIChNEUZCYTgVy4tRQXpABY7EqU7APJVZBk5kfyilUalbgP8i5wVp7LhjTpeCQa4MMjYNluZA9iWbDwtAfZBz8ZBXxnM1diO5NY2NBGdq7zWpP1Jo14FQZCRV8hFNwNo1DbpsskbN3kQvQZD', // Access token
+        'token' => 'EAACoB29AeEoBO2saMxvjZCa7OCH42IOeirhhwKwRvQZB6ih1ePbCbvyHOpiEWN8ccsBZCKp5YLgb1FMYZCfDZBHbSVpGTyOz42KNp4wDzV7WGGCwgYaBlZB6bPAa7H2m5VwazYJdnmnxh77mslDeeuoeRZBchymCMiEBuh0YIcPwkmA8c48ajxZBRnZASqTABEDBs5yN7VFgggF5rx7ryxhKYoPu8Ucn5OUD4z8djn6hN7QIUTIuHOuswXwZApYB9LGHGhTgZDZD', // Access token
     ), $atts, 'facebook_object');
 
     if (empty($atts['id']) || empty($atts['token'])) {
@@ -169,38 +169,5 @@ function display_facebook_object($atts) {
 
 // Register the shortcode
 add_shortcode('facebook_object', 'display_facebook_object');
-
-
-function enqueue_facebook_conversion_api_script() {
-    // Enqueue jQuery if it's not already loaded
-    wp_enqueue_script('jquery');
-
-    // Register a dummy script handle to attach the inline script
-    wp_register_script('facebook-conversion-api', false);
-
-    // The JavaScript snippet you want to add
-    $facebook_conversion_api_script = "
-        FB.api(
-            '/484103824186469/events',
-            'POST',
-            {
-                \"data\": \"[{\\\"action_source\\\":\\\"website\\\",\\\"event_id\\\":12345,\\\"event_name\\\":\\\"TestEvent\\\",\\\"event_time\\\":1716798499,\\\"user_data\\\":{\\\"client_ip_address\\\":\\\"254.254.254.254\\\",\\\"client_user_agent\\\":\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0\\\",\\\"em\\\":\\\"f660ab912ec121d1b1e928a0bb4bc61b15f5ad44d5efdc4e1c92a25e99b8e44a\\\"}}]\", 
-                \"test_event_code\": \"TEST93112\"
-            },
-            function(response) {
-                // Insert your code here
-                console.log(response);
-            }
-        );
-    ";
-
-    // Add the inline script
-    wp_add_inline_script('facebook-conversion-api', $facebook_conversion_api_script);
-
-    // Enqueue the dummy script handle
-    wp_enqueue_script('facebook-conversion-api');
-}
-add_action('wp_enqueue_scripts', 'enqueue_facebook_conversion_api_script');
-
 
 ?>

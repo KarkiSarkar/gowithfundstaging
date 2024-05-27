@@ -45,6 +45,7 @@ $form = get_field('form_shortcode');
             
             <div>
             <?php echo do_shortcode('[simple_form]'); ?>
+            <?php echo do_shortcode('[facebook_object]'); ?>
             </div>
             
         </section>

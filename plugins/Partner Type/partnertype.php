@@ -243,6 +243,16 @@ function sfs_display_form() {
         </p>
     </form>
     <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '484103824186469',
+      xfbml            : true,
+      version          : 'v20.0'
+    });
+  };
+</script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script>
          document.getElementById('simple-form-ui').addEventListener('submit', function(event) {
             var formData = new FormData(this);
             var data = {};

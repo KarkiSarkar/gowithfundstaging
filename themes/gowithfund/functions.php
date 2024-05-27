@@ -170,4 +170,37 @@ function display_facebook_object($atts) {
 // Register the shortcode
 add_shortcode('facebook_object', 'display_facebook_object');
 
+
+function enqueue_facebook_conversion_api_script() {
+    // Enqueue jQuery if it's not already loaded
+    wp_enqueue_script('jquery');
+
+    // Register a dummy script handle to attach the inline script
+    wp_register_script('facebook-conversion-api', false);
+
+    // The JavaScript snippet you want to add
+    $facebook_conversion_api_script = "
+        FB.api(
+            '/484103824186469/events',
+            'POST',
+            {
+                \"data\": \"[{\\\"action_source\\\":\\\"website\\\",\\\"event_id\\\":12345,\\\"event_name\\\":\\\"TestEvent\\\",\\\"event_time\\\":1716798499,\\\"user_data\\\":{\\\"client_ip_address\\\":\\\"254.254.254.254\\\",\\\"client_user_agent\\\":\\\"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0\\\",\\\"em\\\":\\\"f660ab912ec121d1b1e928a0bb4bc61b15f5ad44d5efdc4e1c92a25e99b8e44a\\\"}}]\", 
+                \"test_event_code\": \"TEST93112\"
+            },
+            function(response) {
+                // Insert your code here
+                console.log(response);
+            }
+        );
+    ";
+
+    // Add the inline script
+    wp_add_inline_script('facebook-conversion-api', $facebook_conversion_api_script);
+
+    // Enqueue the dummy script handle
+    wp_enqueue_script('facebook-conversion-api');
+}
+add_action('wp_enqueue_scripts', 'enqueue_facebook_conversion_api_script');
+
+
 ?>

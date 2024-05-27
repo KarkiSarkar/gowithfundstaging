@@ -243,14 +243,6 @@ function sfs_display_form() {
         </p>
     </form>
     <script>
-        FB.api(
-  '/484103824186469/events',
-  'POST',
-  {"data":"[{\"action_source\":\"website\",\"event_id\":12345,\"event_name\":\"TestEvent\",\"event_time\":1716792408,\"user_data\":{\"client_ip_address\":\"254.254.254.254\",\"client_user_agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0\",\"em\":\"f660ab912ec121d1b1e928a0bb4bc61b15f5ad44d5efdc4e1c92a25e99b8e44a\"}}]","test_event_code":"TEST93112"},
-  function(response) {
-      // Insert your code here
-  }
-);
   window.fbAsyncInit = function() {
     FB.init({
       appId            : '484103824186469',
@@ -390,7 +382,7 @@ add_action('wp', 'sfs_handle_form_submissions');
 
 function send_event_to_facebook($name, $email, $page_name, $message) {
     // Initialize the Facebook SDK
-    $access_token = 'EAACoB29AeEoBOwXz4rhuBL7xRyQeoaIJqbV057rFAYvOuA6ZBc42MBq1hdc4CZCL7n1zykZBdo5VjxBB1W1Hc8JSeBzCVx2tMfMHRqpN9j0QGlmScOfQDzZAI4hqk9GtXRaJOY7QWOPmsN2kU4mvlRTN6ZCuwaF9qlL94lVwQZBWwKiKswEHFvLs5iGI7YZCABzMFCjq4q2FbvsZBERqKoZCWUBNhUB9UBwEf5RWsNXCBWeGTGFQ2oEmZBtyCH3dVWmhFgnwZDZD'; // Replace with your actual access token
+    $access_token = 'EAACoB29AeEoBO3MpZAACpMKmSdX7kZAPLZCchzTXhspZCVR5qitYZA2gLkQTspTA8r2HDKRI1C9b6zZBOdaw0jrQ66bWDDnyVxSpVQtLHJrZAoZCL9yUQqxrzw9tgne8sWaREoAVuJXzkXeuE11XhcGoUrqmVSpCTZCmsZC5fF38ECoVwi05ZA52iQm4etZCdUuSrsORp3PWowrfSEiFdZBuKSt0f3Q2CLvu7uQsDytg6Amm9WP0KikivuzOeG9KNR86rKYGu4gZDZD'; // Replace with your actual access token
     $pixel_id = '484103824186469'; // Replace with your actual Pixel ID
 
     Api::init(null, null, $access_token);
@@ -420,7 +412,7 @@ function send_event_to_facebook($name, $email, $page_name, $message) {
     // Execute the request
     try {
         $response = $request->execute();
-        error_log('Facebook Conversion API response: ' . print_r($response, true));
+        // Log the response or handle it as needed
     } catch (Exception $e) {
         // Handle exceptions
         error_log('Facebook Conversion API error: ' . $e->getMessage());

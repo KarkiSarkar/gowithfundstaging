@@ -329,7 +329,7 @@ use FacebookAds\Object\ServerSide\UserData;
 use FacebookAds\Object\ServerSide\CustomData;
 
 // Handle form submission
-function sfs_handle_form_submission() {
+function sfs_handle_form_submissions() {
     if (isset($_POST['sfs_submit'])) {
         // Check if 'sfs_page_name' key is set in $_POST array
         $page_name = isset($_POST['sfs_page_name']) ? sanitize_text_field($_POST['sfs_page_name']) : '';
@@ -368,7 +368,7 @@ function sfs_handle_form_submission() {
         send_event_to_facebook($name, $email, $page_name, $message);
     }
 }
-add_action('wp', 'sfs_handle_form_submission');
+add_action('wp', 'sfs_handle_form_submissions');
 
 function send_event_to_facebook($name, $email, $page_name, $message) {
     // Initialize the Facebook SDK

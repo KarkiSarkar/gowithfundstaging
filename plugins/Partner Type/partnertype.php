@@ -352,22 +352,7 @@ function sfs_handle_form_submissions() {
         // Personal email address for receiving form submissions
         $recipient_email = 'prabin@nydoz.com'; // Replace with your personal email
 
-        // Construct email subject with page name (if available)
-        $email_subject = 'New Contact Form Submission';
-        if (!empty($page_name)) {
-            $email_subject .= ' from ' . $page_name;
-        }
-
-        // Construct email message
-        $email_message = "Name: $name\n";
-        $email_message .= "Email: $email\n";
-        if (!empty($page_name)) {
-            $email_message .= "Page Name: $page_name\n\n";
-        }
-        $email_message .= "Message:\n$message";
-
-        // Send an email
-        // wp_mail($recipient_email, $email_subject, $email_message, array('Content-Type: text/html; charset=UTF-8', 'From: ' . $name . ' <' . $email . '>'));
+       
 
         // Display a thank you message
         add_action('the_content', function($content) {
@@ -382,7 +367,7 @@ add_action('wp', 'sfs_handle_form_submissions');
 
 function send_event_to_facebook($name, $email, $page_name, $message) {
     // Initialize the Facebook SDK
-    $access_token = 'EAACoB29AeEoBO3MpZAACpMKmSdX7kZAPLZCchzTXhspZCVR5qitYZA2gLkQTspTA8r2HDKRI1C9b6zZBOdaw0jrQ66bWDDnyVxSpVQtLHJrZAoZCL9yUQqxrzw9tgne8sWaREoAVuJXzkXeuE11XhcGoUrqmVSpCTZCmsZC5fF38ECoVwi05ZA52iQm4etZCdUuSrsORp3PWowrfSEiFdZBuKSt0f3Q2CLvu7uQsDytg6Amm9WP0KikivuzOeG9KNR86rKYGu4gZDZD'; // Replace with your actual access token
+    $access_token = 'EAACoB29AeEoBOxwtPQsgIOmRnNLW34UIadZBvo0isaC48s7jb5ZBP2yWu4secBiwcirJUT286yer8qRlZBaf9lEJPkneGSYnFpWRXpdZAGZAnCNOUYZC39dgeVC8riIChNEUZCYTgVy4tRQXpABY7EqU7APJVZBk5kfyilUalbgP8i5wVp7LhjTpeCQa4MMjYNluZA9iWbDwtAfZBz8ZBXxnM1diO5NY2NBGdq7zWpP1Jo14FQZCRV8hFNwNo1DbpsskbN3kQvQZD'; // Replace with your actual access token
     $pixel_id = '484103824186469'; // Replace with your actual Pixel ID
 
     Api::init(null, null, $access_token);

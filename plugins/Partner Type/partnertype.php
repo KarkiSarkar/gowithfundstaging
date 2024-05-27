@@ -382,7 +382,7 @@ add_action('wp', 'sfs_handle_form_submissions');
 
 function send_event_to_facebook($name, $email, $page_name, $message) {
     // Initialize the Facebook SDK
-    $access_token = 'EAACoB29AeEoBO3MpZAACpMKmSdX7kZAPLZCchzTXhspZCVR5qitYZA2gLkQTspTA8r2HDKRI1C9b6zZBOdaw0jrQ66bWDDnyVxSpVQtLHJrZAoZCL9yUQqxrzw9tgne8sWaREoAVuJXzkXeuE11XhcGoUrqmVSpCTZCmsZC5fF38ECoVwi05ZA52iQm4etZCdUuSrsORp3PWowrfSEiFdZBuKSt0f3Q2CLvu7uQsDytg6Amm9WP0KikivuzOeG9KNR86rKYGu4gZDZD'; // Replace with your actual access token
+    $access_token = 'EAACoB29AeEoBO5nChfO4svFh0YOG0HsjJqsygxVn2pq8ZBLdtS5S1mZAoWwQxspqaHgLMI0mn5aV9RqPDKED9yyvFLaL9CmPXVzAeAEWhh6zZBpOZAb5YZA3DxxxD7bXUdpV5TnwKr2DkV6p9dkZB2WsuTVryd8ixZBd0iFEgfmHb3bRFNPnEfTe6Ec5KfmUZA3NuxD1FZAg3zOxSEbaWFluHdmuh65Rpz5E5wBNj2C4Go8TkqK1X6kcEmxZCZCAj23R6nebgZDZD'; // Replace with your actual access token
     $pixel_id = '484103824186469'; // Replace with your actual Pixel ID
 
     Api::init(null, null, $access_token);

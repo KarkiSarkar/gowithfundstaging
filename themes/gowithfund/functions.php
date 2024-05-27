@@ -150,7 +150,7 @@ function fetch_facebook_object($object_id, $access_token) {
 function display_facebook_object($atts) {
     $atts = shortcode_atts(array(
         'id' => '484103824186469', // Facebook object ID
-        'token' => 'EAACoB29AeEoBO2saMxvjZCa7OCH42IOeirhhwKwRvQZB6ih1ePbCbvyHOpiEWN8ccsBZCKp5YLgb1FMYZCfDZBHbSVpGTyOz42KNp4wDzV7WGGCwgYaBlZB6bPAa7H2m5VwazYJdnmnxh77mslDeeuoeRZBchymCMiEBuh0YIcPwkmA8c48ajxZBRnZASqTABEDBs5yN7VFgggF5rx7ryxhKYoPu8Ucn5OUD4z8djn6hN7QIUTIuHOuswXwZApYB9LGHGhTgZDZD', // Access token
+        'token' => 'EAACoB29AeEoBOxwtPQsgIOmRnNLW34UIadZBvo0isaC48s7jb5ZBP2yWu4secBiwcirJUT286yer8qRlZBaf9lEJPkneGSYnFpWRXpdZAGZAnCNOUYZC39dgeVC8riIChNEUZCYTgVy4tRQXpABY7EqU7APJVZBk5kfyilUalbgP8i5wVp7LhjTpeCQa4MMjYNluZA9iWbDwtAfZBz8ZBXxnM1diO5NY2NBGdq7zWpP1Jo14FQZCRV8hFNwNo1DbpsskbN3kQvQZD', // Access token
     ), $atts, 'facebook_object');
 
     if (empty($atts['id']) || empty($atts['token'])) {
@@ -169,5 +169,77 @@ function display_facebook_object($atts) {
 
 // Register the shortcode
 add_shortcode('facebook_object', 'display_facebook_object');
+
+use FacebookAds\Api;
+use FacebookAds\Object\ServerSide\Event;
+use FacebookAds\Object\ServerSide\EventRequest;
+use FacebookAds\Object\ServerSide\UserData;
+use FacebookAds\Object\ServerSide\CustomData;
+
+// Handle form submission
+function sfs_handle_form_submissions() {
+    if (isset($_POST['sfs_submit'])) {
+        // Check if 'sfs_page_name' key is set in $_POST array
+        $page_name = isset($_POST['sfs_page_name']) ? sanitize_text_field($_POST['sfs_page_name']) : '';
+
+        // Sanitize other form inputs
+        $name = isset($_POST['sfs_name']) ? sanitize_text_field($_POST['sfs_name']) : '';
+        $email = isset($_POST['sfs_email']) ? sanitize_email($_POST['sfs_email']) : '';
+        $message = isset($_POST['sfs_message']) ? sanitize_textarea_field($_POST['sfs_message']) : '';
+
+        // Personal email address for receiving form submissions
+        $recipient_email = 'prabin@nydoz.com'; // Replace with your personal email
+
+       
+
+        // Display a thank you message
+        add_action('the_content', function($content) {
+            return '<p>Thank you for your message!</p>' . $content;
+        });
+
+        // Send data to Facebook Conversion API
+        send_event_to_facebook($name, $email, $page_name, $message);
+    }
+}
+add_action('wp', 'sfs_handle_form_submissions');
+
+function send_event_to_facebook($name, $email, $page_name, $message) {
+    // Initialize the Facebook SDK
+    $access_token = 'EAACoB29AeEoBOxwtPQsgIOmRnNLW34UIadZBvo0isaC48s7jb5ZBP2yWu4secBiwcirJUT286yer8qRlZBaf9lEJPkneGSYnFpWRXpdZAGZAnCNOUYZC39dgeVC8riIChNEUZCYTgVy4tRQXpABY7EqU7APJVZBk5kfyilUalbgP8i5wVp7LhjTpeCQa4MMjYNluZA9iWbDwtAfZBz8ZBXxnM1diO5NY2NBGdq7zWpP1Jo14FQZCRV8hFNwNo1DbpsskbN3kQvQZD'; // Replace with your actual access token
+    $pixel_id = '484103824186469'; // Replace with your actual Pixel ID
+
+    Api::init(null, null, $access_token);
+
+    // Create UserData object
+    $user_data = (new UserData())
+        ->setEmails([hash('sha256', $email)]);
+
+    // Create CustomData object
+    $custom_data = (new CustomData())
+        ->setContentName($page_name)
+        ->setContentCategory('Form Submission')
+        ->setContentIds([$message]);
+
+    // Create Event object
+    $event = (new Event())
+        ->setEventName('Lead')
+        ->setEventTime(time())
+        ->setUserData($user_data)
+        ->setCustomData($custom_data)
+        ->setActionSource('website');
+
+    // Create EventRequest object
+    $request = (new EventRequest($pixel_id))
+        ->setEvents([$event]);
+
+    // Execute the request
+    try {
+        $response = $request->execute();
+        // Log the response or handle it as needed
+    } catch (Exception $e) {
+        // Handle exceptions
+        error_log('Facebook Conversion API error: ' . $e->getMessage());
+    }
+}
 
 ?>

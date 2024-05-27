@@ -150,7 +150,7 @@ function fetch_facebook_object($object_id, $access_token) {
 function display_facebook_object($atts) {
     $atts = shortcode_atts(array(
         'id' => '484103824186469', // Facebook object ID
-        'token' => 'EAACoB29AeEoBO2saMxvjZCa7OCH42IOeirhhwKwRvQZB6ih1ePbCbvyHOpiEWN8ccsBZCKp5YLgb1FMYZCfDZBHbSVpGTyOz42KNp4wDzV7WGGCwgYaBlZB6bPAa7H2m5VwazYJdnmnxh77mslDeeuoeRZBchymCMiEBuh0YIcPwkmA8c48ajxZBRnZASqTABEDBs5yN7VFgggF5rx7ryxhKYoPu8Ucn5OUD4z8djn6hN7QIUTIuHOuswXwZApYB9LGHGhTgZDZD', // Access token
+        'token' => 'EAACoB29AeEoBOZBP23GKOGlHUDohipXk8LWfUT3Y6fRT8cnOGguruuIuyzgzae6Hp2S9Puj0WjZB1gXWyYRKLykVA6aeZAAquDL3WZCnhOGfuPtShPHBYilUXRme4yZBwCp1v5TO8mdsnrTP2zZC2omN8eG0Re13vwDeB3XNMbZCIFUlXBq7tUBWS5vGTo7HNAQobrEOnB1kYhDZCZADZAd15lGm7bZB4o4ltVgje7YiZAyfdWhzeQtBSvEwYJv5Rf9HcMXwFwZDZD', // Access token
     ), $atts, 'facebook_object');
 
     if (empty($atts['id']) || empty($atts['token'])) {

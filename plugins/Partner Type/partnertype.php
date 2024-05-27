@@ -331,6 +331,27 @@ function sfs_handle_form_submission() {
     }
 }
 add_action('wp', 'sfs_handle_form_submission');
+function add_facebook_sdk() {
+    echo "
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '484103824186469', // Replace with your app ID
+          xfbml      : true,
+          version    : 'v19.0'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = \"https://connect.facebook.net/en_US/sdk.js\";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>";
+}
+add_action('wp_head', 'add_facebook_sdk');
 
 use FacebookAds\Api;
 use FacebookAds\Object\ServerSide\Event;

@@ -6,12 +6,74 @@ Version: 3.0
 Author: Nydoz Team
 */
 
+// Add settings menu
+add_action('admin_menu', 'adsense_rotator_menu');
+function adsense_rotator_menu() {
+    add_options_page('AdSense Rotator Settings', 'AdSense Rotator', 'manage_options', 'adsense-rotator', 'adsense_rotator_settings_page');
+}
+
+// Register settings
+add_action('admin_init', 'adsense_rotator_settings');
+function adsense_rotator_settings() {
+    register_setting('adsense-rotator-settings-group', 'adsense_rotator_ad_units');
+}
+
+// Settings page HTML
+function adsense_rotator_settings_page() {
+    ?>
+    <div class="wrap">
+        <h1>AdSense Rotator Settings</h1>
+        <form method="post" action="options.php">
+            <?php settings_fields('adsense-rotator-settings-group'); ?>
+            <?php do_settings_sections('adsense-rotator-settings-group'); ?>
+
+            <table class="form-table">
+                <tr valign="top">
+                    <th scope="row">Ad Units</th>
+                    <td>
+                        <textarea name="adsense_rotator_ad_units" rows="10" cols="50" class="large-text code"><?php echo esc_textarea(get_option('adsense_rotator_ad_units')); ?></textarea>
+                        <p>Enter the ad units in JSON format. Example:
+                            <pre>
+[
+    {
+        "client_id": "ca-pub-xxxxxxx",
+        "name": "Sponsered1"
+    },
+    {
+        "client_id": "ca-pub-yyyyyyyy",
+        "name": "Sponsered2"
+    },
+    {
+        "client_id": "ca-pub-zzzzzzzz",
+        "name": "Sponsered3"
+    }
+]
+                            </pre>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+
+            <?php submit_button(); ?>
+        </form>
+    </div>
+    <?php
+}
+
+// Function to get rotated AdSense ad units from the database
+function get_rotated_ad_units() {
+    $ad_units = get_option('adsense_rotator_ad_units');
+    if ($ad_units) {
+        return json_decode($ad_units, true);
+    }
+    return array();
+}
+
 // Function to rotate AdSense ad units with names
 function rotate_named_adsense_ads() {
-    // Start session
-    // if (!session_id()) {
-    //     session_start();
-    // }
+    if (!isset($_SESSION)) {
+        session_start();
+    }
 
     // Check if the session variable is set
     if (!isset($_SESSION['selected_ad_unit'])) {
@@ -20,39 +82,25 @@ function rotate_named_adsense_ads() {
     }
 
     // Get the selected ad unit
-    $selected_ad = get_rotated_ad_units()[$_SESSION['selected_ad_unit']];
-    
+    $ad_units = get_rotated_ad_units();
+    if (empty($ad_units)) {
+        return;
+    }
+    $selected_ad = $ad_units[$_SESSION['selected_ad_unit']];
 
     // Output the ad unit
-    ?>
-     <?php if (!is_user_logged_in()) {?> 
-      
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=<?php echo $selected_ad['client_id']; ?>&amp;cachebuster=<?php echo time(); ?>"
-     crossorigin="anonymous"></script>
-    
-    <?php
+    if (!is_user_logged_in()) {
+        ?>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=<?php echo esc_attr($selected_ad['client_id']); ?>&amp;cachebuster=<?php echo time(); ?>" crossorigin="anonymous"></script>
+        <?php
+    }
 }
-}
- header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-        header("Cache-Control: post-check=0, pre-check=0", false);
-        header("Pragma: no-cache");
-        header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
-// function insert_ads_after_paragraph($content) {
-//     // Split content into paragraphs
-//     $paragraphs = explode("</p>", $content);
 
-//     // Insert shortcode after each paragraph
-//     foreach ($paragraphs as $index => $paragraph) {
-//         // Append shortcode after each paragraph
-//         $paragraphs[$index] .= '[rotate_named_adsense_ads]';
-//     }
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
-//     // Join paragraphs back together
-//     $content = implode("</p>", $paragraphs);
-
-//     return $content;
-// }
-// add_filter('the_content', 'insert_ads_after_paragraph');
 function insert_ads_after_paragraph($content) {
     // Check if it's a single post page
     if (is_single()) {
@@ -85,30 +133,3 @@ function rotate_named_adsense_ads_shortcode() {
     return ob_get_clean(); // Return buffered content
 }
 add_shortcode('rotate_named_adsense_ads', 'rotate_named_adsense_ads_shortcode');
-
-// Function to get rotated AdSense ad units
-function get_rotated_ad_units() {
-    // Array of named AdSense ad units
-    $ad_units = array(
-        'ad_unit_1' => array(
-            'client_id' => 'ca-pub-xxxxxxx',
-           
-            'name' => 'Sponsered1',
-        ),
-        'ad_unit_2' => array(
-            'client_id' => 'ca-pub-yyyyyyyy',
-           
-            'name' => 'Sponsered2',
-            
-        ),
-        'ad_unit_3' => array(
-            'client_id' => 'ca-pub-zzzzzzzz',
-           
-            'name' => 'Sponsered3',),
-            
-        
-    );
-
-
-    return $ad_units;
-}

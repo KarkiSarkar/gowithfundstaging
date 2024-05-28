@@ -128,7 +128,7 @@ add_action( 'init', 'create_success_story_post_type' );
 function fetch_facebook_object($object_id, $access_token) {
 
     $object_id = '484103824186469';
-    $access_token = 'EAACoB29AeEoBOZBP23GKOGlHUDohipXk8LWfUT3Y6fRT8cnOGguruuIuyzgzae6Hp2S9Puj0WjZB1gXWyYRKLykVA6aeZAAquDL3WZCnhOGfuPtShPHBYilUXRme4yZBwCp1v5TO8mdsnrTP2zZC2omN8eG0Re13vwDeB3XNMbZCIFUlXBq7tUBWS5vGTo7HNAQobrEOnB1kYhDZCZADZAd15lGm7bZB4o4ltVgje7YiZAyfdWhzeQtBSvEwYJv5Rf9HcMXwFwZDZD';
+    $access_token = 'EAACoB29AeEoBO8HzhqUiV9aByk6DLQX7uoZC6ZALQ4mZBHWAlRo1lHEBuq2tN688kwDypDNIBom73wIgOYQKxzwS8pGEAZAia8tKrBxTUbJgfWOY5DRoeTKhjsW4YQIb6x5LFqPVffSZBMFYtRtW7ytVq6bTWJSTRGbcZAsGf9N1vEjZC2SPZB00X4WJ19o5TV8ZCQ2N2WjlAFklEAqbnY9WFZAWI98n9Wc5U2hRXfZCnjCemPElGE8llCbBXIgwtpJiVVxDgZDZD';
     $url = "https://graph.facebook.com/{$object_id}?access_token={$access_token}";
 
     $response = wp_remote_get($url);
@@ -153,7 +153,7 @@ function fetch_facebook_object($object_id, $access_token) {
 function display_facebook_object($atts) {
     $atts = shortcode_atts(array(
         'id' => '484103824186469', // Facebook object ID
-        'token' => 'EAACoB29AeEoBOZBP23GKOGlHUDohipXk8LWfUT3Y6fRT8cnOGguruuIuyzgzae6Hp2S9Puj0WjZB1gXWyYRKLykVA6aeZAAquDL3WZCnhOGfuPtShPHBYilUXRme4yZBwCp1v5TO8mdsnrTP2zZC2omN8eG0Re13vwDeB3XNMbZCIFUlXBq7tUBWS5vGTo7HNAQobrEOnB1kYhDZCZADZAd15lGm7bZB4o4ltVgje7YiZAyfdWhzeQtBSvEwYJv5Rf9HcMXwFwZDZD', // Access token
+        'token' => 'EAACoB29AeEoBO8HzhqUiV9aByk6DLQX7uoZC6ZALQ4mZBHWAlRo1lHEBuq2tN688kwDypDNIBom73wIgOYQKxzwS8pGEAZAia8tKrBxTUbJgfWOY5DRoeTKhjsW4YQIb6x5LFqPVffSZBMFYtRtW7ytVq6bTWJSTRGbcZAsGf9N1vEjZC2SPZB00X4WJ19o5TV8ZCQ2N2WjlAFklEAqbnY9WFZAWI98n9Wc5U2hRXfZCnjCemPElGE8llCbBXIgwtpJiVVxDgZDZD', // Access token
     ), $atts, 'facebook_object');
 
     if (empty($atts['id']) || empty($atts['token'])) {

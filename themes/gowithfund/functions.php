@@ -126,6 +126,9 @@ add_action( 'init', 'create_success_story_post_type' );
 
 // Function to fetch Facebook object
 function fetch_facebook_object($object_id, $access_token) {
+
+    $object_id = '484103824186469';
+    $access_token = 'EAACoB29AeEoBOZBP23GKOGlHUDohipXk8LWfUT3Y6fRT8cnOGguruuIuyzgzae6Hp2S9Puj0WjZB1gXWyYRKLykVA6aeZAAquDL3WZCnhOGfuPtShPHBYilUXRme4yZBwCp1v5TO8mdsnrTP2zZC2omN8eG0Re13vwDeB3XNMbZCIFUlXBq7tUBWS5vGTo7HNAQobrEOnB1kYhDZCZADZAd15lGm7bZB4o4ltVgje7YiZAyfdWhzeQtBSvEwYJv5Rf9HcMXwFwZDZD';
     $url = "https://graph.facebook.com/{$object_id}?access_token={$access_token}";
 
     $response = wp_remote_get($url);

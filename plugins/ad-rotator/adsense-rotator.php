@@ -91,6 +91,7 @@ function rotate_named_adsense_ads() {
     // Output the ad unit
     if (!is_user_logged_in()) {
         ?>
+        <p><?php echo esc_attr($selected_ad['client_id']); ?></p>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=<?php echo esc_attr($selected_ad['client_id']); ?>&amp;cachebuster=<?php echo time(); ?>" crossorigin="anonymous"></script>
         <?php
     }

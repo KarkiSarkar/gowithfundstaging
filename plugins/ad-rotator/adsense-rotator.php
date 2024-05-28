@@ -71,9 +71,9 @@ function get_rotated_ad_units() {
 
 // Function to rotate AdSense ad units with names
 function rotate_named_adsense_ads() {
-    if (!isset($_SESSION)) {
-        session_start();
-    }
+    // if (!isset($_SESSION)) {
+    //     session_start();
+    // }
 
     // Check if the session variable is set
     if (!isset($_SESSION['selected_ad_unit'])) {

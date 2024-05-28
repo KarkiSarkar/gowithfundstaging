@@ -629,13 +629,13 @@ This following statements selects each category individually that contains an in
             // // die();
             // session_write_close();
             // // Create a new post
-        $post_data = array(
-            'post_title'    => wp_strip_all_tags($name),
-            'post_content'  => $message,
-            'post_status'   => 'publish',
-            'post_type'     => 'partnership_request',
-        );
-        $post_id = wp_insert_post($post_data);
+        // $post_data = array(
+        //     'post_title'    => wp_strip_all_tags($name),
+        //     'post_content'  => $message,
+        //     'post_status'   => 'publish',
+        //     'post_type'     => 'partnership_request',
+        // );
+        // $post_id = wp_insert_post($post_data);
         
             if (!is_admin() && !wp_doing_ajax() && isset($_POST['custom_contact_form_submit'])) {
                 wp_redirect(home_url('/become-a-partner/thank-you/'));

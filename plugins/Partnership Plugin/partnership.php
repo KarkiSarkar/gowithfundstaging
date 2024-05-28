@@ -443,19 +443,19 @@ This following statements selects each category individually that contains an in
     }
     add_shortcode('custom_contact_form', 'custom_contact_form_shortcode');
     
-    function register_partnership_requests_page() {
-        add_menu_page(
-            'Partnership Requests',
-            'Partnership Requests',
-            'manage_options',
-            'partnership-requests',
-            'display_partnership_requests_page',
-            'dashicons-list-view',
-            6
-        );
-    }
+    // function register_partnership_requests_page() {
+    //     add_menu_page(
+    //         'Partnership Requests',
+    //         'Partnership Requests',
+    //         'manage_options',
+    //         'partnership-requests',
+    //         'display_partnership_requests_page',
+    //         'dashicons-list-view',
+    //         6
+    //     );
+    // }
     
-    add_action('admin_menu', 'register_partnership_requests_page');
+    // add_action('admin_menu', 'register_partnership_requests_page');
     
 
     function display_partnership_requests_page() {

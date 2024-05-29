@@ -18,7 +18,10 @@ add_action('admin_init', 'adsense_rotator_settings');
 function adsense_rotator_settings() {
     register_setting('adsense-rotator-settings-group', 'adsense_rotator_ad_units', 'sanitize_ad_units');
     register_setting('adsense-rotator-settings-group', 'adsense_rotator_slot_ids', 'sanitize_ad_units');
+    register_setting('adsense-rotator-settings-group', 'insert_ads_after_paragraph_enabled'); // Add this line
 }
+
+
 
 // Function to sanitize the input in the plugin
 function sanitize_ad_units($input){
@@ -66,7 +69,17 @@ function adsense_rotator_settings_page() {
         <form method="post" action="options.php">
             <?php settings_fields('adsense-rotator-settings-group'); ?>
             <?php do_settings_sections('adsense-rotator-settings-group'); ?>
-
+            <table class="form-table">
+                <tr valign="top">
+                    <th scope="row">Insert Ads After Paragraphs</th>
+                    <td>
+                        <label for="insert_ads_after_paragraph_enabled">
+                            <input type="checkbox" id="insert_ads_after_paragraph_enabled" name="insert_ads_after_paragraph_enabled" value="1" <?php checked(1, get_option('insert_ads_after_paragraph_enabled'), true); ?> />
+                            Enable insertion of ads after paragraphs in single posts
+                        </label>
+                    </td>
+                </tr>
+            </table>
             <table class="form-table" id="adsense-rotator-ad-units">
                 <tr valign="top">
                     <th scope="row">Ad Units</th>
@@ -166,14 +179,17 @@ function display_adsense_ad_unit() {
     if ($selected_ad && !is_user_logged_in()) {
         ?>
         <p><?php echo esc_attr($selected_ad['ad_unit']); ?><?php echo esc_attr($selected_ad['slot_id']); ?></p>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>&amp;slot=<?php echo esc_attr($selected_ad['slot_id']); ?>&amp;cachebuster=<?php echo time(); ?>" crossorigin="anonymous"></script>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>&amp;cachebuster=<?php echo time(); ?>" crossorigin="anonymous"></script>
         <?php
     }
 }
 
+
+
 // Insert ads after paragraphs in single posts
 function insert_ads_after_paragraph($content) {
-    if (is_single()) {
+    $ads_enabled = get_option('insert_ads_after_paragraph_enabled'); // Get the status of the checkbox
+    if (is_single() && $ads_enabled) { // Check if it's a single post and ads insertion is enabled
         $paragraphs = explode("</p>", $content);
         for ($i = 2; $i < count($paragraphs); $i += 3) {
             $paragraphs[$i] .= '[rotate_named_adsense_ads]';

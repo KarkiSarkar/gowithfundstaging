@@ -18,7 +18,9 @@ add_action('admin_init', 'adsense_rotator_settings');
 function adsense_rotator_settings() {
     register_setting('adsense-rotator-settings-group', 'adsense_rotator_ad_units', 'sanitize_ad_units');
     register_setting('adsense-rotator-settings-group', 'adsense_rotator_slot_ids', 'sanitize_ad_units');
-    register_setting('adsense-rotator-settings-group', 'insert_ads_after_paragraph_enabled'); // Add this line
+    register_setting('adsense-rotator-settings-group', 'insert_ads_after_paragraph_enabled'); 
+    register_setting('adsense-rotator-settings-group', 'insert_ads_before_post_enabled');
+    register_setting('adsense-rotator-settings-group', 'display_slot_id_enabled');
 }
 
 
@@ -79,6 +81,24 @@ function adsense_rotator_settings_page() {
                         </label>
                     </td>
                 </tr>
+                <tr valign="top">
+                    <th scope="row">Insert Ads Before Post</th>
+                    <td>
+                        <label for="insert_ads_before_post_enabled">
+                            <input type="checkbox" id="insert_ads_before_post_enabled" name="insert_ads_before_post_enabled" value="1" <?php checked(1, get_option('insert_ads_before_post_enabled'), true); ?> />
+                            Enable insertion of ads before the post content in single posts
+                        </label>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <th scope="row">Display Slot ID Input</th>
+                    <td>
+                        <label for="display_slot_id_enabled">
+                            <input type="checkbox" id="display_slot_id_enabled" name="display_slot_id_enabled" value="1" <?php checked(1, get_option('display_slot_id_enabled'), true); ?> />
+                            Display Slot ID input fields
+                        </label>
+                    </td>
+                </tr>
             </table>
             <table class="form-table" id="adsense-rotator-ad-units">
                 <tr valign="top">
@@ -95,11 +115,11 @@ function adsense_rotator_settings_page() {
                             ?>
                             <div class="ad-unit">
                                 <p><?php echo $counter; ?></p>
-                                <div>
+                              
                                     <input type="text" name="adsense_rotator_ad_units[]" value="<?php echo esc_attr($ad_unit); ?>" class="large-text" placeholder="Ad Unit ID" />
-                                    <input type="text" name="adsense_rotator_slot_ids[]" value="<?php echo isset($slot_ids[$index]) ? esc_attr($slot_ids[$index]) : ''; ?>" class="large-text" placeholder="Slot ID" />
+                                    <input type="text" name="adsense_rotator_slot_ids[]" value="<?php echo isset($slot_ids[$index]) ? esc_attr($slot_ids[$index]) : ''; ?>" class="large-text slot-id-input" placeholder="Slot ID" />
                                     <button type="button" class="button remove-ad-unit">Remove</button>
-                                </div>
+                               
                             </div>
                             <?php
                             $counter++;
@@ -118,20 +138,41 @@ function adsense_rotator_settings_page() {
     document.addEventListener('DOMContentLoaded', function () {
         var container = document.getElementById('ad-units-container');
         var addButton = document.getElementById('add-ad-unit');
+        var displaySlotIdCheckbox = document.getElementById('display_slot_id_enabled');
+
+        function toggleSlotIdInputs() {
+            var display = displaySlotIdCheckbox.checked ? 'block' : 'none';
+            document.querySelectorAll('.slot-id-input').forEach(function(input) {
+                input.style.display = display;
+            });
+        }
+        displaySlotIdCheckbox.addEventListener('change', toggleSlotIdInputs);
+        toggleSlotIdInputs();
 
         addButton.addEventListener('click', function () {
             var div = document.createElement('div');
             div.className = 'ad-unit';
-            div.innerHTML = '<input type="text" name="adsense_rotator_ad_units[]" value="" class="large-text" placeholder="Ad Unit ID" />' +
-                        '<input type="text" name="adsense_rotator_slot_ids[]" value="" class="large-text" placeholder="Slot ID" />' +
-                        '<button type="button" class="button remove-ad-unit">Remove</button>';
+            div.innerHTML = '<p></p>' + 
+                            '<div>' +
+                            '<input type="text" name="adsense_rotator_ad_units[]" value="" class="large-text" placeholder="Ad Unit ID" />' +
+                            '<input type="text" name="adsense_rotator_slot_ids[]" value="" class="large-text slot-id-input" placeholder="Slot ID" style="display: ' + (displaySlotIdCheckbox.checked ? 'block' : 'none') + ';" />' +
+                            '<button type="button" class="button remove-ad-unit">Remove</button>' +
+                            '</div>';
             container.appendChild(div);
+            updateCounter();
         });
 
+        function updateCounter() {
+            var units = container.querySelectorAll('.ad-unit');
+            units.forEach(function(unit, index) {
+                unit.querySelector('p').innerText = index + 1;
+            });
+        }
 
         container.addEventListener('click', function (e) {
             if (e.target && e.target.classList.contains('remove-ad-unit')) {
                 e.target.parentElement.remove();
+                updateCounter();
             }
         });
     });
@@ -175,16 +216,24 @@ add_action('wp_head', 'clear_ad_unit_transient');
 // Function to display the selected AdSense ad unit
 function display_adsense_ad_unit() {
     $selected_ad = get_selected_ad_unit_and_slot();
-
+    $display_slot_id = get_option('display_slot_id_enabled');
     if ($selected_ad && !is_user_logged_in()) {
         ?>
-        <p><?php echo esc_attr($selected_ad['ad_unit']); ?><?php echo esc_attr($selected_ad['slot_id']); ?></p>
+        <p><?php echo esc_attr($selected_ad['ad_unit']); ?><div class="slot-id-input"><?php if ($display_slot_id) { echo esc_attr($selected_ad['slot_id']) ; } ?></div></p>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>&amp;cachebuster=<?php echo time(); ?>" crossorigin="anonymous"></script>
         <?php
     }
 }
 
-
+// Insert ads before the post content
+function insert_ads_before_post($content) {
+    $ads_before_enabled = get_option('insert_ads_before_post_enabled'); // Get the status of the checkbox
+    if (is_single() && $ads_before_enabled) { // Check if it's a single post and ads insertion is enabled
+        $content = '[rotate_named_adsense_ads]' . $content;
+    }
+    return $content;
+}
+add_filter('the_content', 'insert_ads_before_post', 5);
 
 // Insert ads after paragraphs in single posts
 function insert_ads_after_paragraph($content) {

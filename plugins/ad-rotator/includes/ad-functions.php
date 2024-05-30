@@ -98,8 +98,6 @@ function insert_ads_after_paragraph($content) {
             if ($display_slot_id) {
                 // Function to display the selected AdSense ad unit with slot ID
                 $paragraphs[$i] .= '[adsense_ad_with_slot_id]';
-            }else{
-                $paragraphs[$i] .= '[rotate_named_adsense_ads]';
             }
             
         }

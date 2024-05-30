@@ -68,14 +68,15 @@
                         </td>
                     </tr>
                     <tr valign="top">
-                        <th scope="row">Insert Ads Before Post</th>
+                        <th scope="row">Insert Ads After Post</th>
                         <td>
-                            <label for="insert_ads_before_post_enabled">
-                            <input type="checkbox" id="insert_ads_before_post_enabled" name="insert_ads_before_post_enabled" value="1" <?php checked(1, get_option('insert_ads_before_post_enabled'), true); ?> />
-                            Enable insertion of ads before the post content in single posts
+                            <label for="insert_ads_after_post_enabled">
+                                <input type="checkbox" id="insert_ads_after_post_enabled" name="insert_ads_after_post_enabled" value="1" <?php checked(1, get_option('insert_ads_after_post_enabled'), true); ?> />
+                                Enable insertion of ads after the post content in single posts
                             </label>
                         </td>
                     </tr>
+
                     <tr valign="top">
                         <th scope="row">Insert Ads in Footer</th>
                         <td>

@@ -20,6 +20,15 @@
             <div id="Paris" class="ads-tabcontent">
                 <table class="form-table" id="adsense-rotator-ad-units">
                     <tr valign="top">
+                        <th scope="row">Display Slot ID Input</th>
+                        <td>
+                            <label for="display_slot_id_enabled">
+                            <input type="checkbox" id="display_slot_id_enabled" name="display_slot_id_enabled" value="1" <?php checked(1, get_option('display_slot_id_enabled'), true); ?> />
+                            Display Slot ID input fields
+                            </label>
+                        </td>
+                    </tr>
+                    <tr valign="top">
                         <th scope="row">Ad Units</th>
                         <td id="ad-units-container">
                             <?php
@@ -49,15 +58,6 @@
 
             <div id="Tokyo" class="ads-tabcontent">
                 <table class="form-table">
-                    <tr valign="top">
-                        <th scope="row">Display Slot ID Input</th>
-                        <td>
-                            <label for="display_slot_id_enabled">
-                            <input type="checkbox" id="display_slot_id_enabled" name="display_slot_id_enabled" value="1" <?php checked(1, get_option('display_slot_id_enabled'), true); ?> />
-                            Display Slot ID input fields
-                            </label>
-                        </td>
-                    </tr>
                     <tr valign="top">
                         <th scope="row">Insert Ads After Paragraphs</th>
                         <td>

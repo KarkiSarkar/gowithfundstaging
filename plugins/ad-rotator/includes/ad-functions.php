@@ -97,7 +97,7 @@ function insert_ads_after_post($content) {
     }
     return $content;
 }
-add_filter('the_content'. 'insert_ads_after_post');
+add_filter('the_content', 'insert_ads_after_post');
 
 // Insert ads after paragraphs in single posts
 function insert_ads_after_paragraph($content) {

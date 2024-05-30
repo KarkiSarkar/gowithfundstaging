@@ -45,32 +45,45 @@ function rotate_named_adsense_ads_shortcode() {
 add_shortcode('rotate_named_adsense_ads', 'rotate_named_adsense_ads_shortcode');
 
 $display_slot_id = get_option('display_slot_id_enabled');
-if ($display_slot_id) {
-    // Function to display the selected AdSense ad unit with slot ID
-    function display_adsense_ad_unit_with_slot_id() {
-        $selected_ad = get_selected_ad_unit_and_slot();
-        if ($selected_ad && !is_user_logged_in()) {
-            ?>
-            <p>
-                <?php echo esc_attr($selected_ad['ad_unit']); ?>
-                <div class="slot-id-input"><?php echo esc_attr($selected_ad['slot_id']); ?></div>
-            </p>
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>"
-                crossorigin="anonymous"></script>
-            <!-- Nepal Prabin -->
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>"
-                data-ad-slot="<?php echo esc_attr($selected_ad['slot_id']); ?>"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-            <?php
-        }
+// Function to display the selected AdSense ad unit with slot ID
+function display_adsense_ad_unit_with_slot_id() {
+    // Check if the display_slot_id option is enabled
+    if (!get_option('display_slot_id_enabled')) {
+        // If the option is disabled, do not display anything
+        return '';
     }
+    
+    $selected_ad = get_selected_ad_unit_and_slot();
+    if ($selected_ad && !is_user_logged_in()) {
+        ob_start();
+        ?>
+        <p>
+            <?php echo esc_attr($selected_ad['ad_unit']); ?>
+            <div class="slot-id-input"><?php echo esc_attr($selected_ad['slot_id']); ?></div>
+        </p>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>"
+            crossorigin="anonymous"></script>
+        <!-- Nepal Prabin -->
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>"
+            data-ad-slot="<?php echo esc_attr($selected_ad['slot_id']); ?>"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        <?php
+        return ob_get_clean();
+    }
+    return '';
 }
+
+// Register the shortcode for the new function
+function register_adsense_shortcodes() {
+    add_shortcode('adsense_ad_with_slot_id', 'display_adsense_ad_unit_with_slot_id');
+}
+add_action('init', 'register_adsense_shortcodes');
 
 // Register the shortcode for the new function
 function register_adsense_shortcodes() {

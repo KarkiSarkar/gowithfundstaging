@@ -10,7 +10,8 @@
     <div class="ads-tab">
         <button class="ads-tablinks" onclick="openCity(event, 'Paris')"  id="defaultOpen">Adsense Id</button>
         <button class="ads-tablinks" onclick="openCity(event, 'Tokyo')">Adsense Field</button>
-        <p>Use do_shortcodes[adsense_ad_with_slot_id] for script with slot id and do_shortcodes[rotate_named_adsense_ads] for script without slot id.</p>
+        <p>Use [adsense_ad_with_slot_id] for script with slot id and [rotate_named_adsense_ads] for script without slot id.</p>
+        <p><strong>Warning: </strong> Use [adsense_ad_with_slot_id] shortcode only if slot id is enabled.</p>
     </div>
     <div class="ads-tabcontentwrapper">
         <form method="post" action="options.php">

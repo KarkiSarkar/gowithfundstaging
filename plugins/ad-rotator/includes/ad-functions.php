@@ -88,7 +88,7 @@ function insert_ads_after_paragraph($content) {
     if (is_single() && $ads_enabled) { // Check if it's a single post and ads insertion is enabled
         $paragraphs = explode("</p>", $content);
         for ($i = 2; $i < count($paragraphs); $i += 3) {
-            $paragraphs[$i] .= '[adsense_ad_with_slot_id]';
+            $paragraphs[$i] .= '[rotate_named_adsense_ads]';
         }
         $content = implode("</p>", $paragraphs);
     }

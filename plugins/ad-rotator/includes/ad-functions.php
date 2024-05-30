@@ -76,7 +76,7 @@ add_action('init', 'register_adsense_shortcodes');
 function insert_ads_before_post($content) {
     $ads_before_enabled = get_option('insert_ads_before_post_enabled'); // Get the status of the checkbox
     if (is_single() && $ads_before_enabled) { // Check if it's a single post and ads insertion is enabled
-        $content = 'adsense_ad_with_slot_id' . $content;
+        $content = '[adsense_ad_with_slot_id]' . $content;
     }
     return $content;
 }
@@ -88,7 +88,7 @@ function insert_ads_after_paragraph($content) {
     if (is_single() && $ads_enabled) { // Check if it's a single post and ads insertion is enabled
         $paragraphs = explode("</p>", $content);
         for ($i = 2; $i < count($paragraphs); $i += 3) {
-            $paragraphs[$i] .= 'adsense_ad_with_slot_id';
+            $paragraphs[$i] .= '[adsense_ad_with_slot_id]';
         }
         $content = implode("</p>", $paragraphs);
     }

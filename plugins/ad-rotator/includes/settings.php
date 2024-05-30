@@ -14,6 +14,8 @@ function adsense_rotator_settings() {
     register_setting('adsense-rotator-settings-group', 'insert_ads_after_paragraph_enabled'); 
     register_setting('adsense-rotator-settings-group', 'insert_ads_before_post_enabled');
     register_setting('adsense-rotator-settings-group', 'display_slot_id_enabled');
+    register_setting('adsense-rotator-settings-group', 'insert_ads_in_footer_enabled');
+
 }
 
 // Function to sanitize the input in the plugin

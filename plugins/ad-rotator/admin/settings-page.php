@@ -50,6 +50,15 @@
             <div id="Tokyo" class="ads-tabcontent">
                 <table class="form-table">
                     <tr valign="top">
+                        <th scope="row">Display Slot ID Input</th>
+                        <td>
+                            <label for="display_slot_id_enabled">
+                            <input type="checkbox" id="display_slot_id_enabled" name="display_slot_id_enabled" value="1" <?php checked(1, get_option('display_slot_id_enabled'), true); ?> />
+                            Display Slot ID input fields
+                            </label>
+                        </td>
+                    </tr>
+                    <tr valign="top">
                         <th scope="row">Insert Ads After Paragraphs</th>
                         <td>
                             <label for="insert_ads_after_paragraph_enabled">
@@ -68,11 +77,11 @@
                         </td>
                     </tr>
                     <tr valign="top">
-                        <th scope="row">Display Slot ID Input</th>
+                        <th scope="row">Insert Ads in Footer</th>
                         <td>
-                            <label for="display_slot_id_enabled">
-                            <input type="checkbox" id="display_slot_id_enabled" name="display_slot_id_enabled" value="1" <?php checked(1, get_option('display_slot_id_enabled'), true); ?> />
-                            Display Slot ID input fields
+                            <label for="insert_ads_in_footer_enabled">
+                                <input type="checkbox" id="insert_ads_in_footer_enabled" name="insert_ads_in_footer_enabled" value="1" <?php checked(1, get_option('insert_ads_in_footer_enabled'), true); ?> />
+                                Enable insertion of ads in the footer
                             </label>
                         </td>
                     </tr>

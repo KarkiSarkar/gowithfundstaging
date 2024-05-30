@@ -36,6 +36,13 @@ function display_adsense_ad_unit() {
         <?php
     }
 }
+// Shortcode to insert AdSense ad unit
+function rotate_named_adsense_ads_shortcode() {
+    ob_start();
+    display_adsense_ad_unit();
+    return ob_get_clean();
+}
+add_shortcode('rotate_named_adsense_ads', 'rotate_named_adsense_ads_shortcode');
 
 $display_slot_id = get_option('display_slot_id_enabled');
 if ($display_slot_id) {
@@ -96,11 +103,14 @@ function insert_ads_after_paragraph($content) {
 }
 add_filter('the_content', 'insert_ads_after_paragraph');
 
-// Shortcode to insert AdSense ad unit
-function rotate_named_adsense_ads_shortcode() {
-    ob_start();
-    display_adsense_ad_unit();
-    return ob_get_clean();
+// Function to insert ads in the footer
+function insert_ads_in_footer() {
+    if (get_option('insert_ads_in_footer_enabled')) {
+        echo do_shortcode('[rotate_named_adsense_ads]');
+    }
 }
-add_shortcode('rotate_named_adsense_ads', 'rotate_named_adsense_ads_shortcode');
+add_action('wp_footer', 'insert_ads_in_footer');
+
+
+
 ?>

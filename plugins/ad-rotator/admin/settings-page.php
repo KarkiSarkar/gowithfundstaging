@@ -26,7 +26,7 @@
                             <input type="checkbox" id="display_slot_id_enabled" name="display_slot_id_enabled" value="1" <?php checked(1, get_option('display_slot_id_enabled'), true); ?> />
                             Display Slot ID input fields
                             </label>
-                            <p><strong>Warning: </strong> Use [adsense_ad_with_slot_id] shortcode only if slot id is enabled.</p>
+                            <p><strong>***** Warning: </strong> Use [adsense_ad_with_slot_id] shortcode only if slot id is enabled. <strong>*****</strong></p>
                         </td>
                     </tr>
                     <tr valign="top">

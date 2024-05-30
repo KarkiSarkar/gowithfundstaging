@@ -27,10 +27,6 @@ add_action('wp_head', 'clear_ad_unit_transient');
 // Insert the AdSense ad shortcode into the header
 function insert_ads_in_header() {
     echo do_shortcode('[rotate_named_adsense_ads]');
-    $display_slot_id = get_option('display_slot_id_enabled');
-    if ($display_slot_id) {
-        echo do_shortcode('[adsense_ad_with_slot_id]');
-    }
 }
 add_action('wp_head', 'insert_ads_in_header');
 

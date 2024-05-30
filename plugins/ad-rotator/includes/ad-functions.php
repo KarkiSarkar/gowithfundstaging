@@ -48,7 +48,18 @@ if ($display_slot_id) {
                 <?php echo esc_attr($selected_ad['ad_unit']); ?>
                 <div class="slot-id-input"><?php echo esc_attr($selected_ad['slot_id']); ?></div>
             </p>
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>&amp;cachebuster=<?php echo time(); ?>" crossorigin="anonymous"></script>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>"
+                crossorigin="anonymous"></script>
+            <!-- Nepal Prabin -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>"
+                data-ad-slot="<?php echo esc_attr($selected_ad['slot_id']); ?>"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
             <?php
         }
     }

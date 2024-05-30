@@ -85,13 +85,6 @@ function register_adsense_shortcodes() {
 }
 add_action('init', 'register_adsense_shortcodes');
 
-// Register the shortcode for the new function
-function register_adsense_shortcodes() {
-    add_shortcode('adsense_ad_with_slot_id', 'display_adsense_ad_unit_with_slot_id');
-}
-add_action('init', 'register_adsense_shortcodes');
-
-
 // Insert ads before the post content
 function insert_ads_before_post($content) {
     $ads_before_enabled = get_option('insert_ads_before_post_enabled'); // Get the status of the checkbox

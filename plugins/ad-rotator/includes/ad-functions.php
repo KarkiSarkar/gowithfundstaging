@@ -91,9 +91,9 @@ add_filter('the_content', 'insert_ads_before_post', 5);
 
 // Insert ads after post content in single posts
 function insert_ads_after_post($content) {
-    if (is_single() && get_option('insert_ads_after_post_enabled')){
+    if (is_single() && get_option('insert_ads_after_post_enabled')) {
         $ad_content = do_shortcode('[rotate_named_adsense_ads]');
-        $content .= $ad_content
+        $content .= $ad_content;
     }
     return $content;
 }

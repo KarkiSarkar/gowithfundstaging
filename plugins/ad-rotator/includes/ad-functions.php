@@ -94,6 +94,7 @@ function insert_ads_after_paragraph($content) {
     if (is_single() && $ads_enabled) { // Check if it's a single post and ads insertion is enabled
         $paragraphs = explode("</p>", $content);
         for ($i = 2; $i < count($paragraphs); $i += 3) {
+            $display_slot_id = get_option('display_slot_id_enabled');
             if ($display_slot_id) {
                 // Function to display the selected AdSense ad unit with slot ID
                 $paragraphs[$i] .= '[adsense_ad_with_slot_id]';

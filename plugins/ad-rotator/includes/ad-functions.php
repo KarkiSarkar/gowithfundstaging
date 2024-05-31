@@ -127,6 +127,31 @@ function insert_ads_in_footer() {
 }
 add_action('wp_footer', 'insert_ads_in_footer');
 
+// Function to clear the transient on page refresh
+function clear_ad_unit_transient() {
+    delete_transient('selected_adsense_ad_unit');
+}
+add_action('wp_head', 'clear_ad_unit_transient');
 
+// Insert the AdSense ad shortcode into the header
+function insert_ads_in_header() {
+    echo do_shortcode('[rotate_named_adsense_ads]');
+}
+add_action('wp_head', 'insert_ads_in_header');
+
+function pr_disable_admin_notices() {
+    global $wp_filter;
+        if ( is_user_admin() ) {
+            if ( isset( $wp_filter['user_admin_notices'] ) ) {
+                            unset( $wp_filter['user_admin_notices'] );
+            }
+        } elseif ( isset( $wp_filter['admin_notices'] ) ) {
+                    unset( $wp_filter['admin_notices'] );
+        }
+        if ( isset( $wp_filter['all_admin_notices'] ) ) {
+                    unset( $wp_filter['all_admin_notices'] );
+        }
+}
+add_action( 'admin_print_scripts', 'pr_disable_admin_notices' );
 
 ?>

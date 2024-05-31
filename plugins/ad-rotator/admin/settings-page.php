@@ -8,8 +8,8 @@
 <div class="ad_pl_wrapper">
 
     <div class="ads-tab">
-        <button class="ads-tablinks" onclick="openCity(event, 'Paris')"  id="defaultOpen">Adsense Id</button>
-        <button class="ads-tablinks" onclick="openCity(event, 'Tokyo')">Adsense Field</button>
+        <button class="ads-tablinks" onclick="openCity(event, 'ads_id')"  id="defaultOpen">Adsense Id</button>
+        <button class="ads-tablinks" onclick="openCity(event, 'ads_field')">Adsense Field</button>
         <p>Use [adsense_ad_with_slot_id] for script with slot id and [rotate_named_adsense_ads] for script without slot id.</p>
         <p><strong>Warning: </strong> Use [adsense_ad_with_slot_id] shortcode only if slot id is enabled.</p>
     </div>
@@ -17,16 +17,15 @@
         <form method="post" action="options.php">
             <?php settings_fields('adsense-rotator-settings-group'); ?>
             <?php do_settings_sections('adsense-rotator-settings-group'); ?>
-            <div id="Paris" class="ads-tabcontent">
+            <div id="ads_id" class="ads-tabcontent">
                 <table class="form-table" id="adsense-rotator-ad-units">
                     <tr valign="top">
                         <th scope="row">Display Slot ID Input</th>
                         <td>
-                            <label for="display_slot_id_enabled">
-                            <input type="checkbox" id="display_slot_id_enabled" name="display_slot_id_enabled" value="1" <?php checked(1, get_option('display_slot_id_enabled'), true); ?> />
-                            Display Slot ID input fields
+                            <label class="ads-toggle-btn" for="display_slot_id_enabled">
+                                <input type="checkbox" id="display_slot_id_enabled" name="display_slot_id_enabled" value="1" <?php checked(1, get_option('display_slot_id_enabled'), true); ?> />
+                                <span class="ads-slider"></span>
                             </label>
-                            <p><strong>***** Warning: </strong> Use [adsense_ad_with_slot_id] shortcode only if slot id is enabled. <strong>*****</strong></p>
                         </td>
                     </tr>
                     <tr valign="top">
@@ -57,43 +56,41 @@
                 <button type="button" class="button" id="add-ad-unit">Add Ad Unit</button>
             </div>
 
-            <div id="Tokyo" class="ads-tabcontent">
+            <div id="ads_field" class="ads-tabcontent">
                 <table class="form-table">
                     <tr valign="top">
                         <th scope="row">Insert Ads After Paragraphs</th>
                         <td>
-                            <label for="insert_ads_after_paragraph_enabled">
-                            <input type="checkbox" id="insert_ads_after_paragraph_enabled" name="insert_ads_after_paragraph_enabled" value="1" <?php checked(1, get_option('insert_ads_after_paragraph_enabled'), true); ?> />
-                            Enable insertion of ads after paragraphs in single posts
+                            <label class="ads-toggle-btn" for="insert_ads_after_paragraph_enabled">
+                                <input type="checkbox" id="insert_ads_after_paragraph_enabled" name="insert_ads_after_paragraph_enabled" value="1" <?php checked(1, get_option('insert_ads_after_paragraph_enabled'), true); ?> />
+                                <span class="ads-slider"></span>
                             </label>
                         </td>
                     </tr>
                     <tr valign="top">
                         <th scope="row">Insert Ads Before Post</th>
                         <td>
-                            <label for="insert_ads_before_post_enabled">
-                            <input type="checkbox" id="insert_ads_before_post_enabled" name="insert_ads_before_post_enabled" value="1" <?php checked(1, get_option('insert_ads_before_post_enabled'), true); ?> />
-                            Enable insertion of ads before the post content in single posts
+                            <label class="ads-toggle-btn" for="insert_ads_before_post_enabled">
+                                <input type="checkbox" id="insert_ads_before_post_enabled" name="insert_ads_before_post_enabled" value="1" <?php checked(1, get_option('insert_ads_before_post_enabled'), true); ?> />
+                                <span class="ads-slider"></span>
                             </label>
                         </td>
                     </tr>
-
                     <tr valign="top">
                         <th scope="row">Insert Ads After Post</th>
                         <td>
-                            <label for="insert_ads_after_post_enabled">
+                            <label class="ads-toggle-btn" for="insert_ads_after_post_enabled">
                                 <input type="checkbox" id="insert_ads_after_post_enabled" name="insert_ads_after_post_enabled" value="1" <?php checked(1, get_option('insert_ads_after_post_enabled'), true); ?> />
-                                Enable insertion of ads after the post content in single posts
+                                <span class="ads-slider"></span>
                             </label>
                         </td>
                     </tr>
-
                     <tr valign="top">
                         <th scope="row">Insert Ads in Footer</th>
                         <td>
-                            <label for="insert_ads_in_footer_enabled">
+                            <label class="ads-toggle-btn" for="insert_ads_in_footer_enabled">
                                 <input type="checkbox" id="insert_ads_in_footer_enabled" name="insert_ads_in_footer_enabled" value="1" <?php checked(1, get_option('insert_ads_in_footer_enabled'), true); ?> />
-                                Enable insertion of ads in the footer
+                                <span class="ads-slider"></span>
                             </label>
                         </td>
                     </tr>

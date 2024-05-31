@@ -20,7 +20,7 @@
 ?>
 <div class="campaign-block">
    <div class="campaign-image">
-      <a href="<?php echo get_permalink(); ?>" title="<?php  echo get_the_title(); ?> "> <?php echo woocommerce_get_product_thumbnail($thumbnail); ?></a>
+      <a href="<?php echo get_permalink(); ?>" title="<?php  echo get_the_title(); ?> "> <?php echo woocommerce_get_product_thumbnail(); ?></a>
       <a href="<?php echo get_permalink(); ?>" class="overlay"></a>
       <div class="campaign_loved_html">
          <?php echo str_replace(' id=', ' class=', wpcf_function()->campaign_loved(false)); ?>

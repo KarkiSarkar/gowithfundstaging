@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: AdSense Rotator
-Description: Rotates Google AdSense ad codes and generates shortcode. Use do_shortcodes[adsense_ad_with_slot_id] for script with slot id and do_shortcodes[rotate_named_adsense_ads] for script without slot id.
+Description: Rotates Google AdSense ad codes and generates shortcode. Use do_shortcodes[adsense_ad_with_slot_id] for script with slot id and do_shortcodes[rotate_named_adsense_ads] for script without slot id. Rotates Google AdSense ad codes and generates shortcode. Settings of this plugin is available in Setting >> Adsense Rotator for id and section option to be shown. Settings >> ads.txt Rotator to edit ads.txt file.
 Version: 3.0
 Author: Nydoz Team
 */

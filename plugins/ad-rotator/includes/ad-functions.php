@@ -31,7 +31,6 @@ function display_adsense_ad_unit() {
     $display_slot_id = get_option('display_slot_id_enabled');
     if ($selected_ad && !is_user_logged_in()) {
         ?>
-        <p><?php echo esc_attr($selected_ad['ad_unit']); ?></p>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>&amp;cachebuster=<?php echo time(); ?>" crossorigin="anonymous"></script>
         <?php
     }
@@ -58,8 +57,7 @@ function display_adsense_ad_unit_with_slot_id() {
         ob_start();
         ?>
         <p>
-            <?php echo esc_attr($selected_ad['ad_unit']); ?>
-            <div class="slot-id-input"><?php echo esc_attr($selected_ad['slot_id']); ?></div>
+            Sponsered Link
         </p>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>"
             crossorigin="anonymous"></script>

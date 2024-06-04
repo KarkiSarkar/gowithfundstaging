@@ -173,4 +173,33 @@ function display_facebook_object($atts) {
 // Register the shortcode
 add_shortcode('facebook_object', 'display_facebook_object');
 
+
+add_action( 'admin_init', function () {
+    // Check the current user role.
+    if ( current_user_can( 'contributor' ) || current_user_can( 'author' ) ) {
+        remove_menu_page( 'edit.php?post_type=gva_header' );
+        remove_menu_page( 'edit.php?post_type=tribe_events' );
+        remove_menu_page( 'edit.php?post_type=footer' );
+        remove_menu_page( 'edit.php?post_type=gallery' );
+        remove_menu_page( 'edit.php?post_type=portfolio' );
+        remove_menu_page( 'edit.php?post_type=gva_team' );
+        remove_menu_page( 'edit.php?post_type=service' ); 
+        remove_menu_page( 'edit.php?post_type=success_story' );
+        remove_menu_page( 'edit.php?post_type=elementor_library' );
+        remove_menu_page( 'edit-comments.php' );
+        remove_menu_page( 'tools.php' );
+        remove_menu_page( 'wpcf7' );
+    }
+});
+
+function change_role_name() {
+    global $wp_roles;
+
+    if ( ! isset( $wp_roles ) )
+        $wp_roles = new WP_Roles();
+    $wp_roles->roles['contributor']['name'] = 'Content Writer';
+    $wp_roles->role_names['contributor'] = 'Content Writer';           
+}
+add_action('init', 'change_role_name');
+
 ?>

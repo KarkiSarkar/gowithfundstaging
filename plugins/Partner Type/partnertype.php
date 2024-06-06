@@ -250,6 +250,27 @@ function sfs_display_form() {
       version          : 'v20.0'
     });
   };
+  document.getElementById('simple-form-ui').addEventListener('submit', function(event) {
+    var name = document.getElementById('sfs_name').value;
+    var email = document.getElementById('sfs_email').value;
+    var phoneNumber = document.getElementById('sfs_phonenumber').value;
+    var country = document.getElementById('country').value;
+    var message = document.getElementById('sfs_message').value;
+
+    if (!name || !email || !phoneNumber || !country || !message) {
+        alert('Please fill out all required fields.');
+        event.preventDefault(); // Prevent form submission
+    } else if (!validateEmail(email)) {
+        alert('Please enter a valid email address.');
+        event.preventDefault();
+    }
+});
+
+function validateEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+
 </script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script>

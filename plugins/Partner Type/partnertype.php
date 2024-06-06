@@ -262,7 +262,7 @@ function sfs_display_form() {
     var phoneNumber = document.getElementById('sfs_phonenumber').value;
     var country = document.getElementById('country').value;
     var message = document.getElementById('sfs_message').value;
-    event.preventDefault();
+
     var errors = [];
 
     if (!name) {
@@ -303,7 +303,7 @@ function sfs_display_form() {
         document.getElementById('sfs_message').classList.remove('error');
     }
 
-    if (errors) {
+    if (errors.length > 0) {
         event.preventDefault(); // Prevent form submission
         displayErrors(errors);
     }
@@ -327,6 +327,7 @@ function displayErrors(errors) {
 
     errorContainer.appendChild(errorList);
 }
+
 
 
 </script>

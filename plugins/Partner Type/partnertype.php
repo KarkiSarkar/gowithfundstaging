@@ -257,6 +257,12 @@ function sfs_display_form() {
 
 
  // Initially disable the submit button
+
+ document.getElementById("sfs_submit").addEventListener("click", function() {
+    if (this.disabled) {
+        alert("The button is disabled. You cannot click it.");
+    }
+});
 // Initially disable the submit button
 var submitButton = document.getElementById('sfs_submit');
 submitButton.disabled = true;

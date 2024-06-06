@@ -11,6 +11,19 @@ function get_rotated_ad_units_and_slots() {
     }
     return array($ad_units, $slot_ids);
 }
+function display_selected_ad_unit_and_slot() {
+    $selected_ad = get_selected_ad_unit_and_slot();
+
+    if ($selected_ad) {
+        echo 'Ad Unit: ' . $selected_ad['ad_unit'] . '<br>';
+        echo 'Slot ID: ' . $selected_ad['slot_id'];
+    } else {
+        echo 'No ad units available.';
+    }
+}
+
+// Call the function to display the selected ad unit and slot ID
+display_selected_ad_unit_and_slot();
 
 // // Function to select a random ad unit ID and store it in a transient
 // function get_selected_ad_unit_and_slot() {

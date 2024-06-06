@@ -244,6 +244,15 @@ function sfs_display_form() {
         <div id="error-container"></div>
     </form>
     <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if there are errors stored in localStorage
+    var storedErrors = localStorage.getItem('formErrors');
+    if (storedErrors) {
+        displayErrors(JSON.parse(storedErrors));
+        // Clear the stored errors after displaying them
+        localStorage.removeItem('formErrors');
+    }
+});
 
 document.getElementById('simple-form-ui').addEventListener('submit', function(event) {
     var name = document.getElementById('sfs_name').value;
@@ -294,6 +303,8 @@ document.getElementById('simple-form-ui').addEventListener('submit', function(ev
 
     if (errors.length > 0) {
         event.preventDefault(); // Prevent form submission
+        // Store errors in localStorage
+        localStorage.setItem('formErrors', JSON.stringify(errors));
         displayErrors(errors);
     }
 });
@@ -337,6 +348,7 @@ function displayErrors(errors) {
 
 
 
+
   window.fbAsyncInit = function() {
     FB.init({
       appId            : '484103824186469',
@@ -345,12 +357,6 @@ function displayErrors(errors) {
     });
   };
   
-  
-
-
-
-
-
 </script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script>

@@ -245,12 +245,14 @@ function sfs_display_form() {
     </form>
     <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if there are errors stored in localStorage
-    var storedErrors = localStorage.getItem('formErrors');
+    // Check if there are errors stored in sessionStorage
+    var storedErrors = sessionStorage.getItem('formErrors');
     if (storedErrors) {
         displayErrors(JSON.parse(storedErrors));
         // Clear the stored errors after displaying them
-        localStorage.removeItem('formErrors');
+        sessionStorage.removeItem('formErrors');
+        // Scroll to the error container
+        document.getElementById('error-container').scrollIntoView();
     }
 });
 
@@ -303,9 +305,11 @@ document.getElementById('simple-form-ui').addEventListener('submit', function(ev
 
     if (errors.length > 0) {
         event.preventDefault(); // Prevent form submission
-        // Store errors in localStorage
-        localStorage.setItem('formErrors', JSON.stringify(errors));
+        // Store errors in sessionStorage
+        sessionStorage.setItem('formErrors', JSON.stringify(errors));
         displayErrors(errors);
+        // Scroll to the error container
+        document.getElementById('error-container').scrollIntoView();
     }
 });
 

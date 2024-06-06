@@ -244,19 +244,8 @@ function sfs_display_form() {
         <div id="error-container"></div>
     </form>
     <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId            : '484103824186469',
-      xfbml            : true,
-      version          : 'v20.0'
-    });
-  };
-  
-  
 
-
-
-  document.getElementById('simple-form-ui').addEventListener('submit', function(event) {
+document.getElementById('simple-form-ui').addEventListener('submit', function(event) {
     var name = document.getElementById('sfs_name').value;
     var email = document.getElementById('sfs_email').value;
     var phoneNumber = document.getElementById('sfs_phonenumber').value;
@@ -327,6 +316,39 @@ function displayErrors(errors) {
 
     errorContainer.appendChild(errorList);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '484103824186469',
+      xfbml            : true,
+      version          : 'v20.0'
+    });
+  };
+  
+  
+
+
+
 
 
 </script>

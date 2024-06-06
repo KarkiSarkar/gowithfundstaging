@@ -304,8 +304,8 @@ document.getElementById('sfs_phonenumber').addEventListener('input', checkFields
 document.getElementById('country').addEventListener('input', checkFields);
 document.getElementById('sfs_message').addEventListener('input', checkFields);
 
-// Add event listener to the submit button to handle clicks
-submitButton.addEventListener('click', function(event) {
+// Function to handle form submission
+function handleSubmit(event) {
     var name = document.getElementById('sfs_name').value;
     var email = document.getElementById('sfs_email').value;
     var phoneNumber = document.getElementById('sfs_phonenumber').value;
@@ -357,8 +357,13 @@ submitButton.addEventListener('click', function(event) {
         displayErrors(errors);
         alert("Please fill out all required fields.");
     }
-});
+}
 
+// Attach the form submission handler to the submit button click event
+submitButton.addEventListener('click', handleSubmit);
+
+// Attach the form submission handler to the form submit event as well
+document.getElementById('simple-form-ui').addEventListener('submit', handleSubmit);
 
 
 

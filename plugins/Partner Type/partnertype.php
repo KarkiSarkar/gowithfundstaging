@@ -250,6 +250,11 @@ function sfs_display_form() {
       version          : 'v20.0'
     });
   };
+  
+  
+
+
+
   document.getElementById('simple-form-ui').addEventListener('submit', function(event) {
     var name = document.getElementById('sfs_name').value;
     var email = document.getElementById('sfs_email').value;
@@ -257,12 +262,49 @@ function sfs_display_form() {
     var country = document.getElementById('country').value;
     var message = document.getElementById('sfs_message').value;
 
-    if (!name || !email || !phoneNumber || !country || !message) {
-        alert('Please fill out all required fields.');
-        event.preventDefault(); // Prevent form submission
+    var errors = [];
+
+    if (!name) {
+        errors.push("Please enter your name.");
+        document.getElementById('sfs_name').classList.add('error');
+    } else {
+        document.getElementById('sfs_name').classList.remove('error');
+    }
+
+    if (!email) {
+        errors.push("Please enter your email address.");
+        document.getElementById('sfs_email').classList.add('error');
     } else if (!validateEmail(email)) {
-        alert('Please enter a valid email address.');
-        event.preventDefault();
+        errors.push("Please enter a valid email address.");
+        document.getElementById('sfs_email').classList.add('error');
+    } else {
+        document.getElementById('sfs_email').classList.remove('error');
+    }
+
+    if (!phoneNumber) {
+        errors.push("Please enter your phone number.");
+        document.getElementById('sfs_phonenumber').classList.add('error');
+    } else {
+        document.getElementById('sfs_phonenumber').classList.remove('error');
+    }
+
+    if (!country) {
+        errors.push("Please select your country.");
+        document.getElementById('country').classList.add('error');
+    } else {
+        document.getElementById('country').classList.remove('error');
+    }
+
+    if (!message) {
+        errors.push("Please enter your message.");
+        document.getElementById('sfs_message').classList.add('error');
+    } else {
+        document.getElementById('sfs_message').classList.remove('error');
+    }
+
+    if (errors.length > 0) {
+        event.preventDefault(); // Prevent form submission
+        displayErrors(errors);
     }
 });
 
@@ -270,6 +312,21 @@ function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
 }
+
+function displayErrors(errors) {
+    var errorContainer = document.getElementById('error-container');
+    errorContainer.innerHTML = ''; // Clear previous errors
+
+    var errorList = document.createElement('ul');
+    errors.forEach(function(error) {
+        var listItem = document.createElement('li');
+        listItem.textContent = error;
+        errorList.appendChild(listItem);
+    });
+
+    errorContainer.appendChild(errorList);
+}
+
 
 </script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>

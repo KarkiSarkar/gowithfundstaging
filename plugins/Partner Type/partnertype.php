@@ -256,7 +256,11 @@ function sfs_display_form() {
 
 
 
-  document.getElementById('simple-form-ui').addEventListener('submit', function(event) {
+ // Initially disable the submit button
+document.getElementById('sfs_submit').disabled = true;
+
+// Add event listener to the form submission
+document.getElementById('simple-form-ui').addEventListener('submit', function(event) {
     var name = document.getElementById('sfs_name').value;
     var email = document.getElementById('sfs_email').value;
     var phoneNumber = document.getElementById('sfs_phonenumber').value;
@@ -306,14 +310,17 @@ function sfs_display_form() {
     if (errors.length > 0) {
         event.preventDefault(); // Prevent form submission
         displayErrors(errors);
+        alert("Please fill out all required fields.");
     }
 });
 
+// Function to validate email
 function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
 }
 
+// Function to display errors
 function displayErrors(errors) {
     var errorContainer = document.getElementById('error-container');
     errorContainer.innerHTML = ''; // Clear previous errors
@@ -327,6 +334,30 @@ function displayErrors(errors) {
 
     errorContainer.appendChild(errorList);
 }
+
+// Function to check if all fields are filled and enable/disable the submit button accordingly
+function checkFields() {
+    var name = document.getElementById('sfs_name').value;
+    var email = document.getElementById('sfs_email').value;
+    var phoneNumber = document.getElementById('sfs_phonenumber').value;
+    var country = document.getElementById('country').value;
+    var message = document.getElementById('sfs_message').value;
+
+    var submitButton = document.getElementById('sfs_submit');
+
+    if (name && email && phoneNumber && country && message) {
+        submitButton.disabled = false;
+    } else {
+        submitButton.disabled = true;
+    }
+}
+
+// Add event listeners to input fields to check if all fields are filled whenever they are changed
+document.getElementById('sfs_name').addEventListener('input', checkFields);
+document.getElementById('sfs_email').addEventListener('input', checkFields);
+document.getElementById('sfs_phonenumber').addEventListener('input', checkFields);
+document.getElementById('country').addEventListener('input', checkFields);
+document.getElementById('sfs_message').addEventListener('input', checkFields);
 
 
 

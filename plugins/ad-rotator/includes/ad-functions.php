@@ -24,6 +24,10 @@ function get_rotated_ad_units_and_slots() {
 //     }
 //     return $selected_ad;
 // }
+
+
+
+
 // Function to select a random ad unit ID and store it in a transient
 function get_selected_ad_unit_and_slot() {
     // Check if a selected ad is already cached
@@ -57,26 +61,25 @@ function get_selected_ad_unit_and_slot() {
     return $selected_ad;
 }
 
+
+
+
+
+
+
 // Function to display the selected AdSense ad unit
 function display_adsense_ad_unit() {
     $selected_ad = get_selected_ad_unit_and_slot();
-    $display_slot_id = get_option('display_slot_id_enabled');
+    
     if ($selected_ad && !is_user_logged_in()) {
         ?>
-        <p><?php echo esc_attr($selected_ad['ad_unit']); ?></p>
+        <p><?php echo esc_attr($selected_ad['ad_unit']); ?><div class="slot-id-input"></div></p>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>&amp;cachebuster=<?php echo time(); ?>" crossorigin="anonymous"></script>
         <?php
     }
 }
-// Shortcode to insert AdSense ad unit
-function rotate_named_adsense_ads_shortcode() {
-    ob_start();
-    display_adsense_ad_unit();
-    return ob_get_clean();
-}
-add_shortcode('rotate_named_adsense_ads', 'rotate_named_adsense_ads_shortcode');
-
 $display_slot_id = get_option('display_slot_id_enabled');
+
 // Function to display the selected AdSense ad unit with slot ID
 function display_adsense_ad_unit_with_slot_id() {
     // Check if the display_slot_id option is enabled
@@ -95,7 +98,6 @@ function display_adsense_ad_unit_with_slot_id() {
         </p>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>"
             crossorigin="anonymous"></script>
-        <!-- Nepal Prabin -->
         <ins class="adsbygoogle"
             style="display:block"
             data-ad-client="ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>"
@@ -116,6 +118,8 @@ function register_adsense_shortcodes() {
     add_shortcode('adsense_ad_with_slot_id', 'display_adsense_ad_unit_with_slot_id');
 }
 add_action('init', 'register_adsense_shortcodes');
+
+
 
 // Insert ads before the post content
 function insert_ads_before_post($content) {
@@ -151,26 +155,15 @@ function insert_ads_after_paragraph($content) {
 }
 add_filter('the_content', 'insert_ads_after_paragraph');
 
-// Function to insert ads in the footer
-function insert_ads_in_footer() {
-    if (get_option('insert_ads_in_footer_enabled')) {
-        echo do_shortcode('[rotate_named_adsense_ads]');
-    }
+// Shortcode to insert AdSense ad unit
+function rotate_named_adsense_ads_shortcode() {
+    ob_start();
+    display_adsense_ad_unit();
+    return ob_get_clean();
 }
-add_action('wp_footer', 'insert_ads_in_footer');
+add_shortcode('rotate_named_adsense_ads', 'rotate_named_adsense_ads_shortcode');
 
-// Function to clear the transient on page refresh
-function clear_ad_unit_transient() {
-    delete_transient('selected_adsense_ad_unit');
-}
-add_action('wp_head', 'clear_ad_unit_transient');
-
-// Insert the AdSense ad shortcode into the header
-function insert_ads_in_header() {
-    echo do_shortcode('[rotate_named_adsense_ads]');
-}
-add_action('wp_head', 'insert_ads_in_header');
-
+//Function to hide notification
 function pr_disable_admin_notices() {
     global $wp_filter;
         if ( is_user_admin() ) {
@@ -185,5 +178,27 @@ function pr_disable_admin_notices() {
         }
 }
 add_action( 'admin_print_scripts', 'pr_disable_admin_notices' );
+
+// Function to insert ads in the footer
+function insert_ads_in_footer() {
+    if (get_option('insert_ads_in_footer_enabled')) {
+        echo do_shortcode('[rotate_named_adsense_ads]');
+    }
+}
+add_action('wp_footer', 'insert_ads_in_footer');
+
+// Function to clear the transient on page refresh
+function clear_ad_unit_transient() {
+    delete_transient('selected_adsense_ad_unit');
+}
+add_action('wp_head', 'clear_ad_unit_transient');
+
+
+// Insert the AdSense ad shortcode into the header
+function insert_ads_in_header() {
+    echo do_shortcode('[rotate_named_adsense_ads]');
+}
+add_action('wp_head', 'insert_ads_in_header');
+
 
 ?>

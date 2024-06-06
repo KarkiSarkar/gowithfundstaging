@@ -241,6 +241,7 @@ function sfs_display_form() {
         <p>
             <input type="submit" name="sfs_submit" value="Send">
         </p>
+        <div id="error-container"></div>
     </form>
     <script>
   window.fbAsyncInit = function() {

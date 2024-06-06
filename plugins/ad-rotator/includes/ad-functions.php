@@ -50,9 +50,9 @@ function get_selected_ad_unit_and_slot() {
             $selected_ad = array('ad_unit' => $ad_units[$current_index], 'slot_id' => $slot_ids[$current_index]);
 
             // Cache the selected ad unit and slot
-            set_transient('selected_adsense_ad_unit', $selected_ad, 160); // Store for 1 minute
+            set_transient('selected_adsense_ad_unit', $selected_ad, 3000); // Store for 1 minute
             // Store the updated index in a transient for 1 minute
-            set_transient('selected_adsense_ad_index', $current_index, 160);
+            set_transient('selected_adsense_ad_index', $current_index, 3000);
         } else {
             $selected_ad = null;
         }

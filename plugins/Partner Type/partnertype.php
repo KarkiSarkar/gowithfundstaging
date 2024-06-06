@@ -257,10 +257,12 @@ function sfs_display_form() {
 
 
  // Initially disable the submit button
-document.getElementById('sfs_submit').disabled = true;
+// Initially disable the submit button
+var submitButton = document.getElementById('sfs_submit');
+submitButton.disabled = true;
 
-// Add event listener to the form submission
-document.getElementById('simple-form-ui').addEventListener('submit', function(event) {
+// Add event listener to the submit button to handle clicks
+submitButton.addEventListener('click', function(event) {
     var name = document.getElementById('sfs_name').value;
     var email = document.getElementById('sfs_email').value;
     var phoneNumber = document.getElementById('sfs_phonenumber').value;
@@ -342,8 +344,6 @@ function checkFields() {
     var phoneNumber = document.getElementById('sfs_phonenumber').value;
     var country = document.getElementById('country').value;
     var message = document.getElementById('sfs_message').value;
-
-    var submitButton = document.getElementById('sfs_submit');
 
     if (name && email && phoneNumber && country && message) {
         submitButton.disabled = false;

@@ -239,7 +239,7 @@ function sfs_display_form() {
             <input type="file" id="sfs_file" name="sfs_file">
         </p>
         <p>
-            <input type="submit" name="sfs_submit" value="Send">
+            <input type="submit" id="sfs_submit" name="sfs_submit" value="Send">
         </p>
         <div id="error-container"></div>
     </form>

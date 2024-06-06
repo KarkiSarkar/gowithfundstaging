@@ -257,61 +257,10 @@ function sfs_display_form() {
 
 
  // Initially disable the submit button
+document.getElementById('sfs_submit').disabled = true;
 
- document.getElementById("sfs_submit").addEventListener("click", function() {
-    if (this.disabled) {
-        alert("The button is disabled. You cannot click it.");
-    }
-});
-// Initially disable the submit button
-var submitButton = document.getElementById('sfs_submit');
-submitButton.disabled = true;
-
-// Function to validate email
-function validateEmail(email) {
-    var re = /\S+@\S+\.\S+/;
-    return re.test(email);
-}
-
-// Function to display errors
-function displayErrors(errors) {
-    var errorContainer = document.getElementById('error-container');
-    errorContainer.innerHTML = ''; // Clear previous errors
-
-    var errorList = document.createElement('ul');
-    errors.forEach(function(error) {
-        var listItem = document.createElement('li');
-        listItem.textContent = error;
-        errorList.appendChild(listItem);
-    });
-
-    errorContainer.appendChild(errorList);
-}
-
-// Function to check if all fields are filled and enable/disable the submit button accordingly
-function checkFields() {
-    var name = document.getElementById('sfs_name').value;
-    var email = document.getElementById('sfs_email').value;
-    var phoneNumber = document.getElementById('sfs_phonenumber').value;
-    var country = document.getElementById('country').value;
-    var message = document.getElementById('sfs_message').value;
-
-    if (name && email && phoneNumber && country && message) {
-        submitButton.disabled = false;
-    } else {
-        submitButton.disabled = true;
-    }
-}
-
-// Add event listeners to input fields to check if all fields are filled whenever they are changed
-document.getElementById('sfs_name').addEventListener('input', checkFields);
-document.getElementById('sfs_email').addEventListener('input', checkFields);
-document.getElementById('sfs_phonenumber').addEventListener('input', checkFields);
-document.getElementById('country').addEventListener('input', checkFields);
-document.getElementById('sfs_message').addEventListener('input', checkFields);
-
-// Function to handle form submission
-function handleSubmit(event) {
+// Add event listener to the form submission
+document.getElementById('simple-form-ui').addEventListener('submit', function(event) {
     var name = document.getElementById('sfs_name').value;
     var email = document.getElementById('sfs_email').value;
     var phoneNumber = document.getElementById('sfs_phonenumber').value;
@@ -363,31 +312,70 @@ function handleSubmit(event) {
         displayErrors(errors);
         alert("Please fill out all required fields.");
     }
+});
+
+// Function to validate email
+function validateEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
 }
 
-// Attach the form submission handler to the submit button click event
-submitButton.addEventListener('click', handleSubmit);
+// Function to display errors
+function displayErrors(errors) {
+    var errorContainer = document.getElementById('error-container');
+    errorContainer.innerHTML = ''; // Clear previous errors
 
-// Attach the form submission handler to the form submit event as well
-document.getElementById('simple-form-ui').addEventListener('submit', handleSubmit);
+    var errorList = document.createElement('ul');
+    errors.forEach(function(error) {
+        var listItem = document.createElement('li');
+        listItem.textContent = error;
+        errorList.appendChild(listItem);
+    });
+
+    errorContainer.appendChild(errorList);
+}
+
+// Function to check if all fields are filled and enable/disable the submit button accordingly
+function checkFields() {
+    var name = document.getElementById('sfs_name').value;
+    var email = document.getElementById('sfs_email').value;
+    var phoneNumber = document.getElementById('sfs_phonenumber').value;
+    var country = document.getElementById('country').value;
+    var message = document.getElementById('sfs_message').value;
+
+    var submitButton = document.getElementById('sfs_submit');
+
+    if (name && email && phoneNumber && country && message) {
+        submitButton.disabled = false;
+    } else {
+        submitButton.disabled = true;
+    }
+}
+
+// Add event listeners to input fields to check if all fields are filled whenever they are changed
+document.getElementById('sfs_name').addEventListener('input', checkFields);
+document.getElementById('sfs_email').addEventListener('input', checkFields);
+document.getElementById('sfs_phonenumber').addEventListener('input', checkFields);
+document.getElementById('country').addEventListener('input', checkFields);
+document.getElementById('sfs_message').addEventListener('input', checkFields);
 
 
 
 </script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script>
-        //  document.getElementById('simple-form-ui').addEventListener('submit', function(event) {
-        //     var formData = new FormData(this);
-        //     var data = {};
-        //     formData.forEach((value, key) => {
-        //     data[key] = value;
-        //     });
+         document.getElementById('simple-form-ui').addEventListener('submit', function(event) {
+            var formData = new FormData(this);
+            var data = {};
+            formData.forEach((value, key) => {
+            data[key] = value;
+            });
 
-        //     // Perform the lead tracking with form data
-        //     fbq('track', 'Lead', data);
-        //     // Submit the form after tracking
-        //     this.submit();
-        // });
+            // Perform the lead tracking with form data
+            fbq('track', 'Lead', data);
+            // Submit the form after tracking
+            this.submit();
+        });
     </script>
     <?php
     return ob_get_clean();

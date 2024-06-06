@@ -18,19 +18,19 @@ function sfs_display_form() {
     <input type="hidden" name="sfs_page_name" value="<?php echo get_the_title();?>">
         <p>
             <label for="sfs_name">Name:</label>
-            <input type="text" id="sfs_name" name="sfs_name" required>
+            <input type="text" id="sfs_name" name="sfs_name" >
         </p>
         <p>
             <label for="sfs_email">Email:</label>
-            <input type="email" id="sfs_email" name="sfs_email" required>
+            <input type="email" id="sfs_email" name="sfs_email" >
         </p>
         <p>
             <label for="sfs_phonenumber">Phonenumber:</label>
-            <input type="tel" id="sfs_phonenumber" name="sfs_phonenumber" required>
+            <input type="tel" id="sfs_phonenumber" name="sfs_phonenumber" >
         </p>
         <p>
             <label for="country">Country </label><br/>
-            <select id="country" name="country" required>
+            <select id="country" name="country" >
                 <option value="">Select a country</option>
                 <option value="Afghanistan">Afghanistan</option>
                 <option value="Albania">Albania</option>
@@ -232,7 +232,7 @@ function sfs_display_form() {
         </p>
         <p>
             <label for="sfs_message">Message:</label>
-            <textarea id="sfs_message" name="sfs_message" required></textarea>
+            <textarea id="sfs_message" name="sfs_message" ></textarea>
         </p>
         <p>
             <label for="sfs_file">File:</label>

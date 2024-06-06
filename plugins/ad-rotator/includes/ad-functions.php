@@ -12,16 +12,48 @@ function get_rotated_ad_units_and_slots() {
     return array($ad_units, $slot_ids);
 }
 
+// // Function to select a random ad unit ID and store it in a transient
+// function get_selected_ad_unit_and_slot() {
+//     if (false === ($selected_ad = get_transient('selected_adsense_ad_unit'))) {
+//         list($ad_units, $slot_ids) = get_rotated_ad_units_and_slots();
+//         if (!empty($ad_units)) {
+//             $index = array_rand($ad_units);
+//             $selected_ad = array('ad_unit' => $ad_units[$index], 'slot_id' => $slot_ids[$index]);
+//             set_transient('selected_adsense_ad_unit', $selected_ad, 60); // Store for 1 minute
+//         }
+//     }
+//     return $selected_ad;
+// }
 // Function to select a random ad unit ID and store it in a transient
 function get_selected_ad_unit_and_slot() {
+    // Check if a selected ad is already cached
     if (false === ($selected_ad = get_transient('selected_adsense_ad_unit'))) {
+        // Retrieve ad units and slot IDs
         list($ad_units, $slot_ids) = get_rotated_ad_units_and_slots();
+
+        // Check if there are available ad units
         if (!empty($ad_units)) {
-            $index = array_rand($ad_units);
-            $selected_ad = array('ad_unit' => $ad_units[$index], 'slot_id' => $slot_ids[$index]);
+            // Retrieve the current index from a transient
+            $current_index = get_transient('selected_adsense_ad_index');
+            if ($current_index === false) {
+                $current_index = -1; // Initialize to -1 to start from the first ad unit
+            }
+
+            // Increment the index
+            $current_index = ($current_index + 1) % count($ad_units);
+
+            // Select the ad unit and slot based on the updated index
+            $selected_ad = array('ad_unit' => $ad_units[$current_index], 'slot_id' => $slot_ids[$current_index]);
+
+            // Cache the selected ad unit and slot
             set_transient('selected_adsense_ad_unit', $selected_ad, 60); // Store for 1 minute
+            // Store the updated index in a transient for 1 minute
+            set_transient('selected_adsense_ad_index', $current_index, 60);
+        } else {
+            $selected_ad = null;
         }
     }
+
     return $selected_ad;
 }
 

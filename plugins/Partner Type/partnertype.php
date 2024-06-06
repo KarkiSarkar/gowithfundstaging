@@ -376,18 +376,18 @@ document.getElementById('simple-form-ui').addEventListener('submit', handleSubmi
 </script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script>
-         document.getElementById('simple-form-ui').addEventListener('submit', function(event) {
-            var formData = new FormData(this);
-            var data = {};
-            formData.forEach((value, key) => {
-            data[key] = value;
-            });
+        //  document.getElementById('simple-form-ui').addEventListener('submit', function(event) {
+        //     var formData = new FormData(this);
+        //     var data = {};
+        //     formData.forEach((value, key) => {
+        //     data[key] = value;
+        //     });
 
-            // Perform the lead tracking with form data
-            fbq('track', 'Lead', data);
-            // Submit the form after tracking
-            this.submit();
-        });
+        //     // Perform the lead tracking with form data
+        //     fbq('track', 'Lead', data);
+        //     // Submit the form after tracking
+        //     this.submit();
+        // });
     </script>
     <?php
     return ob_get_clean();

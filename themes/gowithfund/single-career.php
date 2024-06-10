@@ -58,7 +58,10 @@
             </a>
         <?php endif; ?>
 
-        <?php the_title( '<strong>Job Title:</strong><p>', '</p>' ); ?>
+       
+        <div>
+            <strong>Job Title:</strong><p><?php the_title(); ?></p> 
+        </div>
         <div>
             <strong>Company Name:</strong> <?php echo esc_html( get_post_meta( get_the_ID(), '_career_company', true ) ); ?>
         </div>

@@ -72,7 +72,7 @@
         <div>
             <strong>Location:</strong> <?php echo esc_html( get_post_meta( get_the_ID(), '_career_location', true ) ); ?>
         </div>
-        <div style="border: 1px solid #00A9A5;">
+        <div style="border: 1px solid #00A9A5; padding: 20px; background: #00A9A5; color: white;">
         <?php echo do_shortcode('[simple_form]'); ?>
         </div>
         

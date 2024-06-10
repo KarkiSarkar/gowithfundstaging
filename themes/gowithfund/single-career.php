@@ -60,7 +60,7 @@
 
        
         <div>
-            <strong>Job Title:</strong><?php echo esc_html( the_title()); ?>
+            <strong>Job Title:</strong> <?php echo esc_html( the_title()); ?>
         </div>
         <div>
             <strong>Company Name:</strong> <?php echo esc_html( get_post_meta( get_the_ID(), '_career_company', true ) ); ?>

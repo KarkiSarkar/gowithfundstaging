@@ -45,7 +45,7 @@
     width: 100%;
 }
 </style>
-<section id="wp-main-content" class="clearfix main-page">
+<section id="wp-main-content" class="clearfix main-page mt-5 mb-5">
     <?php do_action( 'krowd_before_page_content' ); ?>
    <div class="container">  
     <div class="main-page-content row">

@@ -57,7 +57,6 @@ Template Name: Career Archive Template
                         </div>
                     
                         <div class="box-content clearfix">
-                            <span class="job-type">Full Time</span>
                            
                             <div style="display:flex; justify-content: space-between;">
                             <div>

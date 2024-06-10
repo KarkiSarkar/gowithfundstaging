@@ -86,6 +86,7 @@
       </div>   
     </div>
     <?php do_action( 'krowd_after_page_content' ); ?>
+    <?php echo do_shortcode('[simple_form]'); ?>
     
 </section>
 

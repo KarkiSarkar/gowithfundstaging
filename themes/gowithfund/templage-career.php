@@ -33,21 +33,6 @@ Template Name: Career Archive Template
     extract($sidebar_config);
 
  ?>
- <style>
-    .page-title{
-        padding-top: 3rem;
-    }
-    input[type="text"], input[type="tel"], input[type="password"], input[type="email"], textarea, select {
-    background-color: #fff;
-    -webkit-box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.02) inset;
-    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.02) inset;
-    border: 1px solid #E9E9EE;
-    padding: 5px 10px;
-    max-width: 100%;
-    border-radius: 0;
-    width: 100%;
-}
-</style>
 <section id="wp-main-content" class="clearfix main-page">
     <?php do_action( 'krowd_before_page_content' ); ?>
    <div class="container"> 

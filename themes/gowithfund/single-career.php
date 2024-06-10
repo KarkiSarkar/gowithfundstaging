@@ -57,7 +57,7 @@
         <div>
             <strong>Location:</strong> <?php echo esc_html( get_post_meta( get_the_ID(), '_career_location', true ) ); ?>
         </div>
-        
+        <?php echo do_shortcode('[simple_form]'); ?>
     </div><!-- .entry-footer -->
             </div>    
          </div>      
@@ -83,10 +83,11 @@
             <?php do_action( 'krowd_after_sidebar' ); ?>
          </div>
          <?php endif ?>
+         
       </div>   
     </div>
     <?php do_action( 'krowd_after_page_content' ); ?>
-    <?php echo do_shortcode('[simple_form]'); ?>
+    
     
 </section>
 

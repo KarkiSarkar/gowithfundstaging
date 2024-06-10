@@ -60,7 +60,7 @@
 
        
         <div>
-            <strong>Job Title:</strong><p><?php the_title(); ?></p> 
+            <strong>Job Title:</strong><?php echo esc_html( the_title()); ?>
         </div>
         <div>
             <strong>Company Name:</strong> <?php echo esc_html( get_post_meta( get_the_ID(), '_career_company', true ) ); ?>
@@ -68,15 +68,15 @@
         <div>
             <strong>Location:</strong> <?php echo esc_html( get_post_meta( get_the_ID(), '_career_location', true ) ); ?>
         </div>
-        <div style="border: 1px solid #00A9A5; padding: 20px; background: #00A9A5; color: white; margin: 20px 0px;">
-        <?php echo do_shortcode('[simple_form]'); ?>
-        </div>
+        
     </div><!-- .entry-header -->
 
     <div class="entry-content">
         <?php the_content(); ?>
     </div><!-- .entry-content -->
-
+    <div style="border: 1px solid #00A9A5; padding: 20px; background: #00A9A5; color: white; margin: 20px 0px;">
+        <?php echo do_shortcode('[simple_form]'); ?>
+        </div>
     <div class="entry-footer">
         
         

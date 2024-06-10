@@ -45,7 +45,7 @@
     width: 100%;
 }
 </style>
-<section id="wp-main-content" class="clearfix main-page" style="margin: 20px 0px;">
+<section id="wp-main-content" class="clearfix main-page">
     <?php do_action( 'krowd_before_page_content' ); ?>
    <div class="container">  
     <div class="main-page-content row">
@@ -72,7 +72,7 @@
         <div>
             <strong>Location:</strong> <?php echo esc_html( get_post_meta( get_the_ID(), '_career_location', true ) ); ?>
         </div>
-        <div style="border: 1px solid #00A9A5; padding: 20px; background: #00A9A5; color: white;">
+        <div style="border: 1px solid #00A9A5; padding: 20px; background: #00A9A5; color: white; margin: 20px 0px;">
         <?php echo do_shortcode('[simple_form]'); ?>
         </div>
         

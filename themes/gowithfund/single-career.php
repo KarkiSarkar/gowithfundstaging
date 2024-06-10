@@ -58,14 +58,7 @@
             </a>
         <?php endif; ?>
 
-        <?php the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
-    </div><!-- .entry-header -->
-
-    <div class="entry-content">
-        <?php the_content(); ?>
-    </div><!-- .entry-content -->
-
-    <div class="entry-footer">
+        <?php the_title( '<strong>Job Title:</strong><p>', '</p>' ); ?>
         <div>
             <strong>Company Name:</strong> <?php echo esc_html( get_post_meta( get_the_ID(), '_career_company', true ) ); ?>
         </div>
@@ -75,6 +68,14 @@
         <div style="border: 1px solid #00A9A5; padding: 20px; background: #00A9A5; color: white; margin: 20px 0px;">
         <?php echo do_shortcode('[simple_form]'); ?>
         </div>
+    </div><!-- .entry-header -->
+
+    <div class="entry-content">
+        <?php the_content(); ?>
+    </div><!-- .entry-content -->
+
+    <div class="entry-footer">
+        
         
     </div><!-- .entry-footer -->
             </div>    

@@ -160,10 +160,10 @@ if (isset($_POST['submit'])) {
                 
 <?php
 
-
 // Handle form submission function
 function handle_form_submission() {
     if (isset($_POST['submit'])) {
+        // Sanitize form inputs
         $name = sanitize_text_field($_POST['name']);
         $email = sanitize_email($_POST['email']);
         $cover_letter = sanitize_textarea_field($_POST['cover_letter']);
@@ -173,11 +173,11 @@ function handle_form_submission() {
         $recipient_email = $email; // Replace with your recipient email
         global $post;
         $post_name = get_the_title($post->ID);
-        // Email subject
-        $email_subject = 'New Career Application for '.$post_name;
         
+        // Email subject for recipient
+        $email_subject = 'New Career Application for '.$post_name;
 
-        // Email message
+        // Email message for recipient
         $email_message = "Name: $name\n";
         $email_message .= "Email: $email\n";
         $email_message .= "Cover Letter:\n$cover_letter\n";
@@ -193,7 +193,7 @@ function handle_form_submission() {
             }
         }
 
-        // Send email
+        // Send email to recipient
         $success = wp_mail($recipient_email, $email_subject, $email_message, array(), $attachments);
 
         // Remove uploaded file if it exists
@@ -201,10 +201,22 @@ function handle_form_submission() {
             unlink($file_path);
         }
 
+        // Send confirmation email to user
+        $user_email_subject = 'Application Received';
+        $user_email_message = "Dear $name,\n\n";
+        $user_email_message .= "Thank you for your application for the position of $post_name. We have received your application and will review it shortly.\n\n";
+        $user_email_message .= "Best regards,\n";
+        $user_email_message .= "Your Company Name";
+
+        $user_email_headers = array('Content-Type: text/plain; charset=UTF-8');
+
+        wp_mail($email, $user_email_subject, $user_email_message, $user_email_headers);
+
         return $success;
     }
     return false;
 }
+
 ?>
 
 

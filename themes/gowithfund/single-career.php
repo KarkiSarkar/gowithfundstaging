@@ -100,18 +100,10 @@ if (isset($_POST['cfs_submit'])) {
     }
 }
 
-// Start the WordPress loop
-while (have_posts()) :
-    the_post();
-    ?>
-    <div id="primary" class="content-area">
-        <main id="main" class="site-main">
-            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                <header class="entry-header">
-                    <?php the_title('<h1 class="entry-title">', '</h1>'); ?>
-                </header><!-- .entry-header -->
 
-                <div class="entry-content">
+    ?>
+ 
+              
                     <form id="career-application-form" method="post" action="" enctype="multipart/form-data">
                         <input type="hidden" name="cfs_page_name" value="<?php echo get_the_title(); ?>">
                         <p>
@@ -138,15 +130,11 @@ while (have_posts()) :
                             <input type="submit" name="cfs_submit" value="Submit">
                         </p>
                     </form>
-                </div><!-- .entry-content -->
-            </article><!-- #post-<?php the_ID(); ?> -->
-        </main><!-- #main -->
-    </div><!-- #primary -->
+               
 <?php
 // End the WordPress loop
-endwhile;
 
-get_footer();
+
 
 // Handle form submission function
 function cfs_handle_career_application() {

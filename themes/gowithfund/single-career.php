@@ -89,16 +89,13 @@
 <?php
 
 
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly
-}
 
 // Handle form submission
-function sfs_handle_career_application() {
-    if (isset($_POST['sfs_submit'])) {
-        $name = sanitize_text_field($_POST['sfs_name']);
-        $email = sanitize_email($_POST['sfs_email']);
-        $file = isset($_FILES['sfs_file']) ? $_FILES['sfs_file'] : null;
+function cfs_handle_career_application() {
+    if (isset($_POST['cfs_submit'])) {
+        $name = sanitize_text_field($_POST['cfs_name']);
+        $email = sanitize_email($_POST['cfs_email']);
+        $file = isset($_FILES['cfs_file']) ? $_FILES['cfs_file'] : null;
 
         // Email address for receiving career applications
         $recipient_email = 'careers@example.com'; // Replace with your recipient email
@@ -135,7 +132,7 @@ function sfs_handle_career_application() {
         exit();
     }
 }
-add_action('wp', 'sfs_handle_career_application');
+add_action('wp', 'cfs_handle_career_application');
 
 // Enqueue Facebook SDK
 function add_facebook_sdk() {
@@ -162,21 +159,21 @@ add_action('wp_head', 'add_facebook_sdk');
 
 ?>
 <form id="career-application-form" method="post" action="" enctype="multipart/form-data">
-    <input type="hidden" name="sfs_page_name" value="<?php echo get_the_title(); ?>">
+    <input type="hidden" name="cfs_page_name" value="<?php echo get_the_title(); ?>">
     <p>
-        <label for="sfs_name">Name:</label>
-        <input type="text" id="sfs_name" name="sfs_name" required>
+        <label for="cfs_name">Name:</label>
+        <input type="text" id="cfs_name" name="cfs_name" required>
     </p>
     <p>
-        <label for="sfs_email">Email:</label>
-        <input type="email" id="sfs_email" name="sfs_email" required>
+        <label for="cfs_email">Email:</label>
+        <input type="email" id="cfs_email" name="cfs_email" required>
     </p>
     <p>
-        <label for="sfs_file">Resume (PDF only):</label>
-        <input type="file" id="sfs_file" name="sfs_file" accept=".pdf" required>
+        <label for="cfs_file">Resume (PDF only):</label>
+        <input type="file" id="cfs_file" name="cfs_file" accept=".pdf" required>
     </p>
     <p>
-        <input type="submit" name="sfs_submit" value="Submit">
+        <input type="submit" name="cfs_submit" value="Submit">
     </p>
 </form>
 

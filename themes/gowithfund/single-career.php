@@ -173,7 +173,7 @@ function handle_form_submission() {
         $recipient_email = $email; // Replace with your recipient email
 
         // Email subject
-        $email_subject = 'New Career Application for'.$email;
+        $email_subject = 'New Career Application for '.the_title();
 
         // Email message
         $email_message = "Name: $name\n";

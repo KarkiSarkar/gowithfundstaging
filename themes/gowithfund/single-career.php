@@ -174,7 +174,7 @@ function handle_form_submission() {
         global $post;
         $post_name = get_the_title($post->ID);
         // Email subject
-        $email_subject = 'New Career Application for'.$post_name;
+        $email_subject = 'New Career Application for '.$post_name;
         
 
         // Email message

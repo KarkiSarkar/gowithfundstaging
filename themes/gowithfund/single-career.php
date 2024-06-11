@@ -122,7 +122,7 @@ if (isset($_POST['submit'])) {
                             <input type="file" id="file" name="file" accept=".pdf" required>
                         </p>
                         <p>
-                            <input type="submit" name="submit" style="background: white; color: black; font-size: 218px; font-weight: 600;" value="Apply">
+                            <input type="submit" name="submit" style="background: white; color: black; font-size: 18px; font-weight: 600;" value="Apply">
                         </p>
                     </form>
                 

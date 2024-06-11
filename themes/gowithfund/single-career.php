@@ -98,7 +98,7 @@ function cfs_handle_career_application() {
         $file = isset($_FILES['cfs_file']) ? $_FILES['cfs_file'] : null;
 
         // Email address for receiving career applications
-        $recipient_email = 'careers@example.com'; // Replace with your recipient email
+        $recipient_email = 'prabin@nydoz.com'; // Replace with your recipient email
 
         // Construct email subject
         $email_subject = 'New Career Application';

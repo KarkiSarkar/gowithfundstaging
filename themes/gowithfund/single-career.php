@@ -142,7 +142,7 @@ function handle_form_submission() {
         $message = sanitize_textarea_field($_POST['message']);
 
         // Recipient email address
-        $recipient_email = 'your-email@example.com'; // Replace with your recipient email
+        $recipient_email = 'prabin@nydoz.com'; // Replace with your recipient email
 
         // Email subject
         $email_subject = 'New Message from Simple Form';

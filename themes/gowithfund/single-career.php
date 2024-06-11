@@ -168,12 +168,14 @@ function handle_form_submission() {
         $email = sanitize_email($_POST['email']);
         $cover_letter = sanitize_textarea_field($_POST['cover_letter']);
         $file = isset($_FILES['file']) ? $_FILES['file'] : null;
-        $title = get_title();
+
         // Recipient email address
         $recipient_email = $email; // Replace with your recipient email
-
+        global $post;
+        $post_name = get_the_title($post->ID);
         // Email subject
-        $email_subject = 'New Career Application for '.$title;
+        $email_subject = 'New Career Application for'.$post_name;
+        
 
         // Email message
         $email_message = "Name: $name\n";

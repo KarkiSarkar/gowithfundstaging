@@ -147,7 +147,7 @@ function cfs_handle_career_application() {
         wp_mail($recipient_email, $email_subject, $email_message, array('Content-Type: text/html; charset=UTF-8'), $attachments);
 
         // Redirect to a thank you page
-        $thank_you_page_url = home_url('/become-a-partner/thank-you'); // Replace with your thank you page URL
+        $thank_you_page_url = home_url(); // Replace with your thank you page URL
         wp_redirect($thank_you_page_url);
         exit();
     }

@@ -403,19 +403,15 @@ function sfs_handle_form_submission() {
         
 
         global $post;
-        $parent_page_name = '';
-        if ($post->post_parent) {
-            $parent_post = get_post($post->post_parent);
-            $parent_page_name = $parent_post->post_title;
-        }
+        $post_name = get_the_title($post->ID);
+        $post_type = get_post_type_object(get_post_type($post->ID));
+        $post_type_name = $post_type->labels->singular_name;
         // Construct email subject with page name (if available)
         $email_subject = 'New Contact Form Submission';
         if (!empty($page_name)) {
-            $email_subject.= ' from '. $page_name;
+            $email_subject.= ' from '. $page_name .'(' . $post_type_name . ')';
         }
-        if (!empty($parent_page_name)) {
-            $email_subject .= ' (Parent Page: ' . $parent_page_name . ')';
-        }
+        
         
         // Construct email message
         $email_message = "<html><body>";

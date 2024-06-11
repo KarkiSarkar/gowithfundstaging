@@ -104,6 +104,7 @@ if (isset($_POST['submit'])) {
     ?>
    
                     <form id="career-form" method="post" action="" enctype="multipart/form-data">
+                    <?php the_title('<h1 class="entry-title">Fill The Form to Apply', '</h1>'); ?>
                         <p>
                             <label for="name">Name:</label>
                             <input type="text" id="name" name="name" required>

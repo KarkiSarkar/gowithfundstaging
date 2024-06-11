@@ -93,23 +93,17 @@
 if (isset($_POST['submit'])) {
     // Handle form submission
     if (handle_form_submission()) {
-        echo '<p>Thank you for your message!</p>';
+        echo '<p>Thank you for your application!</p>';
     } else {
-        echo '<p>There was an error processing your message. Please try again later.</p>';
+        echo '<p>There was an error processing your application. Please try again later.</p>';
     }
 }
 
-// Start the WordPress loo
-    ?>
-    <div id="primary" class="content-area">
-        <main id="main" class="site-main">
-            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                <header class="entry-header">
-                    <?php the_title('<h1 class="entry-title">', '</h1>'); ?>
-                </header><!-- .entry-header -->
+// Start the WordPress loop
 
-                <div class="entry-content">
-                    <form id="simple-form" method="post" action="">
+    ?>
+   
+                    <form id="career-form" method="post" action="" enctype="multipart/form-data">
                         <p>
                             <label for="name">Name:</label>
                             <input type="text" id="name" name="name" required>
@@ -119,19 +113,19 @@ if (isset($_POST['submit'])) {
                             <input type="email" id="email" name="email" required>
                         </p>
                         <p>
-                            <label for="message">Message:</label>
-                            <textarea id="message" name="message" required></textarea>
+                            <label for="cover-letter">Cover Letter:</label>
+                            <textarea id="cover-letter" name="cover_letter" required></textarea>
                         </p>
                         <p>
-                            <input type="submit" name="submit" value="Send">
+                            <label for="file">Resume (PDF only):</label>
+                            <input type="file" id="file" name="file" accept=".pdf" required>
+                        </p>
+                        <p>
+                            <input type="submit" name="submit" value="Apply">
                         </p>
                     </form>
-                </div><!-- .entry-content -->
-            </article><!-- #post-<?php the_ID(); ?> -->
-        </main><!-- #main -->
-    </div><!-- #primary -->
+                
 <?php
-// End the WordPress loop
 
 
 // Handle form submission function
@@ -139,25 +133,45 @@ function handle_form_submission() {
     if (isset($_POST['submit'])) {
         $name = sanitize_text_field($_POST['name']);
         $email = sanitize_email($_POST['email']);
-        $message = sanitize_textarea_field($_POST['message']);
+        $cover_letter = sanitize_textarea_field($_POST['cover_letter']);
+        $file = isset($_FILES['file']) ? $_FILES['file'] : null;
 
         // Recipient email address
-        $recipient_email = 'prabin@nydoz.com'; // Replace with your recipient email
+        $recipient_email = 'your-email@example.com'; // Replace with your recipient email
 
         // Email subject
-        $email_subject = 'New Message from Simple Form';
+        $email_subject = 'New Career Application';
 
         // Email message
         $email_message = "Name: $name\n";
         $email_message .= "Email: $email\n";
-        $email_message .= "Message: $message\n";
+        $email_message .= "Cover Letter:\n$cover_letter\n";
+
+        // Handle file upload
+        $attachments = array();
+        if ($file) {
+            $upload_dir = wp_upload_dir();
+            $file_name = basename($file['name']);
+            $file_path = $upload_dir['path'] . '/' . $file_name;
+            if (move_uploaded_file($file['tmp_name'], $file_path)) {
+                $attachments[] = $file_path;
+            }
+        }
 
         // Send email
-        return wp_mail($recipient_email, $email_subject, $email_message);
+        $success = wp_mail($recipient_email, $email_subject, $email_message, array(), $attachments);
+
+        // Remove uploaded file if it exists
+        if ($file && file_exists($file_path)) {
+            unlink($file_path);
+        }
+
+        return $success;
     }
     return false;
 }
 ?>
+
 
 <!-- Custom end -->
 

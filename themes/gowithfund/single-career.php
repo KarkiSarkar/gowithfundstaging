@@ -75,7 +75,7 @@
         <?php the_content(); ?>
     </div><!-- .entry-content -->
     <div style="border: 1px solid #00A9A5; padding: 20px; background: #00A9A5; color: white; margin: 20px 0px;">
-        <?php echo do_shortcode('[simple_form]'); ?>
+        <?php echo do_shortcode('[contact-form-7 id="a606481" title="Career"]'); ?>
         </div>
     <div class="entry-footer">
         

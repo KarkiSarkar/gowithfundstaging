@@ -170,7 +170,7 @@ function handle_form_submission() {
         $file = isset($_FILES['file']) ? $_FILES['file'] : null;
 
         // Recipient email address
-        $recipient_email = 'prabin@nydoz.com'; // Replace with your recipient email
+        $recipient_email = $email; // Replace with your recipient email
 
         // Email subject
         $email_subject = 'New Career Application';

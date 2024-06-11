@@ -199,9 +199,9 @@ wp_redirect(home_url('/become-a-partner/thank-you/'));
             unlink($file_path);
         }
 
-        return $success;
+      
     }
-    return false;
+   
 }
 ?>
 

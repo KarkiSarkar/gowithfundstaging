@@ -125,6 +125,47 @@ if (isset($_POST['submit'])) {
                             <input type="submit" name="submit" style="background: white; color: black; font-size: 18px; font-weight: 600;" value="Apply">
                         </p>
                     </form>
+                    <script>
+                         document.addEventListener('DOMContentLoaded', function() {
+                                var form = document.getElementById('career-form');
+                                form.addEventListener('submit', function(event) {
+                                    var name = document.getElementById('name').value;
+                                    var email = document.getElementById('email').value;
+                                    var coverLetter = document.getElementById('cover-letter').value;
+                                    var file = document.getElementById('file').value;
+
+                                    var errors = [];
+
+                                    if (!name) {
+                                        errors.push("Please enter your name.");
+                                    }
+                                    if (!email) {
+                                        errors.push("Please enter your email address.");
+                                    }
+                                    if (!coverLetter) {
+                                        errors.push("Please enter your cover letter.");
+                                    }
+                                    if (!file) {
+                                        errors.push("Please upload your resume.");
+                                    }
+
+                                    if (errors.length > 0) {
+                                        event.preventDefault(); // Prevent form submission
+                                        alert(errors.join("\n")); // Display error messages
+                                    }
+
+                                     // Scroll to the top of the form
+                                        window.scrollTo(0, form.offsetTop);
+
+                            // To prevent the form from redirecting instantly,
+                            // you can use a setTimeout to delay the redirect
+                            setTimeout(function() {
+                                // Redirect to the same page
+                                window.location.href = window.location.href;
+                            }, 1000); // Adjust the delay as needed
+                                });
+                            });
+                    </script>
                 
 <?php
 

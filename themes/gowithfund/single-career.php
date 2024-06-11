@@ -104,7 +104,7 @@ if (isset($_POST['submit'])) {
     ?>
    
                     <form id="career-form" method="post" action="" enctype="multipart/form-data">
-                    <?php the_title('<h1 class="entry-title" style="color: white;">for ', '</h1>'); ?>
+                    <?php the_title('<h1 class="entry-title" style="color: white;">Apply for ', '</h1>'); ?>
                         <p>
                             <label for="name">Name:</label>
                             <input type="text" id="name" name="name" required>
@@ -122,7 +122,7 @@ if (isset($_POST['submit'])) {
                             <input type="file" id="file" name="file" accept=".pdf" required>
                         </p>
                         <p>
-                            <input type="submit" name="submit" value="Apply">
+                            <input type="submit" name="submit" style="background: white;" value="Apply">
                         </p>
                     </form>
                 

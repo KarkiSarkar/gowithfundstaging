@@ -85,7 +85,33 @@
 
 
 <!-- Custom Start -->
+<?php
+// Start session
+session_start();
 
+// Check if the form has been submitted
+if (isset($_POST['submit'])) {
+    // Set a session variable to indicate that the form has been submitted
+    $_SESSION['form_submitted'] = true;
+}
+
+// Check if the session variable is set, indicating that the form has been submitted
+if (isset($_SESSION['form_submitted']) && $_SESSION['form_submitted']) {
+    // Unset the session variable
+    unset($_SESSION['form_submitted']);
+    ?>
+    <script>
+        // After the page reloads, scroll to the form
+        window.onload = function() {
+            var form = document.getElementById('career-form');
+            if (form) {
+                form.scrollIntoView();
+            }
+        };
+    </script>
+    <?php
+}
+?>
 <?php
 
 

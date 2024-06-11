@@ -86,35 +86,75 @@
 
 <!-- Custom Start -->
 
-
-<form id="career-application-form" method="post" action="" enctype="multipart/form-data">
-    <input type="hidden" name="cfs_page_name" value="<?php echo get_the_title(); ?>">
-    <p>
-        <label for="cfs_name">Name:</label>
-        <input type="text" id="cfs_name" name="cfs_name" required>
-    </p>
-    <p>
-        <label for="cfs_email">Email:</label>
-        <input type="email" id="cfs_email" name="cfs_email" required>
-    </p>
-    <p>
-        <label for="cfs_file">Resume (PDF only):</label>
-        <input type="file" id="cfs_file" name="cfs_file" accept=".pdf" required>
-    </p>
-    <p>
-        <input type="submit" name="cfs_submit" value="Submit">
-    </p>
-</form>
-
 <?php
 
+// Check if the form is submitted
+if (isset($_POST['cfs_submit'])) {
+    // Handle form submission
+    if (cfs_handle_career_application()) {
+        // Redirect to thank you page after successful submission
+        wp_redirect(home_url('/thank-you'));
+        exit;
+    } else {
+        echo '<p>There was an error processing your application. Please try again later.</p>';
+    }
+}
 
+// Start the WordPress loop
+while (have_posts()) :
+    the_post();
+    ?>
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main">
+            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                <header class="entry-header">
+                    <?php the_title('<h1 class="entry-title">', '</h1>'); ?>
+                </header><!-- .entry-header -->
 
-// Handle form submission
+                <div class="entry-content">
+                    <form id="career-application-form" method="post" action="" enctype="multipart/form-data">
+                        <input type="hidden" name="cfs_page_name" value="<?php echo get_the_title(); ?>">
+                        <p>
+                            <label for="cfs_name">Name:</label>
+                            <input type="text" id="cfs_name" name="cfs_name" required>
+                        </p>
+                        <p>
+                            <label for="cfs_email">Email:</label>
+                            <input type="email" id="cfs_email" name="cfs_email" required>
+                        </p>
+                        <p>
+                            <label for="cfs_phonenumber">Phone Number:</label>
+                            <input type="tel" id="cfs_phonenumber" name="cfs_phonenumber" required>
+                        </p>
+                        <p>
+                            <label for="cfs_message">Message:</label>
+                            <textarea id="cfs_message" name="cfs_message" required></textarea>
+                        </p>
+                        <p>
+                            <label for="cfs_file">Resume (PDF only):</label>
+                            <input type="file" id="cfs_file" name="cfs_file" accept=".pdf" required>
+                        </p>
+                        <p>
+                            <input type="submit" name="cfs_submit" value="Submit">
+                        </p>
+                    </form>
+                </div><!-- .entry-content -->
+            </article><!-- #post-<?php the_ID(); ?> -->
+        </main><!-- #main -->
+    </div><!-- #primary -->
+<?php
+// End the WordPress loop
+endwhile;
+
+get_footer();
+
+// Handle form submission function
 function cfs_handle_career_application() {
     if (isset($_POST['cfs_submit'])) {
         $name = sanitize_text_field($_POST['cfs_name']);
         $email = sanitize_email($_POST['cfs_email']);
+        $phone = sanitize_text_field($_POST['cfs_phonenumber']);
+        $message = sanitize_textarea_field($_POST['cfs_message']);
         $file = isset($_FILES['cfs_file']) ? $_FILES['cfs_file'] : null;
 
         // Email address for receiving career applications
@@ -125,9 +165,11 @@ function cfs_handle_career_application() {
 
         // Construct email message
         $email_message = "<html><body>";
-        $email_message.= "<h2>Career Application</h2>";
-        $email_message.= "<p>Name: $name</p>";
-        $email_message.= "<p>Email: $email</p>";
+        $email_message .= "<h2>Career Application</h2>";
+        $email_message .= "<p>Name: $name</p>";
+        $email_message .= "<p>Email: $email</p>";
+        $email_message .= "<p>Phone: $phone</p>";
+        $email_message .= "<p>Message: $message</p>";
 
         // Handle file upload
         $attachments = array();
@@ -141,21 +183,22 @@ function cfs_handle_career_application() {
                 $attachments[] = $file_path;
             }
         }
-        $email_message.= "</body></html>";
+        $email_message .= "</body></html>";
 
         // Send email
-        wp_mail($recipient_email, $email_subject, $email_message, array('Content-Type: text/html; charset=UTF-8'), $attachments);
+        $sent = wp_mail($recipient_email, $email_subject, $email_message, array('Content-Type: text/html; charset=UTF-8'), $attachments);
 
-        // Redirect to a thank you page
-        $thank_you_page_url = home_url(); // Replace with your thank you page URL
-        wp_redirect($thank_you_page_url);
-        exit();
+        // Delete temporary file
+        if ($file && file_exists($file_path)) {
+            unlink($file_path);
+        }
+
+        return $sent;
     }
+    return false;
 }
-add_action('wp', 'cfs_handle_career_application');
-
-
 ?>
+
 <!-- Custom end -->
 
 

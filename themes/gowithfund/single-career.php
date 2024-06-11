@@ -85,33 +85,7 @@
 
 
 <!-- Custom Start -->
-<?php
-// Start session
-session_start();
 
-// Check if the form has been submitted
-if (isset($_POST['submit'])) {
-    // Set a session variable to indicate that the form has been submitted
-    $_SESSION['form_submitted'] = true;
-}
-
-// Check if the session variable is set, indicating that the form has been submitted
-if (isset($_SESSION['form_submitted']) && $_SESSION['form_submitted']) {
-    // Unset the session variable
-    unset($_SESSION['form_submitted']);
-    ?>
-    <script>
-        // After the page reloads, scroll to the form
-        window.onload = function() {
-            var form = document.getElementById('career-form');
-            if (form) {
-                form.scrollIntoView();
-            }
-        };
-    </script>
-    <?php
-}
-?>
 <?php
 
 
@@ -179,16 +153,7 @@ if (isset($_POST['submit'])) {
                                         event.preventDefault(); // Prevent form submission
                                         alert(errors.join("\n")); // Display error messages
                                     }
-
-                                     // Scroll to the top of the form
-                                        window.scrollTo(0, form.offsetTop);
-
-                            // To prevent the form from redirecting instantly,
-                            // you can use a setTimeout to delay the redirect
-                            setTimeout(function() {
-                                // Redirect to the same page
-                                window.location.href = window.location.href;
-                            }, 1000); // Adjust the delay as needed
+                                    
                                 });
                             });
                     </script>
@@ -228,7 +193,7 @@ function handle_form_submission() {
 
         // Send email
         $success = wp_mail($recipient_email, $email_subject, $email_message, array(), $attachments);
-
+wp_redirect(home_url('/become-a-partner/thank-you/'));
         // Remove uploaded file if it exists
         if ($file && file_exists($file_path)) {
             unlink($file_path);

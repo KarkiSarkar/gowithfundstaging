@@ -193,15 +193,15 @@ function handle_form_submission() {
 
         // Send email
         $success = wp_mail($recipient_email, $email_subject, $email_message, array(), $attachments);
-wp_redirect(home_url('/become-a-partner/thank-you/'));
+
         // Remove uploaded file if it exists
         if ($file && file_exists($file_path)) {
             unlink($file_path);
         }
 
-      
+        return $success;
     }
-   
+    return false;
 }
 ?>
 

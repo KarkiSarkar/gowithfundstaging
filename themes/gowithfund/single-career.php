@@ -86,6 +86,26 @@
 
 <!-- Custom Start -->
 
+
+<form id="career-application-form" method="post" action="" enctype="multipart/form-data">
+    <input type="hidden" name="cfs_page_name" value="<?php echo get_the_title(); ?>">
+    <p>
+        <label for="cfs_name">Name:</label>
+        <input type="text" id="cfs_name" name="cfs_name" required>
+    </p>
+    <p>
+        <label for="cfs_email">Email:</label>
+        <input type="email" id="cfs_email" name="cfs_email" required>
+    </p>
+    <p>
+        <label for="cfs_file">Resume (PDF only):</label>
+        <input type="file" id="cfs_file" name="cfs_file" accept=".pdf" required>
+    </p>
+    <p>
+        <input type="submit" name="cfs_submit" value="Submit">
+    </p>
+</form>
+
 <?php
 
 
@@ -136,26 +156,6 @@ add_action('wp', 'cfs_handle_career_application');
 
 
 ?>
-<form id="career-application-form" method="post" action="" enctype="multipart/form-data">
-    <input type="hidden" name="cfs_page_name" value="<?php echo get_the_title(); ?>">
-    <p>
-        <label for="cfs_name">Name:</label>
-        <input type="text" id="cfs_name" name="cfs_name" required>
-    </p>
-    <p>
-        <label for="cfs_email">Email:</label>
-        <input type="email" id="cfs_email" name="cfs_email" required>
-    </p>
-    <p>
-        <label for="cfs_file">Resume (PDF only):</label>
-        <input type="file" id="cfs_file" name="cfs_file" accept=".pdf" required>
-    </p>
-    <p>
-        <input type="submit" name="cfs_submit" value="Submit">
-    </p>
-</form>
-
-
 <!-- Custom end -->
 
 

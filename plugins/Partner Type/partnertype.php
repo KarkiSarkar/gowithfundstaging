@@ -401,10 +401,20 @@ function sfs_handle_form_submission() {
         // Personal email address for receiving form submissions
         $recipient_email = $email; // Replace with your personal email
         
+
+        global $post;
+        $parent_page_name = '';
+        if ($post->post_parent) {
+            $parent_post = get_post($post->post_parent);
+            $parent_page_name = $parent_post->post_title;
+        }
         // Construct email subject with page name (if available)
         $email_subject = 'New Contact Form Submission';
         if (!empty($page_name)) {
             $email_subject.= ' from '. $page_name;
+        }
+        if (!empty($parent_page_name)) {
+            $email_subject .= ' (Parent Page: ' . $parent_page_name . ')';
         }
         
         // Construct email message

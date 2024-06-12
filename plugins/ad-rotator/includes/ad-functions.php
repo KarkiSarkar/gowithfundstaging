@@ -157,41 +157,52 @@ add_filter('the_content', 'insert_ads_after_post');
 // }
 // add_filter('the_content', 'insert_ads_after_paragraph');
 
+// Insert ads after specific word count in single posts
 function insert_ads_after_words($content) {
-    if (is_single() && get_option('insert_ads_after_paragraph_enabled')) {
-        $word_count = get_option('insert_ads_after_word_count', 75); // Default to 25 words if not set
+    if (is_single() && get_option('insert_ads_after_post_enabled')) {
+        $word_count = get_option('insert_ads_after_word_count', 75); // Default to 250 words if not set
         $word_count = (int)$word_count;
         if ($word_count <= 0) {
             $word_count = 75;
         }
 
-        // Split content into words using any whitespace characters
-        $words = preg_split('/\s+/', $content);
+        // Remove HTML tags to count words accurately
+        $content_text = wp_strip_all_tags($content);
+        $words = preg_split('/\s+/', $content_text, -1, PREG_SPLIT_NO_EMPTY);
         $total_words = count($words);
-        $ad_content = do_shortcode('[adsense_ad_with_slot_id]');
+        $ad_content = do_shortcode('[rotate_named_adsense_ads]');
 
-        $insertion_index = $word_count;
-        $inside_heading = false; // Flag to skip insertion inside heading tags
-        for ($i = 0; $i < $total_words; $i++) {
-            if (preg_match('/<(h[1-6])>/', $words[$i])) {
-                $inside_heading = true; // Start of heading tag, set the flag
-            } elseif (preg_match('/<\/(h[1-6])>/', $words[$i])) {
-                $inside_heading = false; // End of heading tag, reset the flag
+        // Insert ads after every word count interval
+        $current_word = 0;
+        for ($i = $word_count; $i < $total_words; $i += $word_count) {
+            $current_word += $word_count;
+            if ($current_word < $total_words) {
+                $word = $words[$current_word];
+                // Check if the word is within a header tag
+                $is_header = preg_match('/<(h[1-6])[^>]*>(.*?)<\/\1>/', $word);
+                if ($is_header) {
+                    continue;
+                }
             }
-
-            if (!$inside_heading && $i >= $insertion_index) {
-                array_splice($words, $i, 0, $ad_content); // Insert ad content
-                $total_words = count($words); // Update total words count after insertion
-                $insertion_index += $word_count + 1; // Move insertion index to next word count + 1 to account for newly inserted ad
-                $i += count(explode(' ', $ad_content)); // Adjust index for the inserted ad content
-            }
+            array_splice($words, $i, 0, $ad_content);
+            $i += count(explode(' ', $ad_content)); // Adjust index for the inserted ad content
         }
 
-        $content = implode(' ', $words);
+        // Reconstruct content with ads
+        $content_with_ads = implode(' ', $words);
+
+        // Restore original HTML structure
+        preg_match_all('/<(.*?)>/s', $content, $tags);
+        foreach ($tags[1] as $tag) {
+            $content_with_ads = preg_replace('/<' . $tag . '(.*?)>/', '<' . $tag . '$1>', $content_with_ads);
+        }
+
+        $content = $content_with_ads;
     }
     return $content;
 }
 add_filter('the_content', 'insert_ads_after_words');
+
 
 
 

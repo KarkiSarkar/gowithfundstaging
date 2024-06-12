@@ -97,23 +97,23 @@
                         </td>
                     </tr>
                     <tr valign="top">
-    <th scope="row">Insert Ads Before Sidebar</th>
-    <td>
-        <label class="ads-toggle-btn" for="insert_ads_before_sidebar_enabled">
-            <input type="checkbox" id="insert_ads_before_sidebar_enabled" name="insert_ads_before_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_before_sidebar_enabled'), true); ?> />
-            <span class="ads-slider"></span>
-        </label>
-    </td>
-</tr>
-<tr valign="top">
-    <th scope="row">Insert Ads After Sidebar</th>
-    <td>
-        <label class="ads-toggle-btn" for="insert_ads_after_sidebar_enabled">
-            <input type="checkbox" id="insert_ads_after_sidebar_enabled" name="insert_ads_after_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_after_sidebar_enabled'), true); ?> />
-            <span class="ads-slider"></span>
-        </label>
-    </td>
-</tr>
+                        <th scope="row">Insert Ads in Before Sidebar</th>
+                        <td>
+                        <label class="ads-toggle-btn" for="insert_ads_before_sidebar_enabled">
+                            <input type="checkbox" id="insert_ads_before_sidebar_enabled" name="insert_ads_before_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_before_sidebar_enabled'), true); ?> />
+                            <span class="ads-slider"></span>
+                        </label>
+                        </td>
+                    </tr>
+                        <tr valign="top">
+                            <th scope="row">Insert Ads After Sidebar</th>
+                            <td>
+                            <label class="ads-toggle-btn" for="insert_ads_after_sidebar_enabled">
+                                <input type="checkbox" id="insert_ads_after_sidebar_enabled" name="insert_ads_after_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_after_sidebar_enabled'), true); ?> />
+                                <span class="ads-slider"></span>
+                            </label>
+                            </td>
+                        </tr>
                 </table>
             </div>
             <script>
@@ -135,10 +135,7 @@
                 document.getElementById("defaultOpen").click();
             </script>
             <div class="ads-rotate-submit-btn">
-                <?php submit_button(); // Add this code after form submission
-var_dump(get_option('insert_ads_before_sidebar_enabled'));
-var_dump(get_option('insert_ads_after_sidebar_enabled'));
-?>
+                <?php submit_button(); ?>
             </div>
         </form>
     </div>

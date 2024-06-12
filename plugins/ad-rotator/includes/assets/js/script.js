@@ -27,6 +27,19 @@ document.addEventListener('DOMContentLoaded', function () {
         updateCounter();
     });
 
+    function updateHiddenInput() {
+        var checkbox = document.getElementById('insert_ads_before_sidebar_enabled');
+        var hiddenInput = document.getElementById('insert_ads_before_sidebar_hidden');
+        hiddenInput.value = checkbox.checked ? '1' : '0';
+    }
+
+    // Bind change event listener to the checkbox
+    var checkbox = document.getElementById('insert_ads_before_sidebar_enabled');
+    checkbox.addEventListener('change', updateHiddenInput);
+
+    // Call updateHiddenInput initially to set hidden input value based on checkbox state
+    updateHiddenInput();
+
     function updateCounter() {
         var units = container.querySelectorAll('.ad-unit');
         units.forEach(function(unit, index) {

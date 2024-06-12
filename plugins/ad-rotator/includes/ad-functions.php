@@ -170,7 +170,7 @@ function insert_ads_after_words($content) {
         $content_text = wp_strip_all_tags($content);
         $words = preg_split('/\s+/', $content_text, -1, PREG_SPLIT_NO_EMPTY);
         $total_words = count($words);
-        $ad_content = do_shortcode('[rotate_named_adsense_ads]');
+        $ad_content = do_shortcode('[adsense_ad_with_slot_id]');
 
         // Insert ads after every word count interval
         $current_word = 0;

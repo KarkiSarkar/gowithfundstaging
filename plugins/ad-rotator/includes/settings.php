@@ -16,6 +16,8 @@ function adsense_rotator_settings() {
     register_setting('adsense-rotator-settings-group', 'display_slot_id_enabled');
     register_setting('adsense-rotator-settings-group', 'insert_ads_in_footer_enabled');
     register_setting('adsense-rotator-settings-group', 'insert_ads_after_post_enabled');
+    register_setting('adsense-rotator-settings-group', 'insert_ads_after_word_count');
+
 
 }
 

@@ -157,41 +157,41 @@ add_filter('the_content', 'insert_ads_after_post');
 // }
 // add_filter('the_content', 'insert_ads_after_paragraph');
 
-function insert_ads_after_words($content) {
-    if (is_single() && get_option('insert_ads_after_paragraph_enabled')) {
-        $word_count = get_option('insert_ads_after_word_count', 75); // Default to 25 words if not set
-        $word_count = (int)$word_count;
-        if ($word_count <= 0) {
-            $word_count = 75;
-        }
+// function insert_ads_after_words($content) {
+//     if (is_single() && get_option('insert_ads_after_paragraph_enabled')) {
+//         $word_count = get_option('insert_ads_after_word_count', 75); // Default to 25 words if not set
+//         $word_count = (int)$word_count;
+//         if ($word_count <= 0) {
+//             $word_count = 75;
+//         }
 
-        // Split content into words using any whitespace characters
-        $words = preg_split('/\s+/', $content);
-        $total_words = count($words);
-        $ad_content = do_shortcode('[adsense_ad_with_slot_id]');
+//         // Split content into words using any whitespace characters
+//         $words = preg_split('/\s+/', $content);
+//         $total_words = count($words);
+//         $ad_content = do_shortcode('[adsense_ad_with_slot_id]');
 
-        $insertion_index = $word_count;
-        $inside_heading = false; // Flag to skip insertion inside heading tags
-        for ($i = 0; $i < $total_words; $i++) {
-            if (preg_match('/<(h[1-6])/', $words[$i])) {
-                $inside_heading = true; // Start of heading tag, set the flag
-            } elseif (preg_match('/<\/(h[1-6])>/', $words[$i])) {
-                $inside_heading = false; // End of heading tag, reset the flag
-            }
+//         $insertion_index = $word_count;
+//         $inside_heading = false; // Flag to skip insertion inside heading tags
+//         for ($i = 0; $i < $total_words; $i++) {
+//             if (preg_match('/<(h[1-6])/', $words[$i])) {
+//                 $inside_heading = true; // Start of heading tag, set the flag
+//             } elseif (preg_match('/<\/(h[1-6])>/', $words[$i])) {
+//                 $inside_heading = false; // End of heading tag, reset the flag
+//             }
 
-            if (!$inside_heading && $i >= $insertion_index) {
-                array_splice($words, $i, 0, $ad_content); // Insert ad content
-                $total_words = count($words); // Update total words count after insertion
-                $insertion_index += $word_count + 1; // Move insertion index to next word count + 1 to account for newly inserted ad
-                $i += count(explode(' ', $ad_content)); // Adjust index for the inserted ad content
-            }
-        }
+//             if (!$inside_heading && $i >= $insertion_index) {
+//                 array_splice($words, $i, 0, $ad_content); // Insert ad content
+//                 $total_words = count($words); // Update total words count after insertion
+//                 $insertion_index += $word_count + 1; // Move insertion index to next word count + 1 to account for newly inserted ad
+//                 $i += count(explode(' ', $ad_content)); // Adjust index for the inserted ad content
+//             }
+//         }
 
-        $content = implode(' ', $words);
-    }
-    return $content;
-}
-add_filter('the_content', 'insert_ads_after_words');
+//         $content = implode(' ', $words);
+//     }
+//     return $content;
+// }
+// add_filter('the_content', 'insert_ads_after_words');
 
 
 

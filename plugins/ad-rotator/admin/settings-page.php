@@ -97,11 +97,14 @@
                         </td>
                     </tr>
                     <tr valign="top">
-                        <label class="ads-toggle-btn" for="insert_ads_before_sidebar_enabled">
-                            <input type="checkbox" id="insert_ads_before_sidebar_enabled" name="insert_ads_before_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_before_sidebar_enabled'), true); ?> />
-                            <span class="ads-slider"></span>
-                        </label>
-                        </tr>
+                        <th scope="row">Insert Ads in Widgets</th>
+                        <td>
+                            <label class="ads-toggle-btn" for="insert_ads_before_sidebar_enabled">
+                                <input type="checkbox" id="insert_ads_before_sidebar_enabled" name="insert_ads_before_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_before_sidebar_enabled'), true); ?> />
+                                <span class="ads-slider"></span>
+                            </label>
+                        </td>
+                    </tr>
                         <tr valign="top">
                             <th scope="row">Insert Ads After Sidebar</th>
                             <td>

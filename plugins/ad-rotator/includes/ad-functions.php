@@ -159,10 +159,10 @@ add_filter('the_content', 'insert_ads_after_post');
 
 function insert_ads_after_words($content) {
     if (is_single() && get_option('insert_ads_after_paragraph_enabled')) {
-        $word_count = get_option('insert_ads_after_word_count', 25); // Default to 25 words if not set
+        $word_count = get_option('insert_ads_after_word_count', 75); // Default to 25 words if not set
         $word_count = (int)$word_count;
         if ($word_count <= 0) {
-            $word_count = 25;
+            $word_count = 75;
         }
 
         // Define tags to exclude from ad insertion

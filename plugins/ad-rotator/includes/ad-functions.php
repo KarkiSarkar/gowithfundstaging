@@ -172,7 +172,6 @@ function insert_ads_after_words($content) {
 
         $insertion_index = $word_count;
         $inside_heading = false; // Flag to skip insertion inside heading tags
-        $current_word_count = 0; // Track the current word count excluding words in heading tags
         for ($i = 0; $i < $total_words; $i++) {
             if (preg_match('/<(h[1-6])>/', $words[$i])) {
                 $inside_heading = true; // Start of heading tag, set the flag
@@ -180,16 +179,11 @@ function insert_ads_after_words($content) {
                 $inside_heading = false; // End of heading tag, reset the flag
             }
 
-            if (!$inside_heading) {
-                $current_word_count++; // Increment word count if not inside heading tags
-            }
-
-            if (!$inside_heading && $current_word_count >= $insertion_index) {
+            if (!$inside_heading && $i >= $insertion_index) {
                 array_splice($words, $i, 0, $ad_content); // Insert ad content
                 $total_words = count($words); // Update total words count after insertion
                 $insertion_index += $word_count + 1; // Move insertion index to next word count + 1 to account for newly inserted ad
                 $i += count(explode(' ', $ad_content)); // Adjust index for the inserted ad content
-                $current_word_count = 0; // Reset word count after insertion
             }
         }
 
@@ -198,7 +192,6 @@ function insert_ads_after_words($content) {
     return $content;
 }
 add_filter('the_content', 'insert_ads_after_words');
-
 
 
 

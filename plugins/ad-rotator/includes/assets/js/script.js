@@ -38,6 +38,12 @@ document.addEventListener('DOMContentLoaded', function () {
             updateCounter();
         }
     });
+
+    form.addEventListener('submit', function() {
+        if (!wordCountInput.value) {
+            wordCountInput.value = 250;
+        }
+    });
 });
 
 

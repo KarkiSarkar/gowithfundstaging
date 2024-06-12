@@ -160,7 +160,7 @@ add_filter('the_content', 'insert_ads_after_post');
 // Insert ads after specific word count in single posts
 function insert_ads_after_words($content) {
     if (is_single() && get_option('insert_ads_after_paragraph_enabled')) {
-        $word_count = get_option('insert_ads_after_word_count', 300); // Default to 300 words if not set
+        $word_count = get_option('insert_ads_after_word_count', 250); // Default to 300 words if not set
         $words = explode(' ', $content);
         if (count($words) > $word_count) {
             $ad_content = do_shortcode('[adsense_ad_with_slot_id]');

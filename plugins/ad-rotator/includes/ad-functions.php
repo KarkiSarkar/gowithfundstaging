@@ -144,18 +144,45 @@ function insert_ads_after_post($content) {
 add_filter('the_content', 'insert_ads_after_post');
 
 // Insert ads after paragraphs in single posts
-function insert_ads_after_paragraph($content) {
+// function insert_ads_after_paragraph($content) {
+//     $ads_enabled = get_option('insert_ads_after_paragraph_enabled'); // Get the status of the checkbox
+//     if (is_single() && $ads_enabled) { // Check if it's a single post and ads insertion is enabled
+//         $paragraphs = explode("</p>", $content);
+//         for ($i = 2; $i < count($paragraphs); $i += 3) {
+//             $paragraphs[$i] .= '[adsense_ad_with_slot_id]';
+//         }
+//         $content = implode("</p>", $paragraphs);
+//     }
+//     return $content;
+// }
+// add_filter('the_content', 'insert_ads_after_paragraph');
+
+function insert_ads_after_word_count($content) {
     $ads_enabled = get_option('insert_ads_after_paragraph_enabled'); // Get the status of the checkbox
     if (is_single() && $ads_enabled) { // Check if it's a single post and ads insertion is enabled
-        $paragraphs = explode("</p>", $content);
-        for ($i = 2; $i < count($paragraphs); $i += 3) {
-            $paragraphs[$i] .= '[adsense_ad_with_slot_id]';
+        $words = explode(' ', $content); // Split the content into words
+        $word_count = 300; // Set the number of words after which the ad should be inserted
+        $ad_code = '[adsense_ad_with_slot_id]'; // Define the ad code
+
+        $new_content = '';
+        $current_word_count = 0;
+
+        foreach ($words as $word) {
+            $new_content .= $word . ' ';
+            $current_word_count++;
+
+            if ($current_word_count == $word_count) {
+                $new_content .= $ad_code . ' ';
+                $current_word_count = 0; // Reset word count
+            }
         }
-        $content = implode("</p>", $paragraphs);
+
+        return $new_content;
     }
     return $content;
 }
-add_filter('the_content', 'insert_ads_after_paragraph');
+add_filter('the_content', 'insert_ads_after_word_count');
+
 
 // Shortcode to insert AdSense ad unit
 function rotate_named_adsense_ads_shortcode() {

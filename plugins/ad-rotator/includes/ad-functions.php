@@ -157,31 +157,20 @@ add_filter('the_content', 'insert_ads_after_post');
 // }
 // add_filter('the_content', 'insert_ads_after_paragraph');
 
-function insert_ads_after_word_count($content) {
-    $ads_enabled = get_option('insert_ads_after_paragraph_enabled'); // Get the status of the checkbox
-    if (is_single() && $ads_enabled) { // Check if it's a single post and ads insertion is enabled
-        $words = explode(' ', $content); // Split the content into words
-        $word_count = 25; // Set the number of words after which the ad should be inserted
-        $ad_code = '[adsense_ad_with_slot_id]'; // Define the ad code
-
-        $new_content = '';
-        $current_word_count = 0;
-
-        foreach ($words as $word) {
-            $new_content .= $word . ' ';
-            $current_word_count++;
-
-            if ($current_word_count == $word_count) {
-                $new_content .= $ad_code . ' ';
-                $current_word_count = 0; // Reset word count
-            }
+// Insert ads after specific word count in single posts
+function insert_ads_after_words($content) {
+    if (is_single() && get_option('insert_ads_after_paragraph_enabled')) {
+        $word_count = get_option('insert_ads_after_word_count', 300); // Default to 300 words if not set
+        $words = explode(' ', $content);
+        if (count($words) > $word_count) {
+            $ad_content = do_shortcode('[rotate_named_adsense_ads]');
+            array_splice($words, $word_count, 0, $ad_content);
+            $content = implode(' ', $words);
         }
-
-        return $new_content;
     }
     return $content;
 }
-add_filter('the_content', 'insert_ads_after_word_count');
+add_filter('the_content', 'insert_ads_after_words');
 
 
 // Shortcode to insert AdSense ad unit

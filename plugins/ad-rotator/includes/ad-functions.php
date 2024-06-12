@@ -165,25 +165,24 @@ function insert_ads_after_words($content) {
             $word_count = 75;
         }
 
-        // Define tags to exclude from ad insertion
-        $exclude_tags = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
-
-        // Remove content within excluded tags
-        foreach ($exclude_tags as $tag) {
-            $pattern = '/<' . $tag . '.*?' . '>.*?<\/' . $tag . '>/s';
-            $content = preg_replace($pattern, '', $content);
-        }
-
         // Split content into words using any whitespace characters
         $words = preg_split('/\s+/', $content);
         $total_words = count($words);
         $ad_content = do_shortcode('[adsense_ad_with_slot_id]');
 
         $insertion_index = $word_count;
-        while ($insertion_index < $total_words) {
-            array_splice($words, $insertion_index, 0, $ad_content);
-            $total_words = count($words); // Update total words count after insertion
-            $insertion_index += $word_count + 1; // Move insertion index to next word count + 1 to account for newly inserted ad
+        $skip_tag = false; // Flag to skip insertion within heading tags
+        for ($i = 0; $i < $total_words; $i++) {
+            if ($skip_tag && preg_match('/<\/(h[1-6])>/', $words[$i])) {
+                $skip_tag = false; // End of heading tag, reset the flag
+            } elseif (!$skip_tag && preg_match('/<(h[1-6])>/', $words[$i])) {
+                $skip_tag = true; // Start of heading tag, set the flag
+            } elseif (!$skip_tag && $i >= $insertion_index) {
+                array_splice($words, $i, 0, $ad_content); // Insert ad content
+                $total_words = count($words); // Update total words count after insertion
+                $insertion_index += $word_count + 1; // Move insertion index to next word count + 1 to account for newly inserted ad
+                $i += count(explode(' ', $ad_content)); // Adjust index for the inserted ad content
+            }
         }
 
         $content = implode(' ', $words);
@@ -191,6 +190,7 @@ function insert_ads_after_words($content) {
     return $content;
 }
 add_filter('the_content', 'insert_ads_after_words');
+
 
 
 

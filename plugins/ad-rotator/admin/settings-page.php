@@ -78,6 +78,19 @@
                         </td>
                     </tr>
                     <tr valign="top">
+                        <th scope="row">Widget Control</th>
+                        <td>
+                            <input type="checkbox" id="enable_sidebar_ads" name="enable_sidebar_ads" value="1" <?php checked(get_option('enable_sidebar_ads'), 1); ?> />
+                            <label for="enable_sidebar_ads"><?php _e('Enable Sidebar Ads', 'text_domain'); ?></label>
+                            <br>
+                            <input type="checkbox" id="enable_top_ads" name="enable_top_ads" value="1" <?php checked(get_option('enable_top_ads'), 1); ?> />
+                            <label for="enable_top_ads"><?php _e('Enable Top Ads', 'text_domain'); ?></label>
+                            <br>
+                            <input type="checkbox" id="enable_bottom_ads" name="enable_bottom_ads" value="1" <?php checked(get_option('enable_bottom_ads'), 1); ?> />
+                            <label for="enable_bottom_ads"><?php _e('Enable Bottom Ads', 'text_domain'); ?></label>
+                        </td>
+                    </tr>
+                    <tr valign="top">
                         <th scope="row">Insert Ads After Post</th>
                         <td>
                             <label class="ads-toggle-btn" for="insert_ads_after_post_enabled">

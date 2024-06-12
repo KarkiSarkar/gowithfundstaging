@@ -241,5 +241,51 @@ function insert_ads_in_header() {
 }
 add_action('wp_head', 'insert_ads_in_header');
 
+// Register custom widgets
+function register_custom_widgets() {
+    register_widget('Ads_Widget');
+}
+add_action('widgets_init', 'register_custom_widgets');
 
+// Custom widget class
+class Ads_Widget extends WP_Widget {
+    // Constructor
+    public function __construct() {
+        parent::__construct(
+            'ads_widget',
+            __('Ads Widget', 'text_domain'),
+            array('description' => __('Display ads', 'text_domain'))
+        );
+    }
+
+    // Widget output
+    public function widget($args, $instance) {
+        // Check if widget visibility is enabled
+        if ($instance['enabled']) {
+            // Widget output code here
+            echo '<div class="ads-widget">';
+            // Display ads content
+            echo do_shortcode('[adsense_ad_with_slot_id]');
+            echo '</div>';
+        }
+    }
+
+    // Widget settings form
+    public function form($instance) {
+        $enabled = isset($instance['enabled']) ? $instance['enabled'] : false;
+        ?>
+        <p>
+            <input class="checkbox" type="checkbox" <?php checked($enabled); ?> id="<?php echo $this->get_field_id('enabled'); ?>" name="<?php echo $this->get_field_name('enabled'); ?>" />
+            <label for="<?php echo $this->get_field_id('enabled'); ?>"><?php _e('Enable', 'text_domain'); ?></label>
+        </p>
+        <?php
+    }
+
+    // Update widget settings
+    public function update($new_instance, $old_instance) {
+        $instance = array();
+        $instance['enabled'] = !empty($new_instance['enabled']) ? 1 : 0;
+        return $instance;
+    }
+}
 ?>

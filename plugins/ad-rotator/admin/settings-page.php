@@ -78,19 +78,6 @@
                         </td>
                     </tr>
                     <tr valign="top">
-                        <th scope="row">Widget Control</th>
-                        <td>
-                            <input type="checkbox" id="enable_sidebar_ads" name="enable_sidebar_ads" value="1" <?php checked(get_option('enable_sidebar_ads'), 1); ?> />
-                            <label for="enable_sidebar_ads"><?php _e('Enable Sidebar Ads', 'text_domain'); ?></label>
-                            <br>
-                            <input type="checkbox" id="enable_top_ads" name="enable_top_ads" value="1" <?php checked(get_option('enable_top_ads'), 1); ?> />
-                            <label for="enable_top_ads"><?php _e('Enable Top Ads', 'text_domain'); ?></label>
-                            <br>
-                            <input type="checkbox" id="enable_bottom_ads" name="enable_bottom_ads" value="1" <?php checked(get_option('enable_bottom_ads'), 1); ?> />
-                            <label for="enable_bottom_ads"><?php _e('Enable Bottom Ads', 'text_domain'); ?></label>
-                        </td>
-                    </tr>
-                    <tr valign="top">
                         <th scope="row">Insert Ads After Post</th>
                         <td>
                             <label class="ads-toggle-btn" for="insert_ads_after_post_enabled">
@@ -128,39 +115,6 @@
                 // Get the element with id="defaultOpen" and click on it
                 document.getElementById("defaultOpen").click();
             </script>
-             <script>
-        jQuery(document).ready(function($) {
-            $('#enable_sidebar_ads').change(function() {
-                if ($(this).is(':checked')) {
-                    // Enable sidebar ads widget
-                    $('.sidebar .ads-widget').show();
-                } else {
-                    // Disable sidebar ads widget
-                    $('.sidebar .ads-widget').hide();
-                }
-            });
-
-            $('#enable_top_ads').change(function() {
-                if ($(this).is(':checked')) {
-                    // Enable top ads widget
-                    $('.top-ads-widget').show();
-                } else {
-                    // Disable top ads widget
-                    $('.top-ads-widget').hide();
-                }
-            });
-
-            $('#enable_bottom_ads').change(function() {
-                if ($(this).is(':checked')) {
-                    // Enable bottom ads widget
-                    $('.bottom-ads-widget').show();
-                } else {
-                    // Disable bottom ads widget
-                    $('.bottom-ads-widget').hide();
-                }
-            });
-        });
-    </script>
             <div class="ads-rotate-submit-btn">
                 <?php submit_button(); ?>
             </div>

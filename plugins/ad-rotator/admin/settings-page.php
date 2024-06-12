@@ -19,6 +19,7 @@
             <?php do_settings_sections('adsense-rotator-settings-group'); ?>
             <div id="ads_id" class="ads-tabcontent">
                 <table class="form-table" id="adsense-rotator-ad-units">
+                    
                     <tr valign="top">
                         <th scope="row">Display Slot ID Input</th>
                         <td>
@@ -65,7 +66,7 @@
                                 <input type="checkbox" id="insert_ads_after_paragraph_enabled" name="insert_ads_after_paragraph_enabled" value="1" <?php checked(1, get_option('insert_ads_after_paragraph_enabled'), true); ?> />
                                 <span class="ads-slider"></span>
                             </label>
-                            <input type="number" id="insert_ads_after_word_count" name="insert_ads_after_word_count" value="<?php echo esc_attr(get_option('insert_ads_after_word_count', 0)); ?>" placeholder="Number of words" />
+                            <input type="number" id="insert_ads_after_word_count" name="insert_ads_after_word_count" value="<?php echo esc_attr(get_option('insert_ads_after_word_count', 300)); ?>" placeholder="Number of words" />
                         </td>
                     </tr>
                     <tr valign="top">
@@ -95,6 +96,22 @@
                             </label>
                         </td>
                     </tr>
+                    <tr valign="top">
+                    <label class="ads-toggle-btn" for="insert_ads_in_footer_enabled">
+                                <input type="checkbox" id="insert_ads_in_footer_enabled" name="insert_ads_in_footer_enabled" value="1" <?php checked(1, get_option('insert_ads_in_footer_enabled'), true); ?> />
+                                <span class="ads-slider"></span>
+                            </label>
+                            <th scope="row">Insert Ads Before Sidebar</th>
+                            <td>
+                                <input type="checkbox" name="insert_ads_before_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_before_sidebar_enabled'), true); ?> />
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <th scope="row">Insert Ads After Sidebar</th>
+                            <td>
+                                <input type="checkbox" name="insert_ads_after_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_after_sidebar_enabled'), true); ?> />
+                            </td>
+                        </tr>
                 </table>
             </div>
             <script>

@@ -159,24 +159,30 @@ add_filter('the_content', 'insert_ads_after_post');
 
 // Insert ads after specific word count in single posts
 // Insert ads after specific word count in single posts
+// Insert ads after specific word count in single posts
 function insert_ads_after_words($content) {
     if (is_single() && get_option('insert_ads_after_paragraph_enabled')) {
-        $word_count = get_option('insert_ads_after_word_count', 50); // Default to 250 words if not set
+        $word_count = get_option('insert_ads_after_word_count', 250); // Default to 250 words if not set
         $word_count = (int)$word_count;
         if ($word_count <= 0) {
             $word_count = 50;
         }
 
         $words = explode(' ', $content);
-        if (count($words) > $word_count) {
-            $ad_content = do_shortcode('[adsense_ad_with_slot_id]');
-            array_splice($words, $word_count, 0, $ad_content);
-            $content = implode(' ', $words);
+        $total_words = count($words);
+        $ad_content = do_shortcode('[adsense_ad_with_slot_id]');
+
+        for ($i = $word_count; $i < $total_words; $i += $word_count) {
+            array_splice($words, $i, 0, $ad_content);
+            $i += count(explode(' ', $ad_content)); // Adjust index for the inserted ad content
         }
+
+        $content = implode(' ', $words);
     }
     return $content;
 }
 add_filter('the_content', 'insert_ads_after_words');
+
 
 
 

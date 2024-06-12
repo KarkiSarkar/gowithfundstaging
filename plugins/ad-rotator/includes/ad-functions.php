@@ -241,18 +241,5 @@ function insert_ads_in_header() {
 }
 add_action('wp_head', 'insert_ads_in_header');
 
-function add_shortcode_to_sidebar($content) {
-    // Add the shortcode at the beginning of the sidebar
-    $shortcode_before = '[adsense_ad_with_slot_id]';
-    // Add the shortcode at the end of the sidebar
-    $shortcode_after = '[adsense_ad_with_slot_id]';
-    
-    // Append the shortcode at the beginning and end of the sidebar content
-    $content = $shortcode_before . $content . $shortcode_after;
-    
-    return $content;
-}
-
-add_filter('dynamic_sidebar_params', 'add_shortcode_to_sidebar');
 
 ?>

@@ -174,9 +174,9 @@ function insert_ads_after_words($content) {
         $inside_heading = false; // Flag to skip insertion inside heading tags
         for ($i = 0; $i < $total_words; $i++) {
             if (preg_match('/<(h[1-6])>/', $words[$i])) {
-                $inside_heading = true; // Start of heading tag, set the flag
+                $inside_heading = false; // Start of heading tag, set the flag
             } elseif (preg_match('/<\/(h[1-6])>/', $words[$i])) {
-                $inside_heading = true; // End of heading tag, reset the flag
+                $inside_heading = false; // End of heading tag, reset the flag
             }
 
             if (!$inside_heading && $i >= $insertion_index) {

@@ -19,18 +19,7 @@
             <?php do_settings_sections('adsense-rotator-settings-group'); ?>
             <div id="ads_id" class="ads-tabcontent">
                 <table class="form-table" id="adsense-rotator-ad-units">
-                <tr valign="top">
-                            <th scope="row">Insert Ads Before Sidebar</th>
-                            <td>
-                                <input type="checkbox" name="insert_ads_before_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_before_sidebar_enabled'), true); ?> />
-                            </td>
-                        </tr>
-                        <tr valign="top">
-                            <th scope="row">Insert Ads After Sidebar</th>
-                            <td>
-                                <input type="checkbox" name="insert_ads_after_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_after_sidebar_enabled'), true); ?> />
-                            </td>
-                        </tr>
+                    
                     <tr valign="top">
                         <th scope="row">Display Slot ID Input</th>
                         <td>
@@ -107,6 +96,18 @@
                             </label>
                         </td>
                     </tr>
+                    <tr valign="top">
+                            <th scope="row">Insert Ads Before Sidebar</th>
+                            <td>
+                                <input type="checkbox" name="insert_ads_before_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_before_sidebar_enabled'), true); ?> />
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <th scope="row">Insert Ads After Sidebar</th>
+                            <td>
+                                <input type="checkbox" name="insert_ads_after_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_after_sidebar_enabled'), true); ?> />
+                            </td>
+                        </tr>
                 </table>
             </div>
             <script>

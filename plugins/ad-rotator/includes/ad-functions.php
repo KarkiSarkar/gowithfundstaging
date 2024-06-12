@@ -161,7 +161,7 @@ function insert_ads_after_word_count($content) {
     $ads_enabled = get_option('insert_ads_after_paragraph_enabled'); // Get the status of the checkbox
     if (is_single() && $ads_enabled) { // Check if it's a single post and ads insertion is enabled
         $words = explode(' ', $content); // Split the content into words
-        $word_count = 300; // Set the number of words after which the ad should be inserted
+        $word_count = 30; // Set the number of words after which the ad should be inserted
         $ad_code = '[adsense_ad_with_slot_id]'; // Define the ad code
 
         $new_content = '';

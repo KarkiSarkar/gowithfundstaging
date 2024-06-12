@@ -14,7 +14,7 @@
         <p><strong>Warning: </strong> Use [adsense_ad_with_slot_id] shortcode only if slot id is enabled.</p>
     </div>
     <div class="ads-tabcontentwrapper">
-        <form method="post" id="adsense-rotator-form" action="options.php">
+        <form method="post" action="options.php">
             <?php settings_fields('adsense-rotator-settings-group'); ?>
             <?php do_settings_sections('adsense-rotator-settings-group'); ?>
             <div id="ads_id" class="ads-tabcontent">
@@ -97,18 +97,21 @@
                         </td>
                     </tr>
                     <tr valign="top">
-                        <th scope="row">Insert Ads in Widgets</th>
+                        <th scope="row">Insert Ads in Before Sidebar</th>
                         <td>
-                            <label class="ads-toggle-btn" for="insert_ads_before_sidebar_enabled">
-                                <input type="checkbox" id="insert_ads_before_sidebar_enabled" name="insert_ads_before_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_before_sidebar_enabled'), true); ?> />
-                                <span class="ads-slider"></span>
-                            </label>
+                        <label class="ads-toggle-btn" for="insert_ads_before_sidebar_enabled">
+                            <input type="checkbox" id="insert_ads_before_sidebar_enabled" name="insert_ads_before_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_before_sidebar_enabled'), true); ?> />
+                            <span class="ads-slider"></span>
+                        </label>
                         </td>
                     </tr>
                         <tr valign="top">
                             <th scope="row">Insert Ads After Sidebar</th>
                             <td>
-                                <input type="checkbox" name="insert_ads_after_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_after_sidebar_enabled'), true); ?> />
+                            <label class="ads-toggle-btn" for="insert_ads_after_sidebar_enabled">
+                                <input type="checkbox" id="insert_ads_after_sidebar_enabled" name="insert_ads_after_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_after_sidebar_enabled'), true); ?> />
+                                <span class="ads-slider"></span>
+                            </label>
                             </td>
                         </tr>
                 </table>

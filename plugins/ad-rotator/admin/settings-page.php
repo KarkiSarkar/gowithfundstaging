@@ -97,14 +97,10 @@
                         </td>
                     </tr>
                     <tr valign="top">
-                    <label class="ads-toggle-btn" for="insert_ads_in_footer_enabled">
-                                <input type="checkbox" id="insert_ads_in_footer_enabled" name="insert_ads_in_footer_enabled" value="1" <?php checked(1, get_option('insert_ads_in_footer_enabled'), true); ?> />
-                                <span class="ads-slider"></span>
-                            </label>
-                            <th scope="row">Insert Ads Before Sidebar</th>
-                            <td>
-                                <input type="checkbox" name="insert_ads_before_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_before_sidebar_enabled'), true); ?> />
-                            </td>
+                        <label class="ads-toggle-btn" for="insert_ads_before_sidebar_enabled">
+                            <input type="checkbox" id="insert_ads_before_sidebar_enabled" name="insert_ads_before_sidebar_enabled" value="1" <?php checked(1, get_option('insert_ads_before_sidebar_enabled'), true); ?> />
+                            <span class="ads-slider"></span>
+                        </label>
                         </tr>
                         <tr valign="top">
                             <th scope="row">Insert Ads After Sidebar</th>

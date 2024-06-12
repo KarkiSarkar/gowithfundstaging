@@ -165,7 +165,7 @@ function insert_ads_after_words($content) {
         $word_count = get_option('insert_ads_after_word_count', 250); // Default to 250 words if not set
         $word_count = (int)$word_count;
         if ($word_count <= 0) {
-            $word_count = 50;
+            $word_count = 250;
         }
 
         $words = explode(' ', $content);

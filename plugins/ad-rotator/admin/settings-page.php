@@ -135,7 +135,10 @@
                 document.getElementById("defaultOpen").click();
             </script>
             <div class="ads-rotate-submit-btn">
-                <?php submit_button(); ?>
+                <?php submit_button(); // Add this code after form submission
+var_dump(get_option('insert_ads_before_sidebar_enabled'));
+var_dump(get_option('insert_ads_after_sidebar_enabled'));
+?>
             </div>
         </form>
     </div>

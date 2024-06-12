@@ -158,28 +158,49 @@ add_filter('the_content', 'insert_ads_after_post');
 // add_filter('the_content', 'insert_ads_after_paragraph');
 
 // Insert ads after specific word count in single posts
-// Insert ads after specific word count in single posts
-// Insert ads after specific word count in single posts
 function insert_ads_after_words($content) {
-    if (is_single() && get_option('insert_ads_after_paragraph_enabled')) {
-        $word_count = get_option('insert_ads_after_word_count', 25); // Default to 25 words if not set
+    if (is_single() && get_option('insert_ads_after_post_enabled')) {
+        $word_count = get_option('insert_ads_after_word_count', 250); // Default to 250 words if not set
         $word_count = (int)$word_count;
         if ($word_count <= 0) {
-            $word_count = 25;
+            $word_count = 250;
         }
 
-        $words = preg_split('/\s+/', $content); // Split content into words using any whitespace characters
+        // Remove HTML tags to count words accurately
+        $content_text = wp_strip_all_tags($content);
+        $words = preg_split('/\s+/', $content_text, -1, PREG_SPLIT_NO_EMPTY);
         $total_words = count($words);
-        $ad_content = do_shortcode('[adsense_ad_with_slot_id]');
+        $ad_content = do_shortcode('[rotate_named_adsense_ads]');
 
-        $insertion_index = $word_count;
-        while ($insertion_index < $total_words) {
-            array_splice($words, $insertion_index, 0, $ad_content);
-            $total_words = count($words); // Update total words count after insertion
-            $insertion_index += $word_count + 1; // Move insertion index to next word count + 1 to account for newly inserted ad
+        // Define tags to skip
+        $skip_tags = array('header', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+
+        // Insert ads after every word count interval
+        $current_word = 0;
+        for ($i = $word_count; $i < $total_words; $i += $word_count) {
+            $current_word += $word_count;
+            if ($current_word < $total_words) {
+                $word = $words[$current_word];
+                // Check if the word is within a skip tag
+                $tag = strtolower(strip_tags($word));
+                if (in_array($tag, $skip_tags)) {
+                    continue;
+                }
+            }
+            array_splice($words, $i, 0, $ad_content);
+            $i += count(explode(' ', $ad_content)); // Adjust index for the inserted ad content
         }
 
-        $content = implode(' ', $words);
+        // Reconstruct content with ads
+        $content_with_ads = implode(' ', $words);
+
+        // Restore original HTML structure
+        preg_match_all('/<(.*?)>/s', $content, $tags);
+        foreach ($tags[1] as $tag) {
+            $content_with_ads = preg_replace('/<' . $tag . '(.*?)>/', '<' . $tag . '$1>', $content_with_ads);
+        }
+
+        $content = $content_with_ads;
     }
     return $content;
 }

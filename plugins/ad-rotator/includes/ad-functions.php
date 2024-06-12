@@ -171,10 +171,11 @@ function insert_ads_after_words($content) {
         $words = explode(' ', $content);
         $total_words = count($words);
         $ad_content = do_shortcode('[adsense_ad_with_slot_id]');
+        $inserted_count = 0; // Number of ads inserted
 
-        for ($i = $word_count; $i < $total_words; $i += $word_count) {
-            array_splice($words, $i, 0, $ad_content);
-            $i += count(explode(' ', $ad_content)); // Adjust index for the inserted ad content
+        for ($i = $word_count; $i < $total_words + $inserted_count * count(explode(' ', $ad_content)); $i += $word_count) {
+            array_splice($words, $i + $inserted_count * count(explode(' ', $ad_content)), 0, $ad_content);
+            $inserted_count++;
         }
 
         $content = implode(' ', $words);

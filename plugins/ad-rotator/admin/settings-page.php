@@ -65,7 +65,7 @@
                                 <input type="checkbox" id="insert_ads_after_paragraph_enabled" name="insert_ads_after_paragraph_enabled" value="1" <?php checked(1, get_option('insert_ads_after_paragraph_enabled'), true); ?> />
                                 <span class="ads-slider"></span>
                             </label>
-                            <input type="number" id="insert_ads_after_word_count" name="insert_ads_after_word_count" value="<?php echo esc_attr(get_option('insert_ads_after_word_count', 75)); ?>" placeholder="Number of words" />
+                            <input type="number" id="insert_ads_after_word_count" name="insert_ads_after_word_count" value="<?php echo esc_attr(get_option('insert_ads_after_word_count', 300)); ?>" placeholder="Number of words" />
                         </td>
                     </tr>
                     <tr valign="top">

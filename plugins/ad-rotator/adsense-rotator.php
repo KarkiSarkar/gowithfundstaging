@@ -14,7 +14,7 @@ include plugin_dir_path(__FILE__) . 'admin/ads-txt-editor.php';
 
 function adsense_rotator_enqueue_style(){
     wp_enqueue_style('adsense-rotator-styles', plugin_dir_url(__FILE__) . 'includes/assets/css/styles.css');
-    wp_enqueue_script('adsense-rotator-script', plugin_dir_url(__FILE__) . 'includes/assets/js/script.js');
+    wp_enqueue_script('adsense-rotator-script', plugin_dir_url(__FILE__) . 'includes/assets/js/script.js', array(), $script_version, true );
     // wp_enqueue_script('adsense-rotator-form-script', plugin_dir_url(__FILE__) . 'includes/assets/js/form-script.js');
 }
 add_action('admin_enqueue_scripts', 'adsense_rotator_enqueue_style');

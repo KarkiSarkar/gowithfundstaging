@@ -128,6 +128,39 @@
                 // Get the element with id="defaultOpen" and click on it
                 document.getElementById("defaultOpen").click();
             </script>
+             <script>
+        jQuery(document).ready(function($) {
+            $('#enable_sidebar_ads').change(function() {
+                if ($(this).is(':checked')) {
+                    // Enable sidebar ads widget
+                    $('.sidebar .ads-widget').show();
+                } else {
+                    // Disable sidebar ads widget
+                    $('.sidebar .ads-widget').hide();
+                }
+            });
+
+            $('#enable_top_ads').change(function() {
+                if ($(this).is(':checked')) {
+                    // Enable top ads widget
+                    $('.top-ads-widget').show();
+                } else {
+                    // Disable top ads widget
+                    $('.top-ads-widget').hide();
+                }
+            });
+
+            $('#enable_bottom_ads').change(function() {
+                if ($(this).is(':checked')) {
+                    // Enable bottom ads widget
+                    $('.bottom-ads-widget').show();
+                } else {
+                    // Disable bottom ads widget
+                    $('.bottom-ads-widget').hide();
+                }
+            });
+        });
+    </script>
             <div class="ads-rotate-submit-btn">
                 <?php submit_button(); ?>
             </div>

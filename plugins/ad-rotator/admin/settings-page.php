@@ -14,7 +14,7 @@
         <p><strong>Warning: </strong> Use [adsense_ad_with_slot_id] shortcode only if slot id is enabled.</p>
     </div>
     <div class="ads-tabcontentwrapper">
-        <form method="post" action="options.php">
+        <form method="post" id="adsense-rotator-form" action="options.php">
             <?php settings_fields('adsense-rotator-settings-group'); ?>
             <?php do_settings_sections('adsense-rotator-settings-group'); ?>
             <div id="ads_id" class="ads-tabcontent">

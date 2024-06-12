@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var container = document.getElementById('ad-units-container');
     var addButton = document.getElementById('add-ad-unit');
     var displaySlotIdCheckbox = document.getElementById('display_slot_id_enabled');
+    var form = document.getElementById('adsense-rotator-form');
+    var wordCountInput = document.getElementById('insert_ads_after_word_count');
 
     function toggleSlotIdInputs() {
         var display = displaySlotIdCheckbox.checked ? 'block' : 'none';
@@ -24,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         container.appendChild(div);
         updateCounter();
     });
+    
 
     function updateCounter() {
         var units = container.querySelectorAll('.ad-unit');
@@ -36,6 +39,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (e.target && e.target.classList.contains('remove-ad-unit')) {
             e.target.parentElement.remove();
             updateCounter();
+        }
+    });
+
+    form.addEventListener('submit', function() {
+        if (!wordCountInput.value || isNaN(wordCountInput.value) || wordCountInput.value <= 0) {
+            wordCountInput.value = 300;
         }
     });
 });

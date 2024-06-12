@@ -74,7 +74,7 @@ function display_adsense_ad_unit() {
     
     if ($selected_ad && !is_user_logged_in()) {
         ?>
-        <p><?php echo esc_attr($selected_ad['ad_unit']); ?><div class="slot-id-input"></div></p>
+        <p><?php echo esc_attr($selected_ad['ad_unit']); ?><div class="slot-id-input"><img src="https://images.unsplash.com/photo-1631270315847-f418bde47ca6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/></div></p>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>&amp;cachebuster=<?php echo time(); ?>" crossorigin="anonymous"></script>
         <?php
     }

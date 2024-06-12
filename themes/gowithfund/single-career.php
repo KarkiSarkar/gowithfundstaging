@@ -105,6 +105,7 @@ if (isset($_POST['submit'])) {
    
                     <form id="career-form" method="post" action="" enctype="multipart/form-data">
                     <?php the_title('<h1 class="entry-title" style="color: white;">Apply for ', '</h1>'); ?>
+                    <input type="hidden" name="form_id" value="career_application_form">
                         <p>
                             <label for="name">Name:</label>
                             <input type="text" id="name" name="name" required>
@@ -170,7 +171,7 @@ function handle_form_submission() {
         $file = isset($_FILES['file']) ? $_FILES['file'] : null;
 
         // Recipient email address
-        $recipient_email = 'recipient@example.com'; // Replace with your recipient email
+        $recipient_email = 'career@gowithfund.com'; // Replace with your recipient email
         global $post;
         $post_name = get_the_title($post->ID);
         $site_name = get_bloginfo('name');

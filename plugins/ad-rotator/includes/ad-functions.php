@@ -171,13 +171,15 @@ function insert_ads_after_words($content) {
         $ad_content = do_shortcode('[adsense_ad_with_slot_id]');
 
         $insertion_index = $word_count;
-        $skip_tag = false; // Flag to skip insertion within heading tags
+        $inside_heading = false; // Flag to skip insertion inside heading tags
         for ($i = 0; $i < $total_words; $i++) {
-            if ($skip_tag && preg_match('/<\/(h[1-6])>/', $words[$i])) {
-                $skip_tag = false; // End of heading tag, reset the flag
-            } elseif (!$skip_tag && preg_match('/<(h[1-6])>/', $words[$i])) {
-                $skip_tag = true; // Start of heading tag, set the flag
-            } elseif (!$skip_tag && $i >= $insertion_index) {
+            if (preg_match('/<(h[1-6])>/', $words[$i])) {
+                $inside_heading = true; // Start of heading tag, set the flag
+            } elseif (preg_match('/<\/(h[1-6])>/', $words[$i])) {
+                $inside_heading = false; // End of heading tag, reset the flag
+            }
+
+            if (!$inside_heading && $i >= $insertion_index) {
                 array_splice($words, $i, 0, $ad_content); // Insert ad content
                 $total_words = count($words); // Update total words count after insertion
                 $insertion_index += $word_count + 1; // Move insertion index to next word count + 1 to account for newly inserted ad

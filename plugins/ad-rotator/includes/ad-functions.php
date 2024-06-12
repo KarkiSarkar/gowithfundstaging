@@ -158,6 +158,8 @@ add_filter('the_content', 'insert_ads_after_post');
 // add_filter('the_content', 'insert_ads_after_paragraph');
 
 // Insert ads after specific word count in single posts
+// Insert ads after specific word count in single posts
+// Insert ads after specific word count in single posts
 function insert_ads_after_words($content) {
     if (is_single() && get_option('insert_ads_after_paragraph_enabled')) {
         $word_count = get_option('insert_ads_after_word_count', 25); // Default to 250 words if not set
@@ -166,33 +168,20 @@ function insert_ads_after_words($content) {
             $word_count = 25;
         }
 
-        // Remove HTML tags to count words accurately
-        $content_text = wp_strip_all_tags($content);
-        $words = preg_split('/\s+/', $content_text, -1, PREG_SPLIT_NO_EMPTY);
+        $words = explode(' ', $content);
         $total_words = count($words);
-        $ad_content = do_shortcode('[rotate_named_adsense_ads]');
+        $ad_content = do_shortcode('[adsense_ad_with_slot_id]');
 
-        // Insert ads after every word count interval
         for ($i = $word_count; $i < $total_words; $i += $word_count) {
             array_splice($words, $i, 0, $ad_content);
             $i += count(explode(' ', $ad_content)); // Adjust index for the inserted ad content
         }
 
-        // Reconstruct content with ads
-        $content_with_ads = implode(' ', $words);
-
-        // Restore original HTML structure
-        preg_match_all('/<(.*?)>/s', $content, $tags);
-        foreach ($tags[1] as $tag) {
-            $content_with_ads = preg_replace('/<' . $tag . '(.*?)>/', '<' . $tag . '$1>', $content_with_ads);
-        }
-
-        $content = $content_with_ads;
+        $content = implode(' ', $words);
     }
     return $content;
 }
 add_filter('the_content', 'insert_ads_after_words');
-
 
 
 

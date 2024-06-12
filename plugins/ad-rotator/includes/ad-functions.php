@@ -243,9 +243,9 @@ add_action('wp_head', 'insert_ads_in_header');
 
 function add_shortcode_to_sidebar($content) {
     // Add the shortcode at the beginning of the sidebar
-    $shortcode_before = '[rotate_named_adsense_ads]';
+    $shortcode_before = '[adsense_ad_with_slot_id]';
     // Add the shortcode at the end of the sidebar
-    $shortcode_after = '[rotate_named_adsense_ads]';
+    $shortcode_after = '[adsense_ad_with_slot_id]';
     
     // Append the shortcode at the beginning and end of the sidebar content
     $content = $shortcode_before . $content . $shortcode_after;

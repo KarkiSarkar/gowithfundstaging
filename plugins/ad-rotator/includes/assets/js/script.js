@@ -42,11 +42,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    form.addEventListener('submit', function() {
-        if (!wordCountInput.value || isNaN(wordCountInput.value) || wordCountInput.value <= 0) {
-            wordCountInput.value = 300;
-        }
-    });
+    // form.addEventListener('submit', function() {
+    //     if (!wordCountInput.value || isNaN(wordCountInput.value) || wordCountInput.value <= 0) {
+    //         wordCountInput.value = 300;
+    //     }
+    // });
 });
 
 

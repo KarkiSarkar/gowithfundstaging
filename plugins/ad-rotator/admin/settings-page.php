@@ -87,15 +87,7 @@
                             </label>
                         </td>
                     </tr>
-                    <tr valign="top">
-                        <th scope="row">Insert Ads in Footer</th>
-                        <td>
-                            <label class="ads-toggle-btn" for="insert_ads_in_footer_enabled">
-                                <input type="checkbox" id="insert_ads_in_footer_enabled" name="insert_ads_in_footer_enabled" value="1" <?php checked(1, get_option('insert_ads_in_footer_enabled'), true); ?> />
-                                <span class="ads-slider"></span>
-                            </label>
-                        </td>
-                    </tr>
+                   
                     <tr valign="top">
                         <th scope="row">Insert Ads in Before Sidebar</th>
                         <td>

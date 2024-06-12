@@ -44,7 +44,7 @@ function sanitize_slot_ids($input){
 function sanitize_word_count($input){
     $input = (int)$input;
     if ($input <= 0) {
-        $input = 100;
+        $input = 75;
     }
     return $input;
 }

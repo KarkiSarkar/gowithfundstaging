@@ -162,10 +162,10 @@ add_filter('the_content', 'insert_ads_after_post');
 // Insert ads after specific word count in single posts
 function insert_ads_after_words($content) {
     if (is_single() && get_option('insert_ads_after_paragraph_enabled')) {
-        $word_count = get_option('insert_ads_after_word_count', 100);
+        $word_count = get_option('insert_ads_after_word_count', 75);
         $word_count = (int)$word_count;
         if ($word_count <= 0) {
-            $word_count = 100;
+            $word_count = 75;
         }
 
         $words = preg_split('/\s+/', $content);

@@ -16,7 +16,7 @@ function adsense_rotator_settings() {
     register_setting('adsense-rotator-settings-group', 'display_slot_id_enabled');
     register_setting('adsense-rotator-settings-group', 'insert_ads_in_footer_enabled');
     register_setting('adsense-rotator-settings-group', 'insert_ads_after_post_enabled');
-    register_setting('adsense-rotator-settings-group', 'insert_ads_after_word_count');
+    register_setting('adsense-rotator-settings-group', 'insert_ads_after_word_count', 'sanitize_word_count');
 
 
 }
@@ -40,4 +40,13 @@ function sanitize_slot_ids($input){
     }
     return $input;
 }
+
+function sanitize_word_count($input){
+    $input = (int)$input;
+    if ($input <= 0) {
+        $input = 250; // Default to 250 if the input is not valid
+    }
+    return $input;
+}
+
 ?>

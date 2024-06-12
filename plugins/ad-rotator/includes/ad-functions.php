@@ -169,7 +169,7 @@ function insert_ads_after_words($content) {
 
         $words = explode(' ', $content);
         if (count($words) > $word_count) {
-            $ad_content = do_shortcode('[rotate_named_adsense_ads]');
+            $ad_content = do_shortcode('[adsense_ad_with_slot_id]');
             array_splice($words, $word_count, 0, $ad_content);
             $content = implode(' ', $words);
         }

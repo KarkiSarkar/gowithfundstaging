@@ -157,17 +157,24 @@ add_filter('the_content', 'insert_ads_after_post');
 // }
 // add_filter('the_content', 'insert_ads_after_paragraph');
 
-// Insert ads after specific word count in single posts
-// Insert ads after specific word count in single posts
-// Insert ads after specific word count in single posts
 function insert_ads_after_words($content) {
     if (is_single() && get_option('insert_ads_after_paragraph_enabled')) {
-        $word_count = get_option('insert_ads_after_word_count', 75);
+        $word_count = get_option('insert_ads_after_word_count', 25); // Default to 25 words if not set
         $word_count = (int)$word_count;
         if ($word_count <= 0) {
-            $word_count = 75;
+            $word_count = 25;
         }
 
+        // Define tags to exclude from ad insertion
+        $exclude_tags = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+
+        // Remove content within excluded tags
+        foreach ($exclude_tags as $tag) {
+            $pattern = '/<' . $tag . '.*?' . '>.*?<\/' . $tag . '>/s';
+            $content = preg_replace($pattern, '', $content);
+        }
+
+        // Split content into words using any whitespace characters
         $words = preg_split('/\s+/', $content);
         $total_words = count($words);
         $ad_content = do_shortcode('[adsense_ad_with_slot_id]');
@@ -179,19 +186,11 @@ function insert_ads_after_words($content) {
             $insertion_index += $word_count + 1; // Move insertion index to next word count + 1 to account for newly inserted ad
         }
 
-        preg_match_all('/<(h[1-6])[^>]*>/', $content, $html_tags);
-        $content_with_tags = implode(' ', $words);
-        foreach ($html_tags[0] as $tag) {
-            $content_with_tags = preg_replace('/\s(' . preg_quote($tag, '/') . ')/', $tag, $content_with_tags);
-        }
-
-        $content = $content_with_tags;
+        $content = implode(' ', $words);
     }
     return $content;
 }
 add_filter('the_content', 'insert_ads_after_words');
-
-
 
 
 

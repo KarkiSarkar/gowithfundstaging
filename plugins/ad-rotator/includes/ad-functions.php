@@ -284,14 +284,14 @@ add_action('wp_head', 'insert_ads_in_header');
 
 function add_shortcode_before_sidebar() {
    
-        echo do_shortcode('[rotate_named_adsense_ads]');
+        echo do_shortcode('[adsense_ad_with_slot_id]');
     
 }
 add_action('dynamic_sidebar_before', 'add_shortcode_before_sidebar');
 
 function add_shortcode_after_sidebar() {
    
-        echo do_shortcode('[rotate_named_adsense_ads]');
+        echo do_shortcode('[adsense_ad_with_slot_id]');
     
 }
 add_action('dynamic_sidebar_after', 'add_shortcode_after_sidebar');

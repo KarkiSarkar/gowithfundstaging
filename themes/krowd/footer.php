@@ -71,35 +71,6 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-0ZCYSLL5K1');
-<<<<<<< HEAD
-</script><!-- Load Facebook SDK for JavaScript -->
-<div id="fb-root"></div>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId            : '764878905858713', // Replace 'YOUR_APP_ID' with your actual Facebook App ID
-      autoLogAppEvents : true,
-      xfbml            : true,
-      version          : 'v9.0'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<!-- Your customer chat code -->
-<div class="fb-customerchat"
-     attribution=setup_tool
-     page_id="1686357274985685">
-</div>
-
-=======
 </script>
 <div id="fb-root"></div>
 
@@ -128,7 +99,6 @@
 	fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
->>>>>>> origin/master
 <?php wp_footer(); ?>
 </body>
 </html>

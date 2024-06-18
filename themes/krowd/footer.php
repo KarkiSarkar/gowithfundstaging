@@ -74,28 +74,6 @@
 </script>
 
 
-<div id="fb-root"></div>
-<div id="fb-customer-chat" class="fb-customerchat"></div>
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      xfbml            : true,
-      version          : 'v10.0'  // or the latest version you are using
-    });
-  };
-
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-  document.getElementById('fb-customer-chat').setAttribute("page_id", "1686357274985685");
-  document.getElementById('fb-customer-chat').setAttribute("attribution", "biz_inbox");
-</script>
 
 
 <?php wp_footer(); ?>

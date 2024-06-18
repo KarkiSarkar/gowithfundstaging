@@ -78,7 +78,7 @@
 
 <script>
   var chatbox = document.getElementById('fb-customer-chat');
-  chatbox.setAttribute("page_id", "YOUR-PAGE-ID");  // Replace with your Facebook Page ID
+  chatbox.setAttribute("page_id", "764878905858713");  // Replace with your Facebook Page ID
   chatbox.setAttribute("attribution", "biz_inbox");
 </script>
 

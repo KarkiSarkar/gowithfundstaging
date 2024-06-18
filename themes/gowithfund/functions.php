@@ -300,5 +300,103 @@ function save_career_meta_boxes_data( $post_id ) {
 add_action( 'save_post', 'save_career_meta_boxes_data' );
 
 
+function register_shortcode_widget() {
+    register_widget('Shortcode_Widget');
+}
+add_action('widgets_init', 'register_shortcode_widget');
+class Shortcode_Widget extends WP_Widget {
+    // Constructor
+    public function __construct() {
+        parent::__construct(
+            'shortcode_widget', // Base ID
+            'Shortcode Widget', // Name
+            array('description' => __('A widget that displays a shortcode', 'text_domain'))
+        );
+    }
+
+    // Widget form creation
+    public function form($instance) {
+        if (isset($instance['shortcode'])) {
+            $shortcode = $instance['shortcode'];
+        } else {
+            $shortcode = __('[your_shortcode]', 'text_domain');
+        }
+        ?>
+        <p>
+            <label for="<?php echo $this->get_field_id('shortcode'); ?>"><?php _e('Shortcode:'); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id('shortcode'); ?>" name="<?php echo $this->get_field_name('shortcode'); ?>" type="text" value="<?php echo esc_attr($shortcode); ?>" />
+        </p>
+        <?php
+    }
+
+    // Widget update
+    public function update($new_instance, $old_instance) {
+        $instance = array();
+        $instance['shortcode'] = (!empty($new_instance['shortcode'])) ? strip_tags($new_instance['shortcode']) : '';
+        return $instance;
+    }
+
+    // Widget display
+    public function widget($args, $instance) {
+        echo $args['before_widget'];
+
+        if (!empty($instance['shortcode'])) {
+            echo do_shortcode($instance['shortcode']);
+        }
+
+        echo $args['after_widget'];
+    }
+}
+
+function register_facebook_messenger_widget() {
+    register_widget('Facebook_Messenger_Widget');
+}
+add_action('widgets_init', 'register_facebook_messenger_widget');
+class Facebook_Messenger_Widget extends WP_Widget {
+    // Constructor
+    public function __construct() {
+        parent::__construct(
+            'facebook_messenger_widget', // Base ID
+            'Facebook Messenger Widget', // Name
+            array('description' => __('A widget that links to Facebook Messenger', 'text_domain'))
+        );
+    }
+
+    // Widget form creation
+    public function form($instance) {
+        $page_id = !empty($instance['page_id']) ? $instance['page_id'] : __('1686357274985685', 'text_domain');
+        $button_text = !empty($instance['button_text']) ? $instance['button_text'] : __('Chat with us on Messenger', 'text_domain');
+        ?>
+        <p>
+            <label for="<?php echo $this->get_field_id('page_id'); ?>"><?php _e('Facebook Page ID:'); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id('page_id'); ?>" name="<?php echo $this->get_field_name('page_id'); ?>" type="text" value="<?php echo esc_attr($page_id); ?>" />
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('button_text'); ?>"><?php _e('Button Text:'); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id('button_text'); ?>" name="<?php echo $this->get_field_name('button_text'); ?>" type="text" value="<?php echo esc_attr($button_text); ?>" />
+        </p>
+        <?php
+    }
+
+    // Widget update
+    public function update($new_instance, $old_instance) {
+        $instance = array();
+        $instance['page_id'] = (!empty($new_instance['page_id'])) ? strip_tags($new_instance['page_id']) : '';
+        $instance['button_text'] = (!empty($new_instance['button_text'])) ? strip_tags($new_instance['button_text']) : '';
+        return $instance;
+    }
+
+    // Widget display
+    public function widget($args, $instance) {
+        echo $args['before_widget'];
+
+        $page_id = !empty($instance['page_id']) ? $instance['page_id'] : '1686357274985685';
+        $button_text = !empty($instance['button_text']) ? $instance['button_text'] : __('Chat with us on Messenger', 'text_domain');
+
+        echo '<a href="https://m.me/' . esc_attr($page_id) . '" target="_blank" class="facebook-messenger-button">' . esc_html($button_text) . '</a>';
+
+        echo $args['after_widget'];
+    }
+}
 
 ?>

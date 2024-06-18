@@ -297,53 +297,5 @@ function add_shortcode_after_sidebar() {
 add_action('dynamic_sidebar_after', 'add_shortcode_after_sidebar');
 
 
-function register_shortcode_widget() {
-    register_widget('Shortcode_Widget');
-}
-add_action('widgets_init', 'register_shortcode_widget');
-class Shortcode_Widget extends WP_Widget {
-    // Constructor
-    public function __construct() {
-        parent::__construct(
-            'shortcode_widget', // Base ID
-            'Shortcode Widget', // Name
-            array('description' => __('A widget that displays a shortcode', 'text_domain'))
-        );
-    }
-
-    // Widget form creation
-    public function form($instance) {
-        if (isset($instance['shortcode'])) {
-            $shortcode = $instance['shortcode'];
-        } else {
-            $shortcode = __('[your_shortcode]', 'text_domain');
-        }
-        ?>
-        <p>
-            <label for="<?php echo $this->get_field_id('shortcode'); ?>"><?php _e('Shortcode:'); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id('shortcode'); ?>" name="<?php echo $this->get_field_name('shortcode'); ?>" type="text" value="<?php echo esc_attr($shortcode); ?>" />
-        </p>
-        <?php
-    }
-
-    // Widget update
-    public function update($new_instance, $old_instance) {
-        $instance = array();
-        $instance['shortcode'] = (!empty($new_instance['shortcode'])) ? strip_tags($new_instance['shortcode']) : '';
-        return $instance;
-    }
-
-    // Widget display
-    public function widget($args, $instance) {
-        echo $args['before_widget'];
-
-        if (!empty($instance['shortcode'])) {
-            echo do_shortcode($instance['shortcode']);
-        }
-
-        echo $args['after_widget'];
-    }
-}
-
 
 ?>

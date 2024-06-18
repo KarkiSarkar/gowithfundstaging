@@ -73,31 +73,17 @@
   gtag('config', 'G-0ZCYSLL5K1');
 </script>
 <div id="fb-root"></div>
-
-<div id="fb-customer-chat" class="fb-customerchat"></div>
-
-<script>
-  var chatbox = document.getElementById('fb-customer-chat');
-  chatbox.setAttribute("page_id", "764878905858713");  // Replace with your Facebook Page ID
-  chatbox.setAttribute("attribution", "biz_inbox");
-</script>
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      xfbml            : true,
-      version          : 'v10.0'  // Replace with the latest API version or the version you need
-    });
-  };
-
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0" nonce="YOUR_NONCE_VALUE"></script>
+<div class="fb-page" 
+     data-href="https://www.facebook.com/jobsineuropegowithfund/"
+     data-tabs="messages" 
+     data-width="" 
+     data-height="" 
+     data-small-header="false" 
+     data-adapt-container-width="true" 
+     data-hide-cover="false"
+     data-show-facepile="true">
+</div>
 
 <?php wp_footer(); ?>
 </body>

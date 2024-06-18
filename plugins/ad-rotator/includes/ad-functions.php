@@ -283,16 +283,16 @@ function insert_ads_in_header() {
 add_action('wp_head', 'insert_ads_in_header');
 
 function add_shortcode_before_sidebar() {
-   
+    if (is_single() && get_option('insert_ads_before_sidebar_enabled')) {
         echo do_shortcode('[adsense_ad_with_slot_id]');
-    
+    }
 }
 add_action('dynamic_sidebar_before', 'add_shortcode_before_sidebar');
 
 function add_shortcode_after_sidebar() {
-   
+   if (is_single() && get_option('insert_ads_after_sidebar_enabled')) {
         echo do_shortcode('[adsense_ad_with_slot_id]');
-    
+   }
 }
 add_action('dynamic_sidebar_after', 'add_shortcode_after_sidebar');
 

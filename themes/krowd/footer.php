@@ -72,10 +72,6 @@
   gtag('js', new Date());
   gtag('config', 'G-0ZCYSLL5K1');
 </script>
-<?php
-// Place this code in your theme's footer.php file just before the closing </body> tag
-?>
-
 <!-- Load Facebook SDK for JavaScript -->
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js"></script>

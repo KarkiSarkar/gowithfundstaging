@@ -72,18 +72,6 @@
   gtag('js', new Date());
   gtag('config', 'G-0ZCYSLL5K1');
 </script>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0" nonce="YOUR_NONCE_VALUE"></script>
-<div class="fb-page" 
-     data-href="https://www.facebook.com/jobsineuropegowithfund/"
-     data-tabs="messages" 
-     data-width="" 
-     data-height="" 
-     data-small-header="false" 
-     data-adapt-container-width="true" 
-     data-hide-cover="false"
-     data-show-facepile="true">
-</div>
 
 <?php wp_footer(); ?>
 </body>

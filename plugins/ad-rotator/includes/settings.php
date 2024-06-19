@@ -19,6 +19,7 @@ function adsense_rotator_settings() {
     register_setting('adsense-rotator-settings-group', 'insert_ads_after_word_count', 'sanitize_word_count');
     register_setting('adsense-rotator-settings-group', 'insert_ads_before_sidebar_enabled');
     register_setting('adsense-rotator-settings-group', 'insert_ads_after_sidebar_enabled');
+    register_setting('adsense-rotator-settings-group', 'insert_ads_in_between_content_enabled');
 
 }
 

@@ -297,7 +297,9 @@ function add_shortcode_after_sidebar() {
 add_action('dynamic_sidebar_after', 'add_shortcode_after_sidebar');
 
 function insert_content_after_third_post() {
-    // Check if we are on the main blog page and in the main query
+    if (get_option('insert_ads_after_sidebar_enabled')) {
+        
+   
    if (!is_front_page() && !is_page(array('about', 'contact')) && !is_single() && is_main_query()) {
         // Increment post counter
         if (in_the_loop() && is_main_query()) {
@@ -314,6 +316,7 @@ function insert_content_after_third_post() {
             }
         }
    }
+}
 }
 add_action('the_post', 'insert_content_after_third_post');
 

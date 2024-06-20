@@ -210,15 +210,15 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 }
 ?>
 <div <?php wc_product_class( '', $product ); ?>>
-    <div style="display: flex; justify-content: space-between; width: 20%;" class="container custom-donate-section ">
-        <!-- <div style="display: flex;">
-            <div style="height: 100px; width: 100px;">
-                <?php //echo woocommerce_get_product_thumbnail(); ?>
+    <div style="display: flex; justify-content: space-between; width: 30%;" class="container custom-donate-section ">
+        <div style="display: flex;">
+            <div style="height: 50px; width: 50px;">
+                <?php echo woocommerce_get_product_thumbnail(); ?>
             </div>
             <div>
-                <h2 class="woocommerce-loop-product__title"><?php //echo $product->get_name(); ?></h2>
+                <p class="woocommerce-loop-product__title"><?php echo $product->get_name(); ?></p>
             </div>
-        </div> -->
+        </div>
         <div>
 		<form class="cart" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post" enctype="multipart/form-data">
                 <button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="single_add_to_cart_button button alt">Donate</button>

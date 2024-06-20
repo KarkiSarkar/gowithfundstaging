@@ -216,7 +216,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
                 <?php echo woocommerce_get_product_thumbnail(); ?>
             </div>
             <div>
-                <p class="woocommerce-loop-product__title" style="font-size: 10px; padding-left: 14px; font-weight: 600;"><?php echo $product->get_name(); ?></p>
+                <p class="woocommerce-loop-product__title"><?php echo $product->get_name(); ?></p>
             </div>
         </div>
         <div>
@@ -227,7 +227,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
     </div>
 </div>
 <style>
-   @media only screen and (max-width: 1000px) {
+   @media only screen and (max-width: 800px) {
       .additiobnal{
          display: flex!important; 
          justify-content: space-between!important; 
@@ -235,6 +235,11 @@ if ( empty( $product ) || ! $product->is_visible() ) {
          box-shadow: 2px 2px 5px #00A9A5!important;
          width: 100%!important;
       }
+      .woocommerce-loop-product__title{
+      font-size: 18px; 
+      padding-left: 10px; 
+      font-weight: 600;
+   }
       .custom-donate-section {
   
     position: fixed!important;
@@ -246,6 +251,11 @@ if ( empty( $product ) || ! $product->is_visible() ) {
     z-index: 9999!important;
 }
    }  
+   .woocommerce-loop-product__title{
+      font-size: 12px; 
+      padding-left: 10px; 
+      font-weight: 600;
+   }
    .additiobnal{
       display: flex; 
       justify-content: space-between; 

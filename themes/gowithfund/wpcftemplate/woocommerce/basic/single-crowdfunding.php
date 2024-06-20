@@ -210,13 +210,13 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 }
 ?>
 <div <?php wc_product_class( '', $product ); ?>>
-    <div style="display: flex; justify-content: space-between; width: 20%; border: 1px solid #00A9A5; box-shadow: 2px 2px 5px #00A9A5;" class="container custom-donate-section ">
+    <div style="display: flex; justify-content: space-between; width: 20%; border: 3px solid #00A9A5; box-shadow: 2px 2px 5px #00A9A5;" class="container custom-donate-section ">
         <div style="display: flex;">
             <div style="height: 50px; width: 50px;">
                 <?php echo woocommerce_get_product_thumbnail(); ?>
             </div>
             <div>
-                <p class="woocommerce-loop-product__title" style="font-size: 10px; padding-left: 10px;"><?php echo $product->get_name(); ?></p>
+                <p class="woocommerce-loop-product__title" style="font-size: 10px; padding-left: 12px;"><?php echo $product->get_name(); ?></p>
             </div>
         </div>
         <div>

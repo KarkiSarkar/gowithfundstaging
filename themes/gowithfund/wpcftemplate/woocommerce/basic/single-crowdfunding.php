@@ -231,7 +231,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
     display: none; /* Initially hidden */
     position: fixed;
     bottom: 10px;
-    right: 10px;
+    right: 100px;
     background: white;
     padding: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);

@@ -247,7 +247,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 }
    }  
    .additiobnal{
-      display: flex!important; 
+      display: flex; 
       justify-content: space-between; 
       border: 3px solid #00A9A5; 
       width: 25%!important;

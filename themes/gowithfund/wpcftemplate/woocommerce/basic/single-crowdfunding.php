@@ -216,7 +216,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
                 <?php echo woocommerce_get_product_thumbnail(); ?>
             </div>
             <div>
-                <p class="woocommerce-loop-product__title" style="width: 50%"><?php echo $product->get_name(); ?></p>
+                <p class="woocommerce-loop-product__title" style="width: 50%; font-size: 10px;"><?php echo $product->get_name(); ?></p>
             </div>
         </div>
         <div>

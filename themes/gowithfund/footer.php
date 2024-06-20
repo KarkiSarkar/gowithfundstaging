@@ -11,7 +11,16 @@
 	</div><!--end page content-->
 	
 </div><!-- End page -->
+<?php
+defined( 'ABSPATH' ) || exit;
 
+global $product;
+
+// Ensure visibility.
+if ( empty( $product ) || ! $product->is_visible() ) {
+    return;
+}
+?>
 <div <?php wc_product_class( '', $product ); ?>>
     <div style="display: flex; justify-content: space-between;" class="container custom-donate-section ">
         <div style="display: flex;">

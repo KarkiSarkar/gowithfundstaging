@@ -235,7 +235,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
          box-shadow: 2px 2px 5px #00A9A5!important;
       }
       .custom-donate-section {
-    display: none!important; /* Initially hidden */
+  
     position: fixed!important;
     bottom: 0px!important;
     right: 0px!important;

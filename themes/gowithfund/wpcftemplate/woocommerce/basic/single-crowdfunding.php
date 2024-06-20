@@ -250,7 +250,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
       display: flex; 
       justify-content: space-between; 
       border: 3px solid #00A9A5; 
-      width: 25%!important;
+      width: 25%;
       box-shadow: 2px 2px 5px #00A9A512;
    }
 	.custom-donate-section {

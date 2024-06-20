@@ -229,20 +229,20 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 <style>
    @media only screen and (max-width: 600px) {
       .additiobnal{
-         display: flex; 
-         justify-content: space-between; 
-         border: 1px solid #00A9A5; 
-         box-shadow: 2px 2px 5px #00A9A5;
+         display: flex!important; 
+         justify-content: space-between!important; 
+         border: 1px solid #00A9A5!important; 
+         box-shadow: 2px 2px 5px #00A9A5!important;
       }
       .custom-donate-section {
-    display: none; /* Initially hidden */
-    position: fixed;
-    bottom: 0px;
-    right: 0px;
-    background: white;
-    padding: 10px;
+    display: none!important; /* Initially hidden */
+    position: fixed!important;
+    bottom: 0px!important;
+    right: 0px!important;
+    background: white!important;
+    padding: 10px!important;
     
-    z-index: 9999;
+    z-index: 9999!important;
 }
    }  
    .additiobnal{

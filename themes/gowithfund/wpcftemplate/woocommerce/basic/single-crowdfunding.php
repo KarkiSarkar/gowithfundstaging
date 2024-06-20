@@ -230,7 +230,6 @@ if ( empty( $product ) || ! $product->is_visible() ) {
    .additiobnal{
       display: flex; 
       justify-content: space-between; 
-      width: 20%; 
       border: 3px solid #00A9A5; 
       box-shadow: 2px 2px 5px #00A9A5;
    }

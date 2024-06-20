@@ -210,7 +210,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 }
 ?>
 <div <?php wc_product_class( '', $product ); ?>>
-    <div style="display: flex; justify-content: space-between; width: 20%; border: 1px solid red;" class="container custom-donate-section ">
+    <div style="display: flex; justify-content: space-between; width: 20%; border: 1px solid red; box-shadow: 2px 2px 2px red" class="container custom-donate-section ">
         <div style="display: flex;">
             <div style="height: 50px; width: 50px;">
                 <?php echo woocommerce_get_product_thumbnail(); ?>

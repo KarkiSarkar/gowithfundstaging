@@ -229,7 +229,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 <style>
    @media only screen and (max-width: 800px) {
       .additiobnal{
-         display: flex!important; 
+         display: flex; 
          justify-content: space-between!important; 
          border: 1px solid #00A9A5!important; 
          box-shadow: 2px 2px 5px #00A9A5!important;

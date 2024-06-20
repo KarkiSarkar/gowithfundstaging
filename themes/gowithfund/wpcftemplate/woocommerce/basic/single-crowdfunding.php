@@ -236,7 +236,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
          width: 100%!important;
       }
       .woocommerce-loop-product__title{
-      font-size: 18px; 
+      font-size: 12px; 
       padding-left: 10px; 
       font-weight: 600;
    }
@@ -252,7 +252,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 }
    }  
    .woocommerce-loop-product__title{
-      font-size: 12px; 
+      font-size: 18px; 
       padding-left: 10px; 
       font-weight: 600;
    }

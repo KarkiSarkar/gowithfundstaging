@@ -32,7 +32,9 @@ if ( empty( $product ) || ! $product->is_visible() ) {
             </div>
         </div>
         <div>
-            <button class="single_add_to_cart_button pitch_deck_url">Donate</button>
+		<form class="cart" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post" enctype="multipart/form-data">
+                <button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="single_add_to_cart_button button alt">Donate</button>
+            </form>
         </div>
     </div>
 </div>
@@ -51,10 +53,10 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 <script>
 	jQuery(document).ready(function($) {
     // Listen for the click event on the Add to Cart button
-    $(document).on('click', '.single_add_to_cart_button', function() {
-        // Trigger a click on the custom button
-        $('.wpneo_donate_button').click();
-    });
+    // $(document).on('click', '.single_add_to_cart_button', function() {
+    //     // Trigger a click on the custom button
+    //     $('.wpneo_donate_button').click();
+    // });
 
     function isElementInViewport(el) {
         var rect = el.getBoundingClientRect();
@@ -82,7 +84,13 @@ if ( empty( $product ) || ! $product->is_visible() ) {
     // Check visibility on scroll and on page load
     $(window).on('scroll', checkVisibility);
     $(window).on('load', checkVisibility);
-
+	$(document).on('submit', '.cart', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+        var form = $(this);
+        $.post(form.attr('action'), form.serialize(), function(response) {
+            window.location.href = "<?php echo esc_url( wc_get_checkout_url() ); ?>"; // Redirect to checkout page
+        });
+    });
 	
 });
 

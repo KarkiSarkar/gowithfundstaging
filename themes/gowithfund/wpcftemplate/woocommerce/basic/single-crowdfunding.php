@@ -227,7 +227,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
     </div>
 </div>
 <style>
-   @media only screen and (max-width: 600px) {
+   @media only screen and (max-width: 1000px) {
       .additiobnal{
          display: flex!important; 
          justify-content: space-between!important; 
@@ -250,7 +250,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
       display: flex; 
       justify-content: space-between; 
       border: 3px solid #00A9A5; 
-      width: 25%;
+      width: 35%;
       box-shadow: 2px 2px 5px #00A9A512;
    }
 	.custom-donate-section {

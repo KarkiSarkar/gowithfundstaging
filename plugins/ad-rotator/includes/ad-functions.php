@@ -72,7 +72,7 @@ function get_selected_ad_unit_and_slot() {
 function display_adsense_ad_unit() {
     $selected_ad = get_selected_ad_unit_and_slot();
     
-    if ($selected_ad && !is_user_logged_in()) {
+    if ($selected_ad) {
         ?>
          
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>&amp;cachebuster=<?php echo time(); ?>" crossorigin="anonymous"></script>
@@ -90,7 +90,7 @@ function display_adsense_ad_unit_with_slot_id() {
     }
     
     $selected_ad = get_selected_ad_unit_and_slot();
-    if ($selected_ad && !is_user_logged_in()) {
+    if ($selected_ad) {
         ob_start();
         ?>
        <div align="center" style="clear: both;">

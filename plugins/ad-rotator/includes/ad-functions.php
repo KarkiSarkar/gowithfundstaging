@@ -308,6 +308,7 @@ function insert_content_after_third_post() {
                   // Check if it's the 3rd post
                 if ($post_counter > $total_posts && ($post_counter - 3) % 3 == 0) {
                     echo do_shortcode('[adsense_ad_with_slot_id]');
+                    echo $total_posts;
                 }
             }
        }

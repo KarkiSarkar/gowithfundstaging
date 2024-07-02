@@ -293,27 +293,27 @@ function add_shortcode_after_sidebar() {
 }
 add_action('dynamic_sidebar_after', 'add_shortcode_after_sidebar');
 
-function insert_content_after_third_post() {
-    if (get_option('insert_ads_in_between_content_enabled')) {
-       if (!is_front_page() && !is_page(array('about', 'contact')) && !is_single() && is_main_query()) {
-            // Increment post counter
-            if (in_the_loop() && is_main_query()) {
-                global $post_counter;
-                if (!isset($post_counter)) {
-                    $post_counter = 0;
-                }
-                $post_counter++;
+// function insert_content_after_third_post() {
+//     if (get_option('insert_ads_in_between_content_enabled')) {
+//        if (!is_front_page() && !is_page(array('about', 'contact')) && !is_single() && is_main_query()) {
+//             // Increment post counter
+//             if (in_the_loop() && is_main_query()) {
+//                 global $post_counter;
+//                 if (!isset($post_counter)) {
+//                     $post_counter = 0;
+//                 }
+//                 $post_counter++;
         
-                // Check if it's the 3rd post
-                  // Check if it's the 3rd post
-                if (($post_counter - 1) % 3 == 0) {
-                    echo do_shortcode('[adsense_ad_with_slot_id]');
-                }
-            }
-       }
-    }
-}
-add_action('the_post', 'insert_content_after_third_post');
+//                 // Check if it's the 3rd post
+//                   // Check if it's the 3rd post
+//                 if (($post_counter - 1) % 3 == 0) {
+//                     echo do_shortcode('[adsense_ad_with_slot_id]');
+//                 }
+//             }
+//        }
+//     }
+// }
+// add_action('the_post', 'insert_content_after_third_post');
 
 // // Add shortcode after the navbar
 // function add_content_after_top_nav() {

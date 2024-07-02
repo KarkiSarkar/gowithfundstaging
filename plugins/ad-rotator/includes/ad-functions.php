@@ -298,16 +298,17 @@ function insert_content_after_third_post() {
        if (!is_front_page() && !is_page(array('about', 'contact')) && !is_single() && is_main_query()) {
             // Increment post counter
             if (in_the_loop() && is_main_query()) {
-                global $post_counter;
+                global $post_counter, $wp_query;
                 if (!isset($post_counter)) {
                     $post_counter = 0;
                 }
                 $post_counter++;
-        
+                $total_posts = $wp_query->found_posts;
                 // Check if it's the 3rd post
                   // Check if it's the 3rd post
                 if ($post_counter > 10 && ($post_counter - 3) % 3 == 0) {
                     echo do_shortcode('[adsense_ad_with_slot_id]');
+                    echo $total_posts;
                 }
             }
        }

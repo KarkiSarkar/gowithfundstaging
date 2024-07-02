@@ -293,26 +293,66 @@ function add_shortcode_after_sidebar() {
 }
 add_action('dynamic_sidebar_after', 'add_shortcode_after_sidebar');
 
+// function insert_content_after_third_post() {
+//     if (get_option('insert_ads_in_between_content_enabled')) {
+//        if (!is_front_page() && !is_page(array('about', 'contact')) && !is_single() && is_main_query()) {
+//             // Increment post counter
+//             if (in_the_loop() && is_main_query()) {
+//                 global $post_counter;
+//                 if (!isset($post_counter)) {
+//                     $post_counter = 0;
+//                 }
+//                 $post_counter++;
+        
+//                 // Check if it's the 3rd post
+//                   // Check if it's the 3rd post
+//                 if ($post_counter > 10 && ($post_counter - 3) % 3 == 0) {
+//                     echo do_shortcode('[adsense_ad_with_slot_id]');
+//                 }
+//             }
+//        }
+//     }
+// }
+// add_action('the_post', 'insert_content_after_third_post');
 function insert_content_after_third_post() {
     if (get_option('insert_ads_in_between_content_enabled')) {
-       if (!is_front_page() && !is_page(array('about', 'contact')) && !is_single() && is_main_query()) {
-            // Increment post counter
+        // Handle regular posts
+        if (!is_front_page() && !is_page(array('about', 'contact')) && !is_single() && is_main_query() && !is_post_type_archive('product')) {
             if (in_the_loop() && is_main_query()) {
                 global $post_counter;
                 if (!isset($post_counter)) {
                     $post_counter = 0;
                 }
                 $post_counter++;
-        
-                // Check if it's the 3rd post
-                  // Check if it's the 3rd post
-                if ($post_counter > 10 && ($post_counter - 3) % 3 == 0) {
+
+                // Show ad after the 3rd post and then after every 3 posts
+                if ($post_counter > 2 && ($post_counter - 3) % 3 == 0) {
                     echo do_shortcode('[adsense_ad_with_slot_id]');
                 }
             }
-       }
+        }
+
+        // Handle WooCommerce products
+        if (is_post_type_archive('product') || is_product_category() || is_product_tag()) {
+            add_action('woocommerce_shop_loop_item_title', 'insert_ad_in_product_loop', 9);
+        }
     }
 }
+
+function insert_ad_in_product_loop() {
+    global $woocommerce_loop;
+
+    if (!isset($woocommerce_loop['product_counter'])) {
+        $woocommerce_loop['product_counter'] = 0;
+    }
+    $woocommerce_loop['product_counter']++;
+
+    // Show ad after the 3rd product and then after every 3 products
+    if ($woocommerce_loop['product_counter'] > 2 && ($woocommerce_loop['product_counter'] - 3) % 3 == 0) {
+        echo do_shortcode('[adsense_ad_with_slot_id]');
+    }
+}
+
 add_action('the_post', 'insert_content_after_third_post');
 
 // // Add shortcode after the navbar

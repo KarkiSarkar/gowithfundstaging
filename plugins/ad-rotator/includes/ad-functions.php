@@ -95,6 +95,8 @@ function display_adsense_ad_unit_with_slot_id() {
         ?>
        <div align="center" style="clear: both;">
             <p>Sponsered Link</p>
+            <p><?php echo esc_html($selected_ad['ad_unit']); ?></p>
+            <p><?php echo esc_html($selected_ad['slot_id']); ?></p>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo $selected_ad['ad_unit']; ?>" crossorigin="anonymous"></script>
         <ins class="adsbygoogle"
             style="display:block; width: 100%;"

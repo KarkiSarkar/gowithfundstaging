@@ -74,7 +74,7 @@ function display_adsense_ad_unit() {
     
     if ($selected_ad) {
         ?>
-         
+          <p><?php echo esc_html($selected_ad['ad_unit']); ?></p>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>&amp;cachebuster=<?php echo time(); ?>" crossorigin="anonymous"></script>
         <?php
     }

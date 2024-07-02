@@ -72,9 +72,9 @@ function get_selected_ad_unit_and_slot() {
 function display_adsense_ad_unit() {
     $selected_ad = get_selected_ad_unit_and_slot();
     
-    if ($selected_ad && !is_user_logged_in()) {
+    if ($selected_ad) {
         ?>
-       
+        <p><?php echo esc_attr($selected_ad['ad_unit']); ?><div class="slot-id-input"></div></p>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>&amp;cachebuster=<?php echo time(); ?>" crossorigin="anonymous"></script>
         <?php
     }
@@ -90,11 +90,14 @@ function display_adsense_ad_unit_with_slot_id() {
     }
     
     $selected_ad = get_selected_ad_unit_and_slot();
-    if ($selected_ad && !is_user_logged_in()) {
+    if ($selected_ad ) {
         ob_start();
         ?>
-        <div align="center">
-            <p>Sponsered Link</p>
+        <p>
+            <?php echo esc_attr($selected_ad['ad_unit']); ?>
+            <div class="slot-id-input"><?php echo esc_attr($selected_ad['slot_id']); ?></div>
+            <img width="300" src="https://images.unsplash.com/photo-1631270315847-f418bde47ca6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+        </p>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo esc_attr($selected_ad['ad_unit']); ?>"
             crossorigin="anonymous"></script>
         <ins class="adsbygoogle"
@@ -106,7 +109,6 @@ function display_adsense_ad_unit_with_slot_id() {
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
-        </div>
         <?php
         return ob_get_clean();
     }
@@ -280,82 +282,24 @@ function insert_ads_in_header() {
 }
 add_action('wp_head', 'insert_ads_in_header');
 
-// function add_shortcode_before_sidebar() {
-   
-//         echo do_shortcode('[adsense_ad_with_slot_id]');
-    
-// }
-// add_action('dynamic_sidebar_before', 'add_shortcode_before_sidebar');
-
-// function add_shortcode_after_sidebar() {
-   
-//         echo do_shortcode('[adsense_ad_with_slot_id]');
-    
-// }
-// add_action('dynamic_sidebar_after', 'add_shortcode_after_sidebar');
-
-class Shortcode_Ad_Widget extends WP_Widget {
-    
-    // Constructor
-    public function __construct() {
-        parent::__construct(
-            'shortcode_ad_widget', // Base ID
-            __('Shortcode Ad Widget', 'text_domain'), // Name
-            array('description' => __('A widget that displays a shortcode', 'text_domain'),) // Args
-        );
-    }
-    
-    // Front-end display of widget
-    public function widget($args, $instance) {
-        echo $args['before_widget'];
-        
-        // Display the shortcode
+function add_shortcode_before_sidebar() {
+    if (is_single() && get_option('insert_ads_before_sidebar_enabled')) {
         echo do_shortcode('[adsense_ad_with_slot_id]');
-        
-        echo $args['after_widget'];
-    }
-    
-    // Back-end widget form (optional)
-    public function form($instance) {
-        // No form fields needed for this widget
-        echo '<p>'.__('No settings for this widget', 'text_domain').'</p>';
-    }
-    
-    // Updating widget replacing old instances with new
-    public function update($new_instance, $old_instance) {
-        $instance = array();
-        return $instance;
     }
 }
+add_action('dynamic_sidebar_before', 'add_shortcode_before_sidebar');
 
-// Register and load the widget
-function load_shortcode_ad_widget() {
-    register_widget('Shortcode_Ad_Widget');
+function add_shortcode_after_sidebar() {
+   if (is_single() && get_option('insert_ads_after_sidebar_enabled')) {
+        echo do_shortcode('[adsense_ad_with_slot_id]');
+   }
 }
-add_action('widgets_init', 'load_shortcode_ad_widget');
+add_action('dynamic_sidebar_after', 'add_shortcode_after_sidebar');
 
-// function insert_content_after_third_post() {
-//     // Check if we are on the main blog page and in the main query
-//   if (!is_front_page() && !is_page(array('about', 'contact')) && !is_single() && is_main_query()) {
-//         // Increment post counter
-//         if (in_the_loop() && is_main_query()) {
-//             global $post_counter;
-//             if (!isset($post_counter)) {
-//                 $post_counter = 0;
-//             }
-//             $post_counter++;
-    
-//             // Check if it's the 3rd post
-//               // Check if it's the 3rd post
-//             if ($post_counter > 4 && ($post_counter - 2) % 3 == 0) {
-//                 echo do_shortcode('[adsense_ad_with_slot_id]');
-//             }
-//         }
-//   }
-// }
-// add_action('the_post', 'insert_content_after_third_post');
 function insert_content_after_third_post() {
-    // Check if we are on the main blog page and in the main query
+    if (get_option('insert_ads_in_between_content_enabled')) {
+        
+   
    if (!is_front_page() && !is_page(array('about', 'contact')) && !is_single() && is_main_query()) {
         // Increment post counter
         if (in_the_loop() && is_main_query()) {
@@ -372,6 +316,7 @@ function insert_content_after_third_post() {
             }
         }
    }
+}
 }
 add_action('the_post', 'insert_content_after_third_post');
 

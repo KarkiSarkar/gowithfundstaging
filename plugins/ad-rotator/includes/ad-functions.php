@@ -300,13 +300,13 @@ function insert_content_after_third_post() {
             if (in_the_loop() && is_main_query()) {
                 global $post_counter;
                 if (!isset($post_counter)) {
-                    $post_counter = 3;
+                    $post_counter = 0;
                 }
                 $post_counter++;
         
                 // Check if it's the 3rd post
                   // Check if it's the 3rd post
-                  if ($post_counter % 3 == 1) {
+                  if ($post_counter == 3 || $post_counter % 6 == 1) {
                     echo do_shortcode('[adsense_ad_with_slot_id]');
                 }
             }

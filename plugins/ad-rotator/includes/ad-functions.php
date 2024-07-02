@@ -300,7 +300,7 @@ function insert_content_after_third_post() {
             if (in_the_loop() && is_main_query()) {
                 global $post_counter;
                 if (!isset($post_counter)) {
-                    $post_counter = 0;
+                    $post_counter = 3;
                 }
                 $post_counter++;
         
